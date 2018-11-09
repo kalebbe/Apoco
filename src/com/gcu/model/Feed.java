@@ -28,6 +28,7 @@ public class Feed {
 	
 	private String name;
 	
+	@Size(min = 10, max = 100, message="Link should be between 10 and 100 characters!")
 	private String link;
 	
 	private int userId;

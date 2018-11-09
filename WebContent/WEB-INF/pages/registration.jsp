@@ -31,7 +31,7 @@
 				</c:choose>
 			</div>
 			<div class="form-group">
-				<form:input class="form-control" path="username" placeholder="Username"/>
+				<form:input class="form-control" path="username" placeholder="Username" minlength="4" maxlength="30" />
 				<form:errors style="color: #ffffff; font-size:small;" path="username"/>
 				<!-- Responds to the user if their username is taken -->
 				<c:choose>
@@ -42,19 +42,19 @@
 				</c:choose>
 			</div>
 			<div class="form-group">
-				<form:input class="form-control" path="firstName" placeholder="First Name"/>
+				<form:input class="form-control" path="firstName" placeholder="First Name" minlength="2" maxlength="30" />
 				<form:errors style="color: #ffffff; font-size:small;" path="firstName"/>
 			</div>
 			<div class="form-group">
-				<form:input class="form-control" path="lastName" placeholder="Last Name"/>
+				<form:input class="form-control" path="lastName" placeholder="Last Name" minlength="2" maxlength="30" />
 				<form:errors style="color: #ffffff; font-size:small;" path="lastName"/>
 			</div>
 			<div class="form-group">
-				<form:input class="form-control" path="password" type="password" placeholder="Password" minlength="8"/>
+				<form:input class="form-control" path="password" type="password" placeholder="Password" minlength="8" maxlength="100" />
 				<form:errors style="color: #ffffff; font-size:small;" path="password"/>
 			</div>
 			<div class="form-group">
-				<form:input class="form-control" path="passRe" type="password" placeholder="Password (repeat)" minlength="8"/>
+				<form:input class="form-control" path="passRe" type="password" placeholder="Password (repeat)" minlength="8" maxlength="100" />
 				<form:errors style="color: #ffffff; font-size:small;" path="passRe"/>
 				<!-- Tells the user if passwords do not match -->
 				<c:choose>

@@ -29,7 +29,7 @@
 				<form:errors style="color: #a70000;" path="job" />
 				<h5>
 					Job:
-					<form:input type="text" path="job" style="margin-left:72px;" />
+					<form:input type="text" path="job" style="margin-left:72px;" minlength="2" maxlength="100" />
 					<br> <br> Education:
 					<form:select path="education" style="margin-left:15px;">
 						<form:options items="${edList}" />
@@ -39,7 +39,7 @@
 				<form:errors style="color: #a70000;" path="school" />
 				<h5>
 					School:
-					<form:input type="text" path="school" style="margin-left: 45px;" />
+					<form:input type="text" path="school" style="margin-left: 45px;" minlength="2" maxlength="100" />
 				</h5>
 			</div>
 			<div class="col-md-6">
@@ -85,7 +85,7 @@
 				Word count: <span id="display_count">0</span> of 200 (Max)<br>
 			</p>
 			<form:textarea style="white-space: pre-wrap;" id="word_count"
-				path="bio" rows="10" cols="150" />
+				path="bio" rows="10" cols="150" minlength="50" maxlength="5000" />
 			<h5>
 				<br> Privacy Mode:
 				<form:radiobutton path="privacy" name="privacy" value="true"

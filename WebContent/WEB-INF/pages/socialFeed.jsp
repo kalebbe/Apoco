@@ -20,10 +20,10 @@
 		see</p><hr>
 	<form:form method="POST" modelAttribute="feed" action="createFeed">
 		<h5>Youtube Link</h5>
-		<form:input path="link" />
+		<form:input path="link" minlength="10" maxlength="100" />
 		<p style="font-size: xx-small;">*Not required. Only for youtube videos</p>
 		<form:textarea style="white-space: pre-wrap" id="word_count"
-			path="feed" rows="5" cols="100" />
+			path="feed" rows="5" cols="100" minlength="20" maxlength="5000" />
 		<p style="font-size: xx-small;">
 			Word count: <span id="display_count">0</span> of 200 (Max)
 		</p>
