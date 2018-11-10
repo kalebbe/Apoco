@@ -59,7 +59,7 @@ public class AccountController {
 	public ModelAndView updateFirst(@RequestParam("firstName") String first,  HttpSession session) {
 		User user = us.findById((int)session.getAttribute("id"));
 		user.setFirstName(first);
-		if(!us.updateFirst(user, (int)session.getAttribute("id"))) {
+		if(!us.updateFirst(user)) {
 			session.setAttribute("message", "First name must be between 2 and 30 characters!");
 		}
 		return new ModelAndView("editAccount", "user", user);
@@ -73,7 +73,7 @@ public class AccountController {
 	public ModelAndView updateLast(@RequestParam("lastName") String last, HttpSession session) {
 		User user = us.findById((int)session.getAttribute("id"));
 		user.setLastName(last);
-		if(!us.updateLast(user, (int)session.getAttribute("id"))) {
+		if(!us.updateLast(user)) {
 			session.setAttribute("message", "Last name must be between 2 and 30 characters!");
 		}
 		return new ModelAndView("editAccount", "user", user);
@@ -91,7 +91,7 @@ public class AccountController {
 			session.setAttribute("message", "Email is already taken!");
 			return new ModelAndView("editAccount", "user", user);
 		}
-		if(!us.updateEmail(user, (int)session.getAttribute("id"))) {
+		if(!us.updateEmail(user)) {
 			session.setAttribute("message", "That is not a valid email!");
 		}
 		return new ModelAndView("editAccount", "user", user);
@@ -109,7 +109,7 @@ public class AccountController {
 			session.setAttribute("message", "Username is already taken!");
 			return new ModelAndView("editAccount", "user", user);
 		}
-		if(!us.updateEmail(user, (int)session.getAttribute("id"))) {
+		if(!us.updateEmail(user)) {
 			session.setAttribute("message", "Username must be between 4 and 30 characters!");
 		}
 		return new ModelAndView("editAccount", "user", user);
@@ -132,7 +132,7 @@ public class AccountController {
 		}
 		user.setPassword(pass);
 		user.setPassRe(rePass);
-		if(!us.changePass(user, (int)session.getAttribute("id"))){
+		if(!us.changePass(user)){
 			session.setAttribute("message", "Password must be 8 characters and contain letters and numbers!");
 		}
 		return new ModelAndView("editAccount", "user", us.findById((int)session.getAttribute("id")));

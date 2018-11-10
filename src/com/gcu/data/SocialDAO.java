@@ -96,13 +96,13 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	 * currently not in use.
 	 */
 	@Override
-	public boolean update(Social t, int id) {
+	public boolean update(Social t) {
 		String sql = "UPDATE socialprofiles SET CAREER = ?, CITY = ?, STATE = ?, RELATIONSHIP = ?, BIO = ?, EDUCATION = ?, "
 				+ "SCHOOL = ?, JOB = ?, BIRTH_DATE = ?, PRIVACY = ? WHERE ID = ?";
 		boolean result = false;
 		String date = t.getBirthMonth() + "/" + t.getBirthDay() + t.getBirthYear();
 		if (jdbcTemp.update(sql, t.getCareer(), t.getCity(), t.getState(), t.getStatus(), t.getBio(), t.getEducation(),
-				t.getSchool(), t.getJob(), date, t.isPrivacy(), id) == 1) {
+				t.getSchool(), t.getJob(), date, t.isPrivacy(), t.getId()) == 1) {
 			result = true;
 		}
 		return result;

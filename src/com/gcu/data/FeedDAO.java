@@ -69,7 +69,7 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Feed> findUserFeed(int id) {
-		String sql = "SELECT * FROM socialfeed WHERE USER_ID=?";
+		String sql = "SELECT * FROM socialfeed WHERE USER_ID=? ORDER BY DATE_POSTED DESC";
 		// PreparedStatementSetter required for multiple objects with a parameter
 		List<Feed> feed = jdbcTemp.query(sql, new PreparedStatementSetter() {
 
@@ -100,10 +100,10 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	 * is currently not in use, but may be used in the future.
 	 */
 	@Override
-	public boolean update(Feed t, int id) {
+	public boolean update(Feed t) {
 		String sql = "UPDATE socialfeed SET USER_ID = ?, NAME = ?, POST = ?, PRIVACY = ?, LINK = ? WHERE ID = ?";
 		boolean result = false;
-		if (jdbcTemp.update(sql, t.getUserId(), t.getName(), t.getFeed(), t.getPrivacy(), t.getLink(), id) == 1) {
+		if (jdbcTemp.update(sql, t.getUserId(), t.getName(), t.getFeed(), t.getPrivacy(), t.getLink(), t.getId()) == 1) {
 			result = true;
 		}
 		return result;

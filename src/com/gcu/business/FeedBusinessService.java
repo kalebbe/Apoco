@@ -65,4 +65,14 @@ public class FeedBusinessService implements FeedBusinessInterface {
 	public boolean delete(int id) {
 		return dao.delete(id);
 	}
+	
+	@Override
+	public boolean update(Feed t) {
+		return dao.update(t);
+	}
+	
+	@Override
+	public Feed findById(int id) {
+		return dao.findById(id);
+	}
 }

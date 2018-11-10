@@ -25,6 +25,7 @@ import com.gcu.model.User;
 public class UserMapper implements RowMapper {
 	public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 		User user = new User();
+		user.setId(rs.getInt("ID"));
 		user.setEmail(rs.getString("EMAIL"));
 		user.setUsername(rs.getString("USERNAME"));
 		user.setFirstName(rs.getString("FIRST_NAME"));

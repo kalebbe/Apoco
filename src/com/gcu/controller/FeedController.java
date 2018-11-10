@@ -54,7 +54,7 @@ public class FeedController {
 	 * posts of the user's friends.
 	 */
 	@RequestMapping(path="/feed", method = RequestMethod.GET)
-	public ModelAndView dispalyFeed(@ModelAttribute("feed") Feed feed, HttpSession session) {
+	public ModelAndView displayFeed(@ModelAttribute("feed") Feed feed, HttpSession session) {
 		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id"));
 		return new ModelAndView("socialFeed", "feedList", feedList);
 	}
@@ -95,12 +95,33 @@ public class FeedController {
 	@RequestMapping(path="deleteFeed", method=RequestMethod.POST)
 	public ModelAndView deleteFeed(@ModelAttribute("feed") Feed feed, @RequestParam("id") int id, HttpSession session) {
 		if(fs.delete(id)) {
-			session.setAttribute("message", "You have deleted your post successfully!");
+			session.setAttribute("message3", "You have deleted your post successfully!");
 		}
 		else {
-			session.setAttribute("message", "Something went wrong!");
+			session.setAttribute("message2", "Something went wrong!");
 		}
 		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id"));
+		return new ModelAndView("socialFeed", "feedList", feedList);
+	}
+	
+	@RequestMapping(path="updateFeed", method=RequestMethod.POST)
+	public ModelAndView updateFeed(@ModelAttribute("feed") Feed feed, @RequestParam("id") int id, @RequestParam("feed") String post, HttpSession session) {
+		Feed newFeed = fs.findById(id);
+		newFeed.setFeed(post);
+		if(post.length() >= 20) {
+			if(fs.update(newFeed)) {
+				session.setAttribute("message3", "Your post has been updated!");
+			}
+			else {
+				session.setAttribute("message2", "Something went wrong!");
+			}
+		}
+		else {
+			session.setAttribute("message2", "Your post must be atleast 20 characters!");
+		}
+		
+		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id"));
+		feed.setFeed("");
 		return new ModelAndView("socialFeed", "feedList", feedList);
 	}
 }

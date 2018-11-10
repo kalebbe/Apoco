@@ -18,4 +18,6 @@ public interface FeedBusinessInterface {
 	public boolean create(Feed t);
 	public List<Feed> findUserFeed(int id);
 	public boolean delete(int id);
+	public boolean update(Feed t);
+	public Feed findById(int id);
 }

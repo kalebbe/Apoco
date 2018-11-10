@@ -52,11 +52,22 @@ public class User {
 	@Size(min=8, message="Password must be atleast 8 characters!")
 	@Pattern(regexp = "^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$", message="Password must contain letters and numbers!")
 	private String passRe;
+	
+	private int id;
 
 	
 	/*
 	 * Getters and setters below
 	 */
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getEmail() {
 		return email;
 	}

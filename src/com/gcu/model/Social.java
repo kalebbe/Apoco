@@ -58,6 +58,8 @@ public class Social {
 	private int birthYear;
 	
 	private int userId;
+	
+	private int id;
 
 	/*
 	 * Getters and setters below
@@ -165,6 +167,14 @@ public class Social {
 	public void setBirthYear(int birthYear) {
 		this.birthYear = birthYear;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	/*
 	public String getPicture() {
 		return picture;
@@ -178,9 +188,10 @@ public class Social {
 	/*
 	 * Non-standard constructor used for creating a Social model from the database.
 	 */
-	public Social(String bio, boolean privacy, String career, String city, String state, int birthDay,
+	public Social(String bio, boolean privacy, String career, String city, String state, int birthDay, int id,
 			int birthMonth, int birthYear, String education, String status, String job, String school, int userId) {
 		//this.picture = pic;
+		this.id = id;
 		this.bio = bio;
 		this.privacy = privacy;
 		this.career = career;
@@ -214,5 +225,6 @@ public class Social {
 		this.status = "";
 		this.school = "";
 		this.userId = 0;
+		this.id = 0;
 	}
 }

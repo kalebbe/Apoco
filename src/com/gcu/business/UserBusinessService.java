@@ -23,16 +23,24 @@
 
 package com.gcu.business;
 
+import java.util.List;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gcu.data.FeedDAO;
 import com.gcu.data.UserDAO;
+import com.gcu.model.Feed;
 import com.gcu.model.User;
 
 public class UserBusinessService implements UserBusinessInterface {
 	@Autowired
 	private UserDAO dao;
+	
+	@Autowired
+	private FeedDAO fDAO;
 
 	/*
 	 * This method checks to make sure the username and email aren't taken, the
@@ -76,14 +84,14 @@ public class UserBusinessService implements UserBusinessInterface {
 	 * user's input to the currently hashed password in the database.
 	 */
 	@Override
-	public boolean changePass(User t, int id) {
+	public boolean changePass(User t) {
 		if (t.getPassword().length() < 8
 				|| !t.getPassword().matches("^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$")) {
 			return false;
 		}
 		String hashPass = BCrypt.hashpw(t.getPassword(), BCrypt.gensalt());
 		t.setPassword(hashPass);
-		if (dao.update(t, id)) {
+		if (dao.update(t)) {
 			return true;
 		} else
 			return false;
@@ -100,11 +108,17 @@ public class UserBusinessService implements UserBusinessInterface {
 	}
 
 	@Override
-	public boolean updateFirst(User t, int id) {
+	public boolean updateFirst(User t) {
 		if (t.getFirstName().length() < 2 || t.getFirstName().length() > 30) {
 			return false;
 		} else {
-			if (dao.update(t, id)) {
+			String name = t.getFirstName() + " " + t.getLastName();
+			List<Feed> feedList = fDAO.findUserFeed(t.getId());
+			for(Feed feed : feedList){
+				feed.setName(name);
+				fDAO.update(feed);
+			}
+			if (dao.update(t)) {
 				return true;
 			} else {
 				return false;
@@ -113,11 +127,17 @@ public class UserBusinessService implements UserBusinessInterface {
 	}
 
 	@Override
-	public boolean updateLast(User t, int id) {
+	public boolean updateLast(User t) {
 		if (t.getLastName().length() < 2 || t.getLastName().length() > 30) {
 			return false;
 		} else {
-			if (dao.update(t, id)) {
+			String name = t.getFirstName() + " " + t.getLastName();
+			List<Feed> feedList = fDAO.findUserFeed(t.getId());
+			for(Feed feed : feedList){
+				feed.setName(name);
+				fDAO.update(feed);
+			}
+			if (dao.update(t)) {
 				return true;
 			} else {
 				return false;
@@ -126,11 +146,11 @@ public class UserBusinessService implements UserBusinessInterface {
 	}
 
 	@Override
-	public boolean updateUser(User t, int id) {
+	public boolean updateUser(User t) {
 		if (t.getUsername().length() < 4 || t.getUsername().length() > 30) {
 			return false;
 		} else {
-			if (dao.update(t, id)) {
+			if (dao.update(t)) {
 				return true;
 			} else {
 				return false;
@@ -149,11 +169,11 @@ public class UserBusinessService implements UserBusinessInterface {
 	}
 
 	@Override
-	public boolean updateEmail(User t, int id) {
+	public boolean updateEmail(User t) {
 		try {
 			InternetAddress email = new InternetAddress(t.getEmail());
 			email.validate();
-			if (dao.update(t, id)) {
+			if (dao.update(t)) {
 				return true;
 			} else
 				return false;

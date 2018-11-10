@@ -30,6 +30,7 @@ public class FeedMapper implements RowMapper {
 		Feed feed = new Feed();
 		feed.setFeed(rs.getString("POST"));
 		feed.setId(rs.getInt("ID"));
+		feed.setUserId(rs.getInt("USER_ID"));
 		feed.setLink(rs.getString("LINK"));
 		feed.setName(rs.getString("NAME"));
 		feed.setPrivacy(rs.getString("PRIVACY"));

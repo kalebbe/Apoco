@@ -31,6 +31,7 @@ public class SocialMapper implements RowMapper {
 		String date = rs.getString("BIRTH_DATE");
 		String arr[] = date.split("/");
 		
+		social.setId(rs.getInt("ID"));
 		social.setBio(rs.getString("BIO"));
 		social.setBirthDay(Integer.parseInt(arr[1]));
 		social.setBirthMonth(Integer.parseInt(arr[0]));

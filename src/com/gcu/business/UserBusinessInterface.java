@@ -17,14 +17,14 @@ public interface UserBusinessInterface {
 
 	public int create(User t);
 	public int login(String login, String password);
-	public boolean changePass(User t, int id);
+	public boolean changePass(User t);
 	public boolean checkPass(String pass, int id);
-	public boolean updateFirst(User t, int id);
-	public boolean updateLast(User t, int id);
-	public boolean updateUser(User t, int id);
+	public boolean updateFirst(User t);
+	public boolean updateLast(User t);
+	public boolean updateUser(User t);
 	public boolean checkUser(User t);
 	public boolean checkEmail(User t);
-	public boolean updateEmail(User t, int id);
+	public boolean updateEmail(User t);
 	public User findById(int id);
 	
 }

@@ -111,11 +111,11 @@ public class UserDAO implements DataAccessInterface<User> {
 	 * in the database.
 	 */
 	@Override
-	public boolean update(User t, int id) {
+	public boolean update(User t) {
 		String sql = "UPDATE users SET EMAIL = ?, USERNAME = ?, FIRST_NAME = ?, LAST_NAME = ?, PASSWORD = ? WHERE ID = ?";
 		boolean result = false;
 		if (jdbcTemp.update(sql, t.getEmail(), t.getUsername(), t.getFirstName(), t.getLastName(), t.getPassword(),
-				id) == 1) {
+				t.getId()) == 1) {
 			result = true;
 		}
 		return result;

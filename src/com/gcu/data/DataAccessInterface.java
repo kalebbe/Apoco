@@ -17,6 +17,6 @@ public interface DataAccessInterface <T> {
 	public T findById(int id);
 	public List<T> findAll();
 	public boolean create(T t);
-	public boolean update(T t, int id);
+	public boolean update(T t);
 	public boolean delete(int id);
 }
