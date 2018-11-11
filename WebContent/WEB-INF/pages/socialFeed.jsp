@@ -107,7 +107,7 @@
 								<div
 									onclick="$('#feedTarget${count}').attr('disabled', false); $('#target${count}').css('display', 'inline-block');">
 
-									<textarea id="feedTarget${count}" cols="65" disabled="disabled" name="feed"
+									<textarea id="feedTarget${count}" cols="65" disabled="disabled" name="feed" minlength="20" maxlength="5000"
 										style="white-space: pre-wrap; border: none; outline: none; background-color: white; resize: none; overflow: hidden;"
 										oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'><c:out
 											value="${feed.feed}" /></textarea>

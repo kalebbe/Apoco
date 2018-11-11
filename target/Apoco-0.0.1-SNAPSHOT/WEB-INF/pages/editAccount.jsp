@@ -41,21 +41,21 @@
 			<h4>
 				<form method="POST" action="updateFirst">
 					First Name: <input type="text" style="margin-left: 20px;"
-						name="firstName" value="${user.firstName}" />
+						name="firstName" value="${user.firstName}" minlenght="2" maxlength="30" />
 					<button class="btn action-button" type="submit"
 						style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
 				</form>
 				<br> <br>
 				<form method="POST" action="updateLast">
 					Last Name: <input type="text" style="margin-left: 23px;"
-						name="lastName" value="${user.lastName}" />
+						name="lastName" value="${user.lastName}" minlength="2" maxlength="30" />
 					<button class="btn action-button" type="submit"
 						style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
 				</form>
 				<br> <br>
 				<form method="POST" action="updateUser">
 					Username: <input type="text" style="margin-left: 27px;"
-						name="username" value="${user.username}" />
+						name="username" value="${user.username}" minlength="4" maxlength="30" />
 					<button class="btn action-button" type="submit"
 						style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
 				</form>
@@ -66,18 +66,18 @@
 			<h4>
 				<form method="POST" action="updateEmail">
 					Email: <input type="email" style="margin-left: 100px;" name="email"
-						value="${user.email}" />
+						value="${user.email}" minlength="4" maxlength="40" />
 					<button class="btn action-button" type="submit"
 						style="background-color: #000000; color: #ffffff; float: right; margin-right: 10px;">Update</button>
 				</form>
 				<br> <br>
 				<form method="POST" action="updatePass">
 					Old Password: <input type="password" style="margin-left: 9px;"
-						name="oldPass" placeholder="Old Password" required/> <br> <br> New
+						name="oldPass" placeholder="Old Password" minlength="8" maxlength="100" required/> <br> <br> New
 					Password: <input type="password" name="pass"
-						placeholder="New Password" required/><br><br>
+						placeholder="New Password" minlength="8" maxlength="100" required/><br><br>
 					Re Password: <input type="password" style="margin-left: 22px;"
-						name="rePass" placeholder="Repeat New Password" required/>
+						name="rePass" placeholder="Repeat New Password" minlength="8" maxlength="100" required/>
 					<button class="btn action-button" type="submit"
 						style="background-color: #000000; color: #ffffff; float: right; margin-right: 10px;">Update</button>
 				</form>

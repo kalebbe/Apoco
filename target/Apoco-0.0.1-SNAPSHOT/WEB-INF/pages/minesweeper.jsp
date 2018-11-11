@@ -13,8 +13,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="com.gcu.utilities.MinesweeperLogic"%>
-<script src="<c:url value="/assets/js/AjaxBoard.js" />"></script>
-<script src="<c:url value="/assets/js/Click.js" />"></script>
+<script src="<c:url value="/assets/js/click.js" />"></script>
 <div align="center">
 	<h1>Minesweeper</h1>
 	<div id="board">

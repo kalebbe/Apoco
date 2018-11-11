@@ -33,6 +33,7 @@
 	<script src="<c:url value="/assets/js/jquery.min.js" />"></script>
 	<script src="<c:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/assets/js/wordCount.js" />"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>

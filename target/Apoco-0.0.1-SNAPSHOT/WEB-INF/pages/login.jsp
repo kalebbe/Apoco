@@ -20,10 +20,10 @@
 			<i class="icon-fire" style="color: #000000;"></i>
 		</div>
 		<div class="form-group">
-			<input class="form-control" name="email" placeholder="Email or Username"/>
+			<input class="form-control" name="email" placeholder="Email or Username" minlength="4" maxlength="50" />
 		</div>
 		<div class="form-group">
-			<input class="form-control" type="password" name="password" placeholder="Password"/>
+			<input class="form-control" type="password" name="password" placeholder="Password" minlength="8" maxlength="100" />
 		</div>
 		<div class="form-group">
 			<button class="btn btn-primary btn-block" type="submit"

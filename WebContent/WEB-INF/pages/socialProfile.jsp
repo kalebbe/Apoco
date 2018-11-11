@@ -64,7 +64,7 @@
 				<form:errors style="color: #a70000;" path="city" />
 				<h5>
 					City:
-					<form:input type="text" path="city" />
+					<form:input type="text" path="city" minlength="2" maxlength="40" />
 					State:
 					<form:select path="state">
 						<form:options items="${stateList}" />

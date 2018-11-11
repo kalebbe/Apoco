@@ -25,3 +25,4 @@ com\gcu\model\User.class
 com\gcu\utilities\MinesweeperLogic.class
 com\gcu\data\FeedMapper.class
 com\gcu\controller\HomeController.class
+com\gcu\utilities\GlobalExceptionHandler.class
