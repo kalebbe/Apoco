@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            10/14/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     UserBusinessInterface.java
  * Module Version:  1.0
  * Summary:         This interface gives the methods required in the UserBusinessService class and any
@@ -15,7 +15,7 @@ import com.gcu.model.User;
 
 public interface UserBusinessInterface {
 
-	public int create(User t);
+	public int register(User t);
 	public int login(String login, String password);
 	public boolean changePass(User t);
 	public boolean checkPass(String pass, int id);

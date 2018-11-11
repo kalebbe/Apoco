@@ -1,4 +1,4 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            11/04/18
  * Course:          CST-341
@@ -26,7 +26,7 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemp;
 
-	/*
+	/**
 	 * Sets the data source for this class and instantiates the spring jdbc template
 	 */
 	public void setDataSource(DataSource dataSource) {
@@ -34,7 +34,7 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 		this.jdbcTemp = new JdbcTemplate(dataSource);
 	}
 
-	/*
+	/**
 	 * This method is used to return a socialfeed object by its ID. This is
 	 * currently not in use, but will likely be soon.
 	 */
@@ -46,7 +46,7 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 		return feed;
 	}
 
-	/*
+	/**
 	 * This method returns all feed posts in the database and will likely be used in
 	 * the future for admin/mod powers, but is currently not in use.
 	 */
@@ -64,7 +64,7 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 		}
 	}
 
-	/*
+	/**
 	 * This method is used to find get all of the feed corresponding to a user id.
 	 */
 	@SuppressWarnings("unchecked")
@@ -82,7 +82,7 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 		return feed;
 	}
 
-	/*
+	/**
 	 * This method is used to insert a new Feed object into the database
 	 */
 	@Override
@@ -95,9 +95,10 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 		return result;
 	}
 
-	/*
+	/**
 	 * This method is used to update an existing feed object in the database. This
-	 * is currently not in use, but may be used in the future.
+	 * method is now used in milestone 5 to update the POST column. May be updated
+	 * in the future for an upvote/downvote update
 	 */
 	@Override
 	public boolean update(Feed t) {
@@ -109,7 +110,7 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 		return result;
 	}
 
-	/*
+	/**
 	 * This method is used to delete the feed object from database using the ID of
 	 * the object
 	 */

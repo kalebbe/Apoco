@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            10/14/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     Button.java
  * Module Version:  1.0
  * Summary:         This is the model for the Minesweeper button. This is actually a very simple
@@ -21,7 +21,7 @@ public class Button {
 	private int y; //Y coordinate of the button
 	private boolean flagged; //Flagged by right click. Not yet implemented
 	
-	/*
+	/**
 	 * Getters and setters below
 	 */
 	public boolean isLive() {
@@ -72,6 +72,8 @@ public class Button {
 		this.flagged = flagged;
 	}
 
+	//Non default constructor that creates a global button.
+	//There won't be a default constructor for this model.
 	public Button(Integer x, Integer y) {
 		this.live = false;
 		this.visited = false;

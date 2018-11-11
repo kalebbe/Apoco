@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            10/14/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     SocialDAO.java
  * Module Version:  1.1
  * Summary:         This class is used for all things involving our social service and the database. Currently this class
@@ -29,7 +29,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	private DataSource dataSource; // Datasource grabbed from appconfig
 	private JdbcTemplate jdbcTemp; // Used for spring jdbc database calls
 
-	/*
+	/**
 	 * This method sets the data source for my database calls and instantiates the
 	 * template
 	 */
@@ -38,7 +38,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 		this.jdbcTemp = new JdbcTemplate(dataSource);
 	}
 
-	/*
+	/**
 	 * This method takes the user's id and returns the user model for them. If there
 	 * is no result for that id, the method will catch the exception and return
 	 * null.
@@ -55,7 +55,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 		}
 	}
 
-	/*
+	/**
 	 * This method returns every single social profile in the database. As of right
 	 * now, this method does not have a purpose, but may be used in the future for
 	 * data purposes.
@@ -68,7 +68,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 		return social;
 	}
 
-	/*
+	/**
 	 * This method takes the Social model and inserts it into the database.
 	 */
 	@Override
@@ -89,7 +89,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 		return result;
 	}
 
-	/*
+	/**
 	 * This method updates a single column of the social profile. This was changed
 	 * from the base ICA update method which would update the entire model. I feel
 	 * like this is more efficient as only the required columns are updated. This is
@@ -108,7 +108,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 		return result;
 	}
 
-	/*
+	/**
 	 * This method deletes the social profile of the logged in user. Currently not
 	 * in use.
 	 */

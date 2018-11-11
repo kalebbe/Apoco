@@ -1,3 +1,14 @@
+<!-- 
+   - Author:		  Kaleb Eberhart
+   - Date:            11/10/18
+   - Course:          CST-341
+   - Project Name:    Apoco
+   - Project Version: 1.3
+   - Module Name:     databaseError.jsp
+   - Module Version:  1.0
+   - Summary:         This view shows the user a basic database error page if the database
+   -				  is not connected and they try to make a database call.
+ -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     

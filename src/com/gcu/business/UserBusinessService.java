@@ -1,11 +1,11 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            09/23/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.1
+ * Project Version: 1.3
  * Module Name:     UserBusinessService.java
- * Module Version:  1.1
+ * Module Version:  1.2
  * Summary:         This class handles the business side of user login and registration. It also uses the
  * 				    BCrypt class to hash passwords and check the hash upon login.
  * 					
@@ -19,6 +19,11 @@
  * 					-----UPDATES MILESTONE 4-----
  * 					-Dependency injeciton added for DAO to be autowired.
  * 					-Class restructured for Spring JDBC.
+ * 
+ * 					-----UPDATES MILESTONE 5-----
+ * 					-Column updates are now separated in the business service because the session can no longer
+ * 					 be passed to my service per rubric feedback. I separated the different updates, so that I can
+ * 					 return relevant error messages from the controller.
  */
 
 package com.gcu.business;
@@ -42,42 +47,40 @@ public class UserBusinessService implements UserBusinessInterface {
 	@Autowired
 	private FeedDAO fDAO;
 
-	/*
-	 * This method checks to make sure the username and email aren't taken, the
-	 * passwords aren't equal, and then encrypts the password using BCrypt.
+	/**
+	 * This method hashes the user's password then calls the DAO to create a
+	 * new user in the database. Registration logic is now separated into
+	 * multiple methods.
 	 */
 	@Override
-	public int create(User t) {
-		String hashPass = BCrypt.hashpw(t.getPassword(), BCrypt.gensalt());
-		t.setPassword(hashPass);
-		if(dao.create(t)) {
-			return dao.getId(t.getEmail());
+	public int register(User t) {
+		String hashPass = BCrypt.hashpw(t.getPassword(), BCrypt.gensalt()); //Takes the plain text pass and encrypts it
+		t.setPassword(hashPass); //Updating the model object for database insertion
+		if(dao.create(t)) { //creates a new
+			return dao.getId(t.getEmail()); //Returns the ID of the newly created user for session capture
 		}
-		else return 0;
+		else return 0; //0 tells me that the user creation has failed
 	}
 
-	/*
-	 * This method grabs the hashed database password from the UserDAO class and
-	 * then uses BCrypt to check the hashed password with the user input password.
-	 * If the username(or email) and password matches, the getUsername method is
-	 * called and the user is logged in. The getUsername method is necessary because
-	 * the user can log in with email or username.
+	/**
+	 * This method gets the user's ID from the database if their username or email exists
+	 * otherwise returns a 0. It then calls the DAO to check the validity of the password
 	 */
 	@Override
 	public int login(String login, String password) {
-		int id = dao.getId(login);
-		if (id == 0) {
+		int id = dao.getId(login); //Will return ID # or 0 if no match
+		if (id == 0) { //Returns failed login message in controller
 			return id;
 		}
 
 		if (checkPass(password, id)) {
-			return id;
+			return id; //ID is returned for session capture if the login/pass combo is correct
 		} else {
-			return -1;
+			return -1; //This allows for an error message telling the user their pass is incorrect
 		}
 	}
 
-	/*
+	/**
 	 * This method calls the UserDAO to update the user's password as long as they
 	 * pass the required checks. User's password must have a letter and number as
 	 * well as being 8 characters long. This method also uses BCrypt to match the
@@ -87,38 +90,50 @@ public class UserBusinessService implements UserBusinessInterface {
 	public boolean changePass(User t) {
 		if (t.getPassword().length() < 8
 				|| !t.getPassword().matches("^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$")) {
-			return false;
+			return false; //Returns for error message if the user's pass doesn't match regex and length
 		}
-		String hashPass = BCrypt.hashpw(t.getPassword(), BCrypt.gensalt());
-		t.setPassword(hashPass);
+		String hashPass = BCrypt.hashpw(t.getPassword(), BCrypt.gensalt()); //This hashes the user's new password
+		t.setPassword(hashPass); //Updates User model password for database insertion.
 		if (dao.update(t)) {
 			return true;
 		} else
-			return false;
+			return false; //Database failure. Currently no specific error message
 	}
 
+	/**
+	 * This method is used to check the user's input password with the password in the
+	 * database. This was separated in Milestone 5 for the purpose of specific error
+	 * messaging in the controller
+	 */
 	@Override
 	public boolean checkPass(String pass, int id) {
-		User user = dao.findById(id);
+		User user = dao.findById(id); //Grabs User object with ID
 
-		if (BCrypt.checkpw(pass, user.getPassword())) {
+		if (BCrypt.checkpw(pass, user.getPassword())) { //Checks user's pass with database password for match
 			return true;
 		} else
 			return false;
 	}
 
+	/**
+	 * This method was separated with the others for milestone 5 error messaging purposes.
+	 * Any time the user changes their first name, any feed posts created by them are
+	 * then updated in the database to match their new name. In the future, turning off auto
+	 * commit database changes for the purpose of not submitting database changes if one fails
+	 * would be vital for this method and the updateLast method.
+	 */
 	@Override
 	public boolean updateFirst(User t) {
-		if (t.getFirstName().length() < 2 || t.getFirstName().length() > 30) {
+		if (t.getFirstName().length() < 2 || t.getFirstName().length() > 30) { //Small check to see if betw 4-30 char
 			return false;
 		} else {
-			String name = t.getFirstName() + " " + t.getLastName();
-			List<Feed> feedList = fDAO.findUserFeed(t.getId());
-			for(Feed feed : feedList){
-				feed.setName(name);
-				fDAO.update(feed);
-			}
-			if (dao.update(t)) {
+			if (dao.update(t)) { //User's name is now updated.
+				String name = t.getFirstName() + " " + t.getLastName(); //Connects name for feed update
+				List<Feed> feedList = fDAO.findUserFeed(t.getId()); //Grabs all of the feed posts made by this user
+				for(Feed feed : feedList){ //Rotating through every Feed object in feedList
+					feed.setName(name); //Sets feed name in object
+					fDAO.update(feed); //Updates the feed with the new name
+				}
 				return true;
 			} else {
 				return false;
@@ -126,6 +141,11 @@ public class UserBusinessService implements UserBusinessInterface {
 		}
 	}
 
+	/**
+	 * This method does the same thing as the updateFirst method for the last name. I'm going
+	 * to avoid commenting this up because it is literally the same as the firstName update for
+	 * the last name.
+	 */
 	@Override
 	public boolean updateLast(User t) {
 		if (t.getLastName().length() < 2 || t.getLastName().length() > 30) {
@@ -145,45 +165,63 @@ public class UserBusinessService implements UserBusinessInterface {
 		}
 	}
 
+	/**
+	 * This method only checks to make sure the username is between 4 and
+	 * 30 characters and updates the database. There is now another method
+	 * for checking the existence of the previous username that is used for
+	 * this and registration.
+	 */
 	@Override
 	public boolean updateUser(User t) {
 		if (t.getUsername().length() < 4 || t.getUsername().length() > 30) {
 			return false;
 		} else {
-			if (dao.update(t)) {
+			if (dao.update(t)) { //Updates the user in the database with new username
 				return true;
 			} else {
-				return false;
+				return false; //Currently no error message for db failure
 			}
 		}
 	}
 
+	/**
+	 * This method checks to see if the username already exists in the database.
+	 * This is used for registration and account editing.
+	 */
 	@Override
 	public boolean checkUser(User t) {
 		return dao.checkUsername(t.getUsername());
 	}
 
+	/**
+	 * This method checks to see if the email already exists in the database.
+	 * This is used for registration and account editing.
+	 */
 	@Override
 	public boolean checkEmail(User t) {
 		return dao.checkEmail(t.getEmail());
 	}
 
+	/**
+	 * This method checks to see if the email is valid using basic xyz@xyz checks
+	 * then updates the database.
+	 */
 	@Override
 	public boolean updateEmail(User t) {
 		try {
 			InternetAddress email = new InternetAddress(t.getEmail());
-			email.validate();
+			email.validate(); //Validates email address. 
 			if (dao.update(t)) {
 				return true;
 			} else
 				return false;
-		} catch (AddressException e) {
+		} catch (AddressException e) { //Exception called if email is not valid
 			return false;
 		}
 
 	}
 
-	/*
+	/**
 	 * Returns a user model through the use of their ID. This is now used for the
 	 * account editor rather than saving all information to the session.
 	 */

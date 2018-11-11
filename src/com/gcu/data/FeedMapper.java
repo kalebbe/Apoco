@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            11/04/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     FeedMapper.java
  * Module Version:  1.0
  * Summary:         This class is used to map the data from the database when creating a new
@@ -22,7 +22,7 @@ import com.gcu.model.Feed;
 @SuppressWarnings("rawtypes")
 public class FeedMapper implements RowMapper {
 
-	/*
+	/**
 	 * Quick method for creating and returning a new Feed object from the database.
 	 */
 	@Override

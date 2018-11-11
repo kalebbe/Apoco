@@ -3,18 +3,23 @@
    - Date:            10/14/18
    - Course:          CST-341
    - Project Name:    Apoco
-   - Project Version: 1.1
+   - Project Version: 1.3
    - Module Name:     socialFeed.jsp
    - Module Version:  1.0
    - Summary:         This is a view that allows the user to upload posts to their feed and view others
    -				  that they have posted. In the future, they will be able to see their friend's posts
    -				  and upload pictures.
+   -
+   -				  -----UPDATE MILESTONE 5-----
+   -				  -Added jquery/script to autosize textareas on startup and keyup.
+   -				  -Clicking (read: double clicking) textarea posts will now allow updating
  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
+	//jQuery for autosizing textareas on page load
 	$(function() {
 		$("textarea").each(function() {
 			this.style.height = (this.scrollHeight + 10) + 'px';
@@ -32,6 +37,11 @@
 		<form:input size="50" path="link" minlength="10" maxlength="100" />
 		<p style="font-size: xx-small;">*Not required. Only for youtube
 			videos</p>
+			
+		<!-- 
+		   - Removes scroll bar + resize button from textarea. Form will auto resize as the
+		   - user updates.
+		 -->
 		<form:textarea
 			style="white-space: pre-wrap; resize:none; overflow:hidden;"
 			id="word_count" path="feed" cols="65" minlength="20" maxlength="5000"

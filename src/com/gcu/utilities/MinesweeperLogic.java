@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            10/14/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     MinesweeperLogic.java
  * Module Version:  1.0
  * Summary:         This class contains the logic for the minesweeper game in my project.
@@ -17,11 +17,15 @@ package com.gcu.utilities;
 import com.gcu.model.Button;
 
 public class MinesweeperLogic {
+	
+	//Variables changed to private per rubric feedback
 	private static Button[][] btnHolder;
 	private static boolean lose = false;
 	private static boolean win = false;
 	
-	
+	/**
+	 * Getters and setters below
+	 */
 	public static Button[][] getBtnHolder() {
 		return btnHolder;
 	}
@@ -46,7 +50,7 @@ public class MinesweeperLogic {
 		MinesweeperLogic.win = win;
 	}
 
-	/*
+	/**
 	 * Loops twice to create a multidimensional array of buttons that cover the entire board
 	 * based off the given size and then sets roughly 15 percent of the buttons to have bombs. 
 	 * There is then there's another loop to determine how many live neighbors each button has.
@@ -54,6 +58,7 @@ public class MinesweeperLogic {
 	public void generateBoard(int size) {
 		btnHolder = new Button[size][size];
 		
+		//first loops to check if each button will be a bomb and then set it
 		for(int i = 0; i < size; i++) {
 			for(int j = 0; j < size; j++) {
 				btnHolder[i][j] = new Button(i, j);
@@ -63,6 +68,7 @@ public class MinesweeperLogic {
 			}
 		}
 		
+		//Second loops to set live neighbors for each button
 		for(int i = 0; i < size; i++) {
 			for(int j = 0; j < size; j++) {
 				countNeighbors(i, j, size);
@@ -70,16 +76,16 @@ public class MinesweeperLogic {
 		}
 	}
 	
-	/*
+	/**
 	 * Short method used to determine if a button is going to be a bomb or not.
 	 * This can be changed to allow for easier games, but I will not be changing it.
 	 */
 	public boolean isActive() {
 		int random = 1 + (int)(Math.random() * 20);
-		return (random <= 3) ? true : false;
+		return (random <= 3) ? true : false; //15% chance at being a bomb
 	}
 	
-	/*
+	/**
 	 * This method counts how many live neighbors each button has, so it can be displayed
 	 * to the user when they click on a button
 	 */
@@ -98,7 +104,7 @@ public class MinesweeperLogic {
 		else btnHolder[x][y].setLiveNeighbors(9); //9 == boom
 	}
 	
-	/*
+	/**
 	 * This is a recursive method that is used to populate all those
 	 * naked cells you love on the board when you make that first click.
 	 * Although my version isn't very forgiving and you can die on the first click..
@@ -132,7 +138,7 @@ public class MinesweeperLogic {
 		}
 	}
 	
-	/*
+	/**
 	 * Short method that checks to see if the button at those coordinates
 	 * is in bounds of the array.
 	 */
@@ -140,7 +146,7 @@ public class MinesweeperLogic {
 		return x >= 0 && x < size && y >= 0 && y < size;
 	}
 	
-	/*
+	/**
 	 * All this does is set every cell to visited if the user clicks on a bomb.
 	 */
 	public static void setLose(int size) {
@@ -152,7 +158,7 @@ public class MinesweeperLogic {
 		}
 	}
 	
-	/*
+	/**
 	 * Compares the current visited cells with the amount of 
 	 * cells remaining to determine if the user has won or not.
 	 */

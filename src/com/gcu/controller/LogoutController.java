@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            09/23/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     LogoutController.java
  * Module Version:  1.01
  * Summary:         This controller handles the user logout and deletes all of the session
@@ -27,10 +27,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/logout")
 public class LogoutController {
 	
-	//Clears the session and sends user to the login page (bugged).
+	/**
+	 * Clears the session and sends user to the login page.
+	 */
 	@RequestMapping(path="/log", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:../login/log";
+		session.invalidate(); //Clears session
+		return "redirect:../login/log"; //Redirects user
 	}
 }

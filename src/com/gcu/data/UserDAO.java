@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            09/23/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     UserDAO.java
  * Module Version:  1.1
  * Summary:         This class does all of the data handling for user login and registration.
@@ -30,10 +30,10 @@ import com.gcu.model.User;
 public class UserDAO implements DataAccessInterface<User> {
 
 	@SuppressWarnings("unused")
-	private DataSource dataSource;
+	private DataSource dataSource; //Changed to private per rubric feedback
 	private JdbcTemplate jdbcTemp;
 
-	/*
+	/**
 	 * Sets the data source for the spring jdbc template
 	 */
 	public void setDataSource(DataSource dataSource) {
@@ -41,7 +41,7 @@ public class UserDAO implements DataAccessInterface<User> {
 		this.jdbcTemp = new JdbcTemplate(dataSource);
 	}
 
-	/*
+	/**
 	 * This method creates a new user in the database using a User object
 	 * 
 	 * UPDATE: per rubric feedback, I will changing the password table to binary because I don't want to
@@ -60,27 +60,27 @@ public class UserDAO implements DataAccessInterface<User> {
 		String sql = "INSERT INTO users (EMAIL, USERNAME, FIRST_NAME, LAST_NAME, PASSWORD) VALUES(?,?,?,?,?)";
 		boolean result = false;
 		if (jdbcTemp.update(sql, t.getEmail(), t.getUsername(), t.getFirstName(), t.getLastName(),
-				t.getPassword()) == 1) {
+				t.getPassword()) == 1) { //if update returns 1, then 1 row was affected, so the update worked.
 			result = true;
 		}
 		return result;
 	}
 
-	/*
+	/**
 	 * This method returns every user in the database as a List. This is currently
-	 * not in use, but will likely be used in the future.
+	 * not in use, but will likely be used in the future for Admin purposes.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findAll() {
 		String sql = "SELECT * FROM users";
-		List<User> users = jdbcTemp.query(sql, new UserMapper());
+		List<User> users = jdbcTemp.query(sql, new UserMapper()); //User mapper maps db data to model
 		return users;
 	}
 
-	/*
+	/**
 	 * This method uses the user's id to return the user model corresponding to said
-	 * ID. This method is used to display information for edit account and dispaying
+	 * ID. This method is used to display information for edit account and displaying
 	 * their info.
 	 */
 	@SuppressWarnings("unchecked")
@@ -91,9 +91,9 @@ public class UserDAO implements DataAccessInterface<User> {
 		return user;
 	}
 
-	/*
+	/**
 	 * This method is used to delete the user's account from the database. This is
-	 * currently not in use, but will be with milestone 5.
+	 * currently not in use, but will be coming in a future update.
 	 */
 	@Override
 	public boolean delete(int id) {
@@ -105,7 +105,7 @@ public class UserDAO implements DataAccessInterface<User> {
 		return result;
 	}
 
-	/*
+	/**
 	 * This method is used to update any bit of the user's information. This was
 	 * changed from the ICA to be a bit more flexible without changing every column
 	 * in the database.
@@ -121,14 +121,15 @@ public class UserDAO implements DataAccessInterface<User> {
 		return result;
 	}
 
-	/*
-	 * Checks to see if the user's email address or username is already taken. This
-	 * is used when the user registers their account as well as when they try to
-	 * update their account in the account editor.
+	/**
+	 * Checks to see if the user's username is already taken. This is used when the
+	 * user registers or when they try to update their username.
 	 */
 	public boolean checkUsername(String username) {
 		String sql = "SELECT count(*) FROM users WHERE USERNAME =?";
 		boolean result = false;
+		
+		//Query returns an int with the number of rows that contain this username
 		int count = jdbcTemp.queryForObject(sql, new Object[] { username }, Integer.class);
 		if (count > 0) {
 			result = true;
@@ -136,9 +137,15 @@ public class UserDAO implements DataAccessInterface<User> {
 		return result;
 	}
 	
+	/**
+	 * This method checks to see if the user's email is already taken. This used to be
+	 * merged with the checkUsername method, but was separated for milestone 5.
+	 */
 	public boolean checkEmail(String email) {
 		String sql = "SELECT count(*) FROM users WHERE EMAIL = ?";
 		boolean result = false;
+		
+		//Query returns an int with the number of rows that contain this email
 		int count = jdbcTemp.queryForObject(sql, new Object[] { email }, Integer.class);
 		if(count > 0) {
 			result = true;
@@ -146,7 +153,7 @@ public class UserDAO implements DataAccessInterface<User> {
 		return result;
 	}
 
-	/*
+	/**
 	 * This method grabs the user's ID from their login information. This is
 	 * required so that I can grab the user's id when they log in.
 	 */

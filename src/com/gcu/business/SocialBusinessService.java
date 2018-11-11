@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            10/14/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     SocialBusinessService.java
  * Module Version:  1.0
  * Summary:         This business service handles most general traffic coming from the social
@@ -24,24 +24,24 @@ import com.gcu.model.Social;
 public class SocialBusinessService implements SocialBusinessInterface {
 
 	@Autowired
-	private SocialDAO dao;
+	private SocialDAO dao; //Changed to private per rubric feedback
 
-	/*
+	/**
 	 * This method invokes the create method in SocialDAO to create a new social profile for the
 	 * user submitting their information.
 	 */
 	@Override
-	public boolean create(Social t) {
+	public boolean createSocial(Social t) {
 		return dao.create(t);
 	}
 
-	/*
+	/**
 	 * This method checks to see if the user has created a social account. If they have, their navbar will
 	 * allow them to pages that are restricted to others.
 	 */
 	@Override
 	public boolean checkSocial(int id) {
-		if(dao.findById(id) != null) { //Null is returned if exception is caught
+		if(dao.findById(id) != null) { //NULL will be returned if there is no data in the db for this ID.
 			return true;
 		}
 		else {

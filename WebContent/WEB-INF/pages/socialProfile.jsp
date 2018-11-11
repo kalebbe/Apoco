@@ -3,7 +3,7 @@
    - Date:            10/14/18
    - Course:          CST-341
    - Project Name:    Apoco
-   - Project Version: 1.1
+   - Project Version: 1.3
    - Module Name:     socialProfile.jsp
    - Module Version:  1.0
    - Summary:         This is the view used for creation of the social profile. Will be updated

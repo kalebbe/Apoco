@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            11/04/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     FeedBusinessInterface.java
  * Module Version:  1.0
  * Summary:         This interface lays forth the method guidelines for the FeedBusinessService class

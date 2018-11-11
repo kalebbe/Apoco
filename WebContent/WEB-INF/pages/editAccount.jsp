@@ -41,7 +41,7 @@
 			<h4>
 				<form method="POST" action="updateFirst">
 					First Name: <input type="text" style="margin-left: 20px;"
-						name="firstName" value="${user.firstName}" minlength="2" maxlength="30" />
+						name="firstName" value="${user.firstName}" minlenght="2" maxlength="30" />
 					<button class="btn action-button" type="submit"
 						style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
 				</form>

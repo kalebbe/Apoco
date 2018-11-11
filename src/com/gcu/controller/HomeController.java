@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            09/23/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     HomeController.java
  * Module Version:  1.05
  * Summary:         This controller is used to send the user back to their home page
@@ -34,7 +34,7 @@ public class HomeController {
 	
 private UserBusinessInterface us;
 	
-	/*
+	/**
 	 * Dependency injection allows useage of User service without instantiating an object every time
 	 */
 	@Autowired
@@ -43,13 +43,13 @@ private UserBusinessInterface us;
 	}
 	
 	
-	/*
+	/**
 	 * This method sends the user to their home page. The user's model
 	 * is also sent to the home page to display their username.
 	 */
 	@RequestMapping(path="/user", method=RequestMethod.GET)
 	public ModelAndView goHome(HttpSession session) {
-		session.setAttribute("theme", null);
+		session.setAttribute("theme", null); //Regular red header and footer with all tabs
 		return new ModelAndView("userHome", "user", us.findById((int)session.getAttribute("id")));
 	}
 }

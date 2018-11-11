@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            10/14/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.1
+ * Project Version: 1.3
  * Module Name:     Social.java
  * Module Version:  1.01
  * Summary:         This model is used to for the social profile and it's attributes. There isn't much data
@@ -25,9 +25,9 @@ public class Social {
 	//@NotNull(message = "You must select a picture!")
 	//private String picture;
 
-	private boolean privacy;
+	private boolean privacy; //This determines if randoms can see this user's feed and details
 
-	private String career;
+	private String career; //Generic career field
 
 	@NotNull(message = "You must enter a city!")
 	@Size(min = 2, max = 40, message = "City must be between 2 and 40 characters!")
@@ -35,21 +35,21 @@ public class Social {
 
 	private String State;
 
-	private String status;
+	private String status; //Relationship status
 
 	@NotNull(message = "You must enter a biography!")
 	@Size(min = 50, max = 5000,  message = "Your biography must be atleast 50 characters!")
 	private String bio;
 
-	private String education;
+	private String education; //Generic education level
 
 	@NotNull(message = "Please enter your most recent school!")
 	@Size(min = 2, max = 100, message = "Your school must be between 2 and 100 characters!")
-	private String school;
+	private String school; //Actual school
 
 	@NotNull(message = "Please enter your most recent job!")
 	@Size(min = 2, max = 100, message = "Your job name must be between 2 and 100 characters!")
-	private String job;
+	private String job; //Actual job
 
 	private int birthMonth;
 
@@ -61,7 +61,7 @@ public class Social {
 	
 	private int id;
 
-	/*
+	/**
 	 * Getters and setters below
 	 */
 	public int getUserId() {
@@ -185,8 +185,8 @@ public class Social {
 	}
 	*/
 
-	/*
-	 * Non-standard constructor used for creating a Social model from the database.
+	/**
+	 * Non-default constructor used for creating a Social model from the database.
 	 */
 	public Social(String bio, boolean privacy, String career, String city, String state, int birthDay, int id,
 			int birthMonth, int birthYear, String education, String status, String job, String school, int userId) {
@@ -207,7 +207,7 @@ public class Social {
 		this.userId = userId;
 	}
 
-	/*
+	/**
 	 * Default constructor used to set default values for each property.
 	 */
 	public Social() {

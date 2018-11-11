@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            09/23/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     LoginController.java
  * Module Version:  1.01
  * Summary:         This controller handles user login and gives them an error message if their
@@ -34,10 +34,10 @@ import com.gcu.model.User;
 @RequestMapping("/login")
 public class LoginController {
 	
-	UserBusinessInterface us;
-	SocialBusinessInterface ps;
+	private UserBusinessInterface us; //Changed to private per rubric feedback
+	private SocialBusinessInterface ps;
 	
-	/*
+	/**
 	 * Dependency injection for the UserBusinessService.
 	 */
 	@Autowired
@@ -45,7 +45,7 @@ public class LoginController {
 		this.us = us;
 	} 
 	
-	/*
+	/**
 	 * Dependency injection for the SocialBusinessService.
 	 */
 	@Autowired
@@ -53,7 +53,7 @@ public class LoginController {
 		this.ps = ps;
 	}
 	
-	/*
+	/**
 	 * Points the user to the login page with no messages.
 	 */
 	@RequestMapping(path="/log", method=RequestMethod.GET)
@@ -61,7 +61,7 @@ public class LoginController {
 		return "login";
 	}
 	
-	/*
+	/**
 	 * This method calls the UserService and performs the required login
 	 * actions there. If the user's login information is correct, the user will
 	 * be sent to their home page. Otherwise, the user will be given an error
@@ -69,21 +69,21 @@ public class LoginController {
 	 */
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ModelAndView login(@RequestParam String email, @RequestParam String password, HttpSession session) {
-		int id = us.login(email, password);
+		int id = us.login(email, password); //Checks user login and returns their id if login is correct
 		if(id > 0) {
-			if(ps.checkSocial(id)) {
+			if(ps.checkSocial(id)) { //Checks if the user has a social profile
 				session.setAttribute("hasSocial", true);
 			}
-			session.setAttribute("id", id);
+			session.setAttribute("id", id); //Sets user id for grabbing data
 			return new ModelAndView("userHome", "user", us.findById(id));
 		}
-		else {
+		else { //id==0 if the user/pass combo doesn't match. No 0 IDs in the database
 			session.setAttribute("message", "Username/password combination is incorrect!");
 			return new ModelAndView("login", "user", new User());
 		}
 	}
 	
-	/*
+	/**
 	 * This redirection sends the user to the login page with a message telling them why they
 	 * were sent there.
 	 */

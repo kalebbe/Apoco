@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            09/23/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.2
+ * Project Version: 1.3
  * Module Name:     User.java
  * Module Version:  1.0
  * Summary:         This model holds all of the user fields and completes data validation for
@@ -56,7 +56,7 @@ public class User {
 	private int id;
 
 	
-	/*
+	/**
 	 * Getters and setters below
 	 */
 	
@@ -116,8 +116,9 @@ public class User {
 		this.passRe = passRe;
 	}
 	
-	/*
-	 * Simple User constructor that sets everything to empty.
+	/**
+	 * Simple User constructor that sets everything to empty. May include a non-default for this
+	 * model in the future if I feel a need for it.
 	 */
 	public User() {
 		this.email = "";

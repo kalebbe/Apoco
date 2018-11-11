@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            10/14/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.1
+ * Project Version: 1.3
  * Module Name:     SocialController.java
  * Module Version:  1.01
  * Summary:         This controller is used to handle most things that are involved with the
@@ -37,7 +37,7 @@ public class SocialController {
 
 	private SocialBusinessInterface ss;
 
-	/*
+	/**
 	 * Dependency injection for the SocialBusinessService
 	 */
 	@Autowired
@@ -45,81 +45,88 @@ public class SocialController {
 		this.ss = ss;
 	}
 
-	/*
+	/**
 	 * Sets the user's theme to social which changes their navbar and footer to green. It then checks if the
 	 * user has a profile and then either sends them to the creator or the dashboard.
 	 */
 	@RequestMapping(path = "/social", method = RequestMethod.GET)
 	public ModelAndView socialProfile(@ModelAttribute("social") Social social, HttpSession session) {
-		session.setAttribute("theme", "social");
+		session.setAttribute("theme", "social"); //Makes header and footer of page green and removes social link
 		if(session.getAttribute("hasSocial") != null) {
-			return new ModelAndView("socialDash", "social", new Social());
+			//Returns the dashboard if the user has a social profile
+			return new ModelAndView("socialDash", "social", new Social()); 
 		}
 		else {
-			return new ModelAndView("socialProfile", "social", new Social());
+			//Pushes user to social creator if they don't have a social profile
+			return new ModelAndView("socialProfile", "social", new Social()); 
 		}
 	}
 	
-	/*
-	 * Used to load the games tab of the social service
+	/**
+	 * Used to load the games tab of the social service. Games may receive their own controller
+	 * in the future, but right now there is only one game, so it doesn't seem worth
 	 */
 	@RequestMapping(path = "/games", method = RequestMethod.GET)
 	public String getGames() {
-		return "playGames";
+		return "playGames"; //No model required
 	}
 
-	/*
+	/**
 	 * Submits the user's social profile for entrance into the database after going through the profile service.
-	 * This will use a picture in the future, but I've already spent well over 30 hours on this milestone alone and
-	 * I'm done. Will try again later once we're into Maven. I downloaded all the jars and added the crap to the config
-	 * and it still didn't work. ah well
+	 * The next milestone will likely have pictures in here as well.
 	 */
 	@RequestMapping(path = "/submitSocial", method = RequestMethod.POST)
 	public ModelAndView submitSocial(@Valid @ModelAttribute("social") Social social, BindingResult result,
 			HttpSession session) {
-
 		if (result.hasErrors()) {
-			return new ModelAndView("socialProfile", "social", social);
+			return new ModelAndView("socialProfile", "social", social); //Returns socialProfile with errors
 		}
-		session.setAttribute("social", social);
-		session.setAttribute("hasSocial", true);
-
-		/*
+		
+		social.setUserId((int)session.getAttribute("id")); //Sets social userId as session id
+		
+		if(ss.createSocial(social)) {
+			session.setAttribute("hasSocial", true); //This allows the user to land at the dashboard when they go to social
+			return new ModelAndView("socialDash", "social", social);
+		}
+		else { //Social profile failed insertion into database.
+			return new ModelAndView("socialProfile", "social", new Social());
+		}
+		
+		/**
+		 * Being saved for future milestone usage
 		 * File dir = new File("F:Workspaces/CST341/Apoco/WebContent/assets/img/social/" + (String) session.getAttribute("userId")); dir.mkdirs(); try { mpf.transferTo(dir); }
 		 * catch (IllegalStateException | IOException e) { // TODO Auto-generated catch
 		 * block e.printStackTrace(); System.out.println(e); }
-		 */
-		social.setUserId((int)session.getAttribute("id"));
-		ss.create(social);
-		
-		return new ModelAndView("socialDash", "social", social);
+		 */		
 	}
 
-	/*
-	 * Gives a list from 1 to 31 for a dropdown in the view.
+	/**
+	 * Gives a list from 1 to 31 for a drop down in the view.
 	 */
 	@ModelAttribute("dayList")
 	public List<Integer> getBirthDay() {
 		List<Integer> dayList = new ArrayList<Integer>();
-		for (int i = 1; i <= 31; i++) {
+		for (int i = 1; i <= 31; i++) { //Loop to grab numbers 1->31
 			dayList.add(i);
 		}
 		return dayList;
 	}
 	
-	/*
-	 * Returns a list of years for a dropdown in the view
+	/**
+	 * Returns a list of years for a dropdown in the view. I don't
+	 * think anyone is 118 years old that will be registering, but 
+	 * that's all right.
 	 */
 	@ModelAttribute("yearList")
 	public List<Integer> getBirthYear(){
 		List<Integer> yearList = new ArrayList<Integer>();
-		for(int i = 2018; i >= 1900; i--) {
+		for(int i = 2018; i >= 1900; i--) { //Loops 2018 -> 1900 descending
 			yearList.add(i);
 		}
 		return yearList;
 	}
 	
-	/*
+	/**
 	 * Returns a list of months for a dropdown in the view. Each month
 	 * is given a numeric value.
 	 */
@@ -141,12 +148,13 @@ public class SocialController {
 		return monthList;
 	}
 	
-	/*
+	/**
 	 * Returns a generic list of job types for the user to choose from as a career field.
 	 */
 	@ModelAttribute("jobList")
 	public List<String> getJobList(){
 		List<String> jobList = new ArrayList<String>();
+		//These job types were grabbed from a career webpage and are meant to be generic.
 		jobList.add("Accounting");
 		jobList.add("Admin");
 		jobList.add("Automotive");
@@ -195,8 +203,9 @@ public class SocialController {
 		return jobList;
 	}
 	
-	/*
-	 * Returns a list of education levels for the user to choose from
+	/**
+	 * Returns a list of education levels for the user to choose from. None might not really be
+	 * necessary for this website, but oh well.
 	 */
 	@ModelAttribute("edList")
 	public List<String> getEdList(){
@@ -215,8 +224,9 @@ public class SocialController {
 		return edList;
 	}
 	
-	/*
-	 * Returns a list of relationship statuses for the user to choose from.
+	/**
+	 * Returns a list of relationship statuses for the user to choose from. Couldn't think of any others
+	 * that wouldn't be troll.
 	 */
 	@ModelAttribute("statusList")
 	public List<String> getStatList(){
@@ -231,8 +241,8 @@ public class SocialController {
 		return statList;
 	}
 	
-	/*
-	 * Returns a list of state initials for the user to choose from
+	/**
+	 * Returns a list of state initials for the user to choose from.
 	 */
 	@ModelAttribute("stateList")
 	public List<String> getStates(){

@@ -1,9 +1,9 @@
-/*
+/**
  * Author:          Kaleb Eberhart
  * Date:            10/14/18
  * Course:          CST-341
  * Project Name:    Apoco
- * Project Version: 1.1
+ * Project Version: 1.3
  * Module Name:     Feed.java
  * Module Version:  1.0
  * Summary:         This model is used for user feed posts. This is pretty simple and
@@ -12,6 +12,7 @@
  * 
  * 					-----UPDATE MILESTONE 4-----
  * 					-Added userId + getter and setter for spring jdbc purposes
+ * 					-Added id + getter and setter for UPDATE purposes.
  */
 package com.gcu.model;
 
@@ -35,7 +36,7 @@ public class Feed {
 	
 	private int id;
 	
-	/*
+	/**
 	 * Here be getters and setters
 	 */
 	
@@ -85,7 +86,7 @@ public class Feed {
 		this.feed = feed;
 	}
 	
-	/*
+	/**
 	 * Default constructor to give default values to the model
 	 */
 	public Feed() {
@@ -97,7 +98,7 @@ public class Feed {
 		this.userId = 0;
 	}
 	
-	/*
+	/**
 	 * Non-standard constructor used to set model manually from database.
 	 * Done to allow for reading data from database and displaying in view.
 	 */
