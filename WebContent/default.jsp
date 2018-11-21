@@ -41,9 +41,6 @@
 								<li class="nav-item" role="presentation"><a
 									class="nav-link" href="#"
 									style="font-size: 20px; color: rgb(0, 7, 169); font-family: Aldrich, sans-serif;">Business</a></li>
-								<li class="nav-item" role="presentation"><a
-									class="nav-link" href="#"
-									style="font-size: 20px; color: #dd00c8; font-family: 'Abril Fatface', cursive;">Dating</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="nav-item" role="presentation"><a
@@ -52,9 +49,6 @@
 								<li class="nav-item" role="presentation"><a
 									class="nav-link" href="login/redirect"
 									style="font-size: 20px; color: rgb(0, 7, 169); font-family: Aldrich, sans-serif;">Business</a></li>
-								<li class="nav-item" role="presentation"><a
-									class="nav-link" href="login/redirect"
-									style="font-size: 20px; color: #dd00c8; font-family: 'Abril Fatface', cursive;">Dating</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>

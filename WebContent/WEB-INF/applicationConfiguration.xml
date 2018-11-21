@@ -73,5 +73,8 @@
  	<bean id="userDAO" class="com.gcu.data.UserDAO">
  		<property name="dataSource" ref="dataSource"/>
  	</bean>
+ 	<bean id="businessDAO" class="com.gcu.data.BusinessDAO">
+ 		<property name="dataSource" ref="dataSource"/>
+ 	</bean>
    
  </beans>

@@ -20,14 +20,6 @@
 			</footer>
 		</div>
 	</c:when>
-	<c:when test="${sessionScope.theme.equals('dating')}">
-		<div class="footer-basic" style="background-color: #dd00c8;">
-			<footer>
-				<p class="copyright" style="color: #ffffff;">Apoco Inc ©
-					2018-2019</p>
-			</footer>
-		</div>
-	</c:when>
 	<c:when test="${sessionScope.theme.equals('social')}">
 		<div class="footer-basic" style="background-color: #0fb800;">
 			<footer>
