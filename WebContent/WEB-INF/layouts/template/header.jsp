@@ -41,7 +41,7 @@
 										style="color: #0fb800; font-size: 20px; font-family: 'Alegreya SC', serif;">Social</a></li>
 
 									<li class="nav-item" role="presentation"><a
-										class="nav-link" href="#"
+										class="nav-link" href="../business/bus"
 										style="font-size: 20px; color: rgb(0, 7, 169); font-family: Aldrich, sans-serif;">Business</a></li>
 								</c:when>
 								<c:otherwise>
@@ -111,7 +111,7 @@
 					<div class="collapse navbar-collapse" id="navcol-1">
 						<ul class="nav navbar-nav ml-auto">
 							<li class="nav-item" role="presentation"><a class="nav-link"
-								href="#"
+								href="../business/bus"
 								style="font-size: 20px; color: rgb(0, 7, 169); font-family: Aldrich, sans-serif;">Business</a></li>
 						</ul>
 					</div>
@@ -149,7 +149,7 @@
 			<nav class="navbar navbar-light navbar-expand-md navigation-clean"
 				style="background-color: #0007a9;">
 				<div class="container">
-					<a class="navbar-brand" href="#"
+					<a class="navbar-brand" href="../home/user"
 						style="color: #000000; font-size: 30px;">Apoco</a>
 					<button class="navbar-toggler" data-toggle="collapse"
 						data-target="#navcol-1">
@@ -159,7 +159,7 @@
 					<div class="collapse navbar-collapse" id="navcol-1">
 						<ul class="nav navbar-nav ml-auto">
 							<li class="nav-item" role="presentation"><a class="nav-link"
-								href="#"
+								href="../social/social"
 								style="color: #0fb800; font-size: 20px; font-family: 'Alegreya SC', serif;">Social</a></li>
 						</ul>
 					</div>
@@ -171,16 +171,15 @@
 				class="navbar navbar-light navbar-expand-md navigation-clean-button"
 				style="background-color: #6c6a6a; height: 60px;">
 				<div class="container">
-					<a class="navbar-brand" href="#" style="height: 0px;"></a>
-					<button class="navbar-toggler" data-toggle="collapse"
-						data-target="#navcol-1">
-						<span class="sr-only">Toggle navigation</span><span
-							class="navbar-toggler-icon"></span>
-					</button>
 					<div class="collapse navbar-collapse" id="navcol-1">
-						<ul class="nav navbar-nav mr-auto"></ul>
-						<span class="navbar-text actions"> <a href="../home/user"
-							class="login" style="color: #ffffff; font-size: 14px;">Apoco Home</a><a
+						<ul class="nav navbar-nav mr-auto">
+							<c:choose>
+								<c:when test="${sessionScope.hasBusiness != null}">
+									<li class="nav-item" role="presentation"><a style="color: #ffffff;" class="nav-link" href="../business/bus">Dashboard</a></li>
+								</c:when>
+							</c:choose>
+						</ul>
+						<span class="navbar-text actions"><a
 							class="btn btn-light action-button" role="button"
 							href="../logout/log"
 							style="background-color: #000000; color: #ffffff; font-size: 14px;">Log

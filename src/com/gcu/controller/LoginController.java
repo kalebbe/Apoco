@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.gcu.business.BusinessInterface;
 import com.gcu.business.SocialBusinessInterface;
 import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.User;
@@ -35,7 +37,8 @@ import com.gcu.model.User;
 public class LoginController {
 	
 	private UserBusinessInterface us; //Changed to private per rubric feedback
-	private SocialBusinessInterface ps;
+	private SocialBusinessInterface ss;
+	private BusinessInterface bs;
 	
 	/**
 	 * Dependency injection for the UserBusinessService.
@@ -49,8 +52,13 @@ public class LoginController {
 	 * Dependency injection for the SocialBusinessService.
 	 */
 	@Autowired
-	public void setProfileService(SocialBusinessInterface ps) {
-		this.ps = ps;
+	public void setSocialService(SocialBusinessInterface ss) {
+		this.ss = ss;
+	}
+	
+	@Autowired
+	public void setBusinessService(BusinessInterface bs) {
+		this.bs = bs;
 	}
 	
 	/**
@@ -71,8 +79,11 @@ public class LoginController {
 	public ModelAndView login(@RequestParam String email, @RequestParam String password, HttpSession session) {
 		int id = us.login(email, password); //Checks user login and returns their id if login is correct
 		if(id > 0) {
-			if(ps.checkSocial(id)) { //Checks if the user has a social profile
+			if(ss.checkSocial(id)) { //Checks if the user has a social profile
 				session.setAttribute("hasSocial", true);
+			}
+			if(bs.checkBusiness(id)) {
+				session.setAttribute("hasBusiness", true);
 			}
 			session.setAttribute("id", id); //Sets user id for grabbing data
 			return new ModelAndView("userHome", "user", us.findById(id));

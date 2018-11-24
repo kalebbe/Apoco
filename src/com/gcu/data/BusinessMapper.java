@@ -13,7 +13,19 @@ public class BusinessMapper implements RowMapper {
 	public Business mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Business bus = new Business();
 		
-		//TODO: Set business items
+		String date = rs.getString("DOB");
+		String arr[] = date.split("/");
+		
+		bus.setId(rs.getInt("ID"));
+		bus.setBirthDay(Integer.parseInt(arr[1]));
+		bus.setBirthMonth(Integer.parseInt(arr[0]));
+		bus.setBirthYear(Integer.parseInt(arr[2]));
+		bus.setGender(rs.getString("GENDER"));
+		bus.setEthnicity(rs.getString("ETHNICITY"));
+		bus.setCity(rs.getString("CITY"));
+		bus.setState(rs.getString("STATE"));
+		bus.setEducation(rs.getString("EDUCATION"));
+		bus.setProfession(rs.getString("PROFESSION"));
 		return bus;
 	}
 }

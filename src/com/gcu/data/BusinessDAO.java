@@ -42,11 +42,11 @@ public class BusinessDAO implements DataAccessInterface<Business> {
 
 	@Override
 	public boolean create(Business t) {
-		String sql = "INSERT INTO busprofiles (USER_ID, DOB, GENDER, ETHNICITY, LOCATION, EDUCATION, PROFESSION)"
-				+ " VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO busprofiles (USER_ID, DOB, GENDER, ETHNICITY, CITY, STATE, EDUCATION, PROFESSION)"
+				+ " VALUES (?,?,?,?,?,?,?,?)";
 		boolean result = false;
-		String location = t.getCity() + ", " + t.getState();
-		if (jdbcTemp.update(sql, t.getDob(), t.getGender(), t.getEthnicity(), location, t.getEducation(),
+		String date = t.getBirthMonth() + "/" + t.getBirthDay() + "/" + t.getBirthYear();
+		if (jdbcTemp.update(sql, t.getUserId(), date, t.getGender(), t.getEthnicity(), t.getCity(), t.getState(), t.getEducation(),
 				t.getProfession()) == 1) {
 			result = true;
 		}
@@ -55,11 +55,11 @@ public class BusinessDAO implements DataAccessInterface<Business> {
 
 	@Override
 	public boolean update(Business t) {
-		String sql = "UPDATE busprofiles SET DOB = ?, GENDER = ?, ETHNICITY = ?, LOCATION = ?, EDUCATION = ?,"
+		String sql = "UPDATE busprofiles SET USER_ID = ?, DOB = ?, GENDER = ?, ETHNICITY = ?, CITY = ?, STATE = ?, EDUCATION = ?,"
 				+ " PROFESSION = ? WHERE ID = ?";
 		boolean result = false;
-		String location = t.getCity() + ", " + t.getState();
-		if (jdbcTemp.update(sql, t.getDob(), t.getGender(), t.getEthnicity(), location, t.getEducation(),
+		String date = t.getBirthMonth() + "/" + t.getBirthDay() + "/" + t.getBirthYear();
+		if (jdbcTemp.update(sql, t.getUserId(), date, t.getGender(), t.getEthnicity(), t.getCity(), t.getState(), t.getEducation(),
 				t.getProfession(), t.getId()) == 1) {
 			result = true;
 		}

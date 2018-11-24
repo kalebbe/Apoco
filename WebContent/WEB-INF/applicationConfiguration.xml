@@ -59,9 +59,11 @@
 	<bean id="loginController" class="com.gcu.controller.LoginController"/>
 	<bean id="accountController" class="com.gcu.controller.AccountController"/>
 	<bean id="socialController" class="com.gcu.controller.SocialController"/>
+	<bean id="businessController" class="com.gcu.controller.BusinessController"/>
 	<bean id="feedController" class="com.gcu.controller.FeedController" />
 	<bean id="userService" class="com.gcu.business.UserBusinessService" />
  	<bean id="socialService" class="com.gcu.business.SocialBusinessService" />
+ 	<bean id="businessService" class="com.gcu.business.BusinessService" />
  	<bean id="minesweeperLogic" class="com.gcu.utilities.MinesweeperLogic" />
  	<bean id="feedService" class="com.gcu.business.FeedBusinessService" />
  	<bean id="feedDAO" class="com.gcu.data.FeedDAO">

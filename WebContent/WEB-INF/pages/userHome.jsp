@@ -42,11 +42,19 @@
 			</div>
 			<div class="col-md-6 col-lg-4 item" style="color: rgb(0, 7, 169);">
 				<div class="box">
-					<h3 class="name">Apoco Business</h3>
-					<p class="description">You have not set up a business account!</p>
-					<a class="btn btn-light action-button" role="button" href="#"
-						style="background-color: rgb(0, 7, 169); color: #ffffff; font-size: 14px;">Create
-						Profile</a>
+					<c:choose>
+						<c:when test="${sessionScope.hasBusiness != true}">
+							<h3 class="name">Apoco Business</h3>
+							<p class="description">You have not set up a business account!</p>
+							<a class="btn btn-light action-button" role="button" href="#"
+								style="background-color: rgb(0, 7, 169); color: #ffffff; font-size: 14px;">Create
+								Profile</a>
+						</c:when>
+						<c:otherwise>
+							<h3 class="name">Apoco Business</h3>
+							<p class="description">Business mini dashboard coming soon!</p>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<div class="col-md-6 col-lg-4 item" style="color: #dd00c8;">

@@ -27,17 +27,19 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	private JdbcTemplate jdbcTemp;
 
 	/**
-	 * Sets the data source for this class and instantiates the spring jdbc template
-	 */
+	* Sets the data source for this class and instantiates the spring jdbc template
+	*/
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.jdbcTemp = new JdbcTemplate(dataSource);
 	}
 
 	/**
-	 * This method is used to return a socialfeed object by its ID. This is
-	 * currently not in use, but will likely be soon.
-	 */
+	* This method is used to return a socialfeed object by its ID. This is
+	* currently not in use, but will likely be soon.
+	* @param id Used to find a feed object by its ID.
+	* @return Feed This returns the feed object grabbed from DB.
+	*/
 	@SuppressWarnings("unchecked")
 	@Override
 	public Feed findById(int id) {
@@ -47,9 +49,9 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	}
 
 	/**
-	 * This method returns all feed posts in the database and will likely be used in
-	 * the future for admin/mod powers, but is currently not in use.
-	 */
+	* This method returns all feed posts in the database and will likely be used in
+	* the future for admin/mod powers, but is currently not in use.
+	*/
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Feed> findAll() {
@@ -65,8 +67,8 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	}
 
 	/**
-	 * This method is used to find get all of the feed corresponding to a user id.
-	 */
+	* This method is used to find get all of the feed corresponding to a user id.
+	*/
 	@SuppressWarnings("unchecked")
 	public List<Feed> findUserFeed(int id) {
 		String sql = "SELECT * FROM socialfeed WHERE USER_ID=? ORDER BY DATE_POSTED DESC";
@@ -83,8 +85,8 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	}
 
 	/**
-	 * This method is used to insert a new Feed object into the database
-	 */
+	* This method is used to insert a new Feed object into the database
+	*/
 	@Override
 	public boolean create(Feed t) {
 		String sql = "INSERT INTO socialfeed (USER_ID, NAME, POST, PRIVACY, LINK) VALUES (?,?,?,?,?)";
@@ -96,10 +98,10 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	}
 
 	/**
-	 * This method is used to update an existing feed object in the database. This
-	 * method is now used in milestone 5 to update the POST column. May be updated
-	 * in the future for an upvote/downvote update
-	 */
+	* This method is used to update an existing feed object in the database. This
+	* method is now used in milestone 5 to update the POST column. May be updated
+	* in the future for an upvote/downvote update
+	*/
 	@Override
 	public boolean update(Feed t) {
 		String sql = "UPDATE socialfeed SET USER_ID = ?, NAME = ?, POST = ?, PRIVACY = ?, LINK = ? WHERE ID = ?";
@@ -111,9 +113,9 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	}
 
 	/**
-	 * This method is used to delete the feed object from database using the ID of
-	 * the object
-	 */
+	* This method is used to delete the feed object from database using the ID of
+	* the object
+	*/
 	@Override
 	public boolean delete(int id) {
 		String sql = "DELETE FROM socialfeed WHERE ID = ? ";
