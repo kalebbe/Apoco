@@ -1,13 +1,21 @@
+/**
+ * This controller is used to handle all things that are involved with the business profile
+ * in this project. This will likely be expanded in the future to include updating and
+ * deleting profiles.
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.0
+ * @since   2018-11-25
+ */
+
 package com.gcu.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,7 +23,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.gcu.business.BusinessInterface;
 import com.gcu.model.Business;
 
@@ -24,41 +31,64 @@ import com.gcu.model.Business;
 public class BusinessController {
 	private BusinessInterface bs;
 	
+	/**
+	 * Dependency injection for the BusinessService
+	 * @param bs This is the class being set.
+	 * @return Nothing.
+	 */
 	@Autowired
 	public void setBusinessService(BusinessInterface bs) {
 		this.bs = bs;
 	}
 	
+	/**
+	 * Sets the user's theme to business which will change the appearance of their navbar and footer.
+	 * It will then check to see if the user has a business profile and either sends them to the profile
+	 * creator or the business dashboard.
+	 * @param bus This is the business model retrieved from the view.
+	 * @param session This is the session used to check if the user has a business profile.
+	 * @return ModelAndView This is the new business object sent to the busProfile view.
+	 */
 	@RequestMapping(path = "/bus", method = RequestMethod.GET)
 	public ModelAndView businessProfile(@ModelAttribute("business") Business bus, HttpSession session) {
 		session.setAttribute("theme", "business");
 		if(session.getAttribute("hasBusiness") != null) {
+			//Dashboard is returned if the user has a business profile
 			return new ModelAndView("busDash", "business", new Business());
 		}
 		else {
-			return new ModelAndView("busProfile", "business", new Business());
+			return new ModelAndView("busProfile", "business", new Business()); //To the creator
 		}
 	}
 	
+	/**
+	 * Submits the user's business profile for insertion into the database after pushing through the business
+	 * service. Pictures will be in an upcoming milestone.
+	 * @param bus This is the business model grabbed from the view.
+	 * @param result This is the result used to check for errors.
+	 * @param session This is the session used to set the hasBusiness variable.
+	 * @return ModelAndView This is the updated business object with errors being sent back to the busProfile view.
+	 */
 	@RequestMapping(path = "/submitBus", method = RequestMethod.POST)
 	public ModelAndView submitBus(@Valid @ModelAttribute("business") Business bus, BindingResult result, HttpSession session) {
 		if(result.hasErrors()) {
-			return new ModelAndView("busProfile", "business", bus);
+			return new ModelAndView("busProfile", "business", bus); //REturns busProfile with errors
 		}
 		
 		bus.setUserId((int)session.getAttribute("id"));
 		
 		if(bs.createBusiness(bus)) {
-			session.setAttribute("hasBusiness", true);
+			session.setAttribute("hasBusiness", true); //This allows the user to land at the dashboard when they got to business
 			return new ModelAndView("busDash", "business", bus);
 		}
-		else {
+		else { //Business profile failed insertion into database.
 			return new ModelAndView("busProfile", "business", new Business());
 		}
 	}
 	
 	/**
 	 * Gives a list from 1 to 31 for a drop down in the view.
+	 * @return List<Integer> This is the list of days in a month being returned.
 	 */
 	@ModelAttribute("dayList")
 	public List<Integer> getBirthDay() {
@@ -73,6 +103,7 @@ public class BusinessController {
 	 * Returns a list of years for a dropdown in the view. I don't
 	 * think anyone is 118 years old that will be registering, but 
 	 * that's all right.
+	 * @return List<Integer> This is a list of many years being returned.
 	 */
 	@ModelAttribute("yearList")
 	public List<Integer> getBirthYear(){
@@ -86,6 +117,7 @@ public class BusinessController {
 	/**
 	 * Returns a list of months for a dropdown in the view. Each month
 	 * is given a numeric value.
+	 * @return Map<Integer, String> This is a map of months->value pairs being returned.
 	 */
 	@ModelAttribute("monthList")
 	public Map<Integer, String> getMonthList(){
@@ -107,6 +139,7 @@ public class BusinessController {
 	
 	/**
 	 * Returns a generic list of job types for the user to choose from as a career field.
+	 * @return List<String> This is the list of different job types being returned.
 	 */
 	@ModelAttribute("jobList")
 	public List<String> getJobList(){
@@ -160,6 +193,10 @@ public class BusinessController {
 		return jobList;
 	}
 	
+	/**
+	 * This method gives a list of different ethnicities to the model for the user to choose from.
+	 * @return List<String> This is the list of ethnicities being returned.
+	 */
 	@ModelAttribute("ethList")
 	public List<String> getEthList(){
 		List<String> ethList = new ArrayList<String>();
@@ -176,6 +213,7 @@ public class BusinessController {
 	/**
 	 * Returns a list of education levels for the user to choose from. None might not really be
 	 * necessary for this website, but oh well.
+	 * @return List<String> This is the list of education levels being returned.
 	 */
 	@ModelAttribute("edList")
 	public List<String> getEdList(){
@@ -196,6 +234,7 @@ public class BusinessController {
 	
 	/**
 	 * Returns a list of state initials for the user to choose from.
+	 * @return List<String> This is the list of state abbreviations being returned.
 	 */
 	@ModelAttribute("stateList")
 	public List<String> getStates(){

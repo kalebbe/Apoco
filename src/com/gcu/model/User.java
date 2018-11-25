@@ -1,16 +1,14 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            09/23/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     User.java
- * Module Version:  1.0
- * Summary:         This model holds all of the user fields and completes data validation for
- * 					each field. I will try to add email validation again in the future, but
- * 					it was causing exceptions every time I tried to use it. The email is checked
- * 					in the JavaScript regardless and it doesn't seeem that important because the
- * 					email is easy to spoof anyways.
+ * This model holds all of the user fields and completes data validation for
+ * each field. I will try to add email validation again in the future, but
+ * it was causing exceptions every time I tried to use it. The email is checked
+ * in the JavaScript regardless and it doesn't seeem that important because the
+ * email is easy to spoof anyways.
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.0
+ * @since   2018-11-25
  */
 
 package com.gcu.model;
@@ -55,63 +53,121 @@ public class User {
 	
 	private int id;
 
-	
 	/**
-	 * Getters and setters below
+	 * Getter for the id variable.
+	 * @return int This is the id of the user.
 	 */
-	
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Setter for the id variable.
+	 * @param id This is the new id of the user.
+	 * @return Nothing.
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 	
+	/**
+	 * Getter for the email variable.
+	 * @return String This is the email of the user.
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * Setter for the email variable.
+	 * @param email This is the new email of the user.
+	 * @return Nothing.
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Getter for the username variable.
+	 * @return String This is the username of the user.
+	 */
 	public String getUsername() {
 		return username;
 	}
 
+	/**
+	 * Setter for the username variable.
+	 * @param username This is the new username of the user.
+	 * @return Nothing.
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	/**
+	 * Getter for the firstName variable.
+	 * @return String This is the first name of the user.
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
+	/**
+	 * Setter for the firstName variable.
+	 * @param firstName This is the new first name of the user.
+	 * @return Nothing.
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
+	/**
+	 * Getter for the lastName variable.
+	 * @return String This is the last name of the user.
+	 */
 	public String getLastName() {
 		return lastName;
 	}
 
+	/**
+	 * Setter for the lastName variable.
+	 * @param lastName This is the new last name of the user.
+	 * @return Nothing.
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
+	/**
+	 * Getter for the password variable.
+	 * @return String This is the password of the user.
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * Setter for the password variable.
+	 * @param password This is the new password of the user.
+	 * @return Nothing.
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	 * Getter for the passRe variable.
+	 * @return String this is the repeated password of the user.
+	 */
 	public String getPassRe() {
 		return passRe;
 	}
 
+	/**
+	 * Setter for the passRe variable.
+	 * @param passRe This is the new repeated password of the user.
+	 * @return Nothing.
+	 */
 	public void setPassRe(String passRe) {
 		this.passRe = passRe;
 	}

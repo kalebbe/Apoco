@@ -1,12 +1,19 @@
+/**
+ * This class is used for any database interactions with Business objects. Currently, the
+ * only methods being used are findById and create, but this will change.
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.0
+ * @since   2018-11-25
+ */
+
 package com.gcu.data;
 
 import java.util.List;
-
 import javax.sql.DataSource;
-
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-
 import com.gcu.model.Business;
 
 public class BusinessDAO implements DataAccessInterface<Business> {
@@ -15,11 +22,23 @@ public class BusinessDAO implements DataAccessInterface<Business> {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemp;
 
+	/**
+	 * Sets the data source for this class and instantiates the spring jdbc template.
+	 * @param dataSource.
+	 * @return Nothing.
+	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.jdbcTemp = new JdbcTemplate(dataSource);
 	}
 
+	/**
+	 * This method is used to return a Business profile using its id. Realistically, this is probably
+	 * supposed to be grabbing a busprofile by its ID not the USER_ID, but this is how I currently get
+	 * user profiles.
+	 * @param id This is the id of the profile being grabbed.
+	 * @return Business This is the business profile returned from the database.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Business findById(int id) {
@@ -32,6 +51,10 @@ public class BusinessDAO implements DataAccessInterface<Business> {
 		}
 	}
 
+	/**
+	 * This method returns every Business profile in the database. Currently not in use.
+	 * @return List<Business> This is the list of Business profiles returned.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Business> findAll() {
@@ -40,11 +63,18 @@ public class BusinessDAO implements DataAccessInterface<Business> {
 		return bus;
 	}
 
+	/**
+	 * This method creates a new business profile in the database. This is one of the few methods here that are currently
+	 * in use.
+	 * @param t This is the business profile being created.
+	 * @return boolean This is the success or failure of database insertion.
+	 */
 	@Override
 	public boolean create(Business t) {
 		String sql = "INSERT INTO busprofiles (USER_ID, DOB, GENDER, ETHNICITY, CITY, STATE, EDUCATION, PROFESSION)"
 				+ " VALUES (?,?,?,?,?,?,?,?)";
 		boolean result = false;
+		//This is inserted as a String rather than util.date because the String serves my purposes.
 		String date = t.getBirthMonth() + "/" + t.getBirthDay() + "/" + t.getBirthYear();
 		if (jdbcTemp.update(sql, t.getUserId(), date, t.getGender(), t.getEthnicity(), t.getCity(), t.getState(), t.getEducation(),
 				t.getProfession()) == 1) {
@@ -53,6 +83,12 @@ public class BusinessDAO implements DataAccessInterface<Business> {
 		return result;
 	}
 
+	/**
+	 * This method updates a business profile in the database. This is currently not in use, but it will be in the
+	 * near future.
+	 * @param t This is the business profile being updated.
+	 * @return boolean This is the success or failure of the database update.
+	 */
 	@Override
 	public boolean update(Business t) {
 		String sql = "UPDATE busprofiles SET USER_ID = ?, DOB = ?, GENDER = ?, ETHNICITY = ?, CITY = ?, STATE = ?, EDUCATION = ?,"
@@ -66,6 +102,12 @@ public class BusinessDAO implements DataAccessInterface<Business> {
 		return result;
 	}
 
+	/**
+	 * This method deletes a business profile from the database by it's id. This is currently not in use,
+	 * but will be added for future purposes.
+	 * @param id This is the id of the profile scheduled for deletion.
+	 * @return boolean This is the success or failure of the database deletion.
+	 */
 	@Override
 	public boolean delete(int id) {
 		String sql = "DELETE FROM busprofiles WHERE USER_ID = ?";

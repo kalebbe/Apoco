@@ -1,16 +1,13 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            09/23/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     RegistrationController.java
- * Module Version:  1.01
- * Summary:         This controller handles the user's registration to my website and
- * 					also brings them to the registration page.
+ * This controller handles the user's registration to my website and
+ * also brings them to the registration page.
  * 					
- * 					-----UPDATE MILESTONE 3-----
- * 					-Added Dependency injection
+ * -----UPDATE MILESTONE 3-----
+ * -Added Dependency injection
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.01
+ * @since   2018-11-25
  */
 
 package com.gcu.controller;
@@ -34,7 +31,9 @@ public class RegistrationController {
 	UserBusinessInterface us;
 	
 	/**
-	 * Dependency injection allows useage of User service without instantiating an object every time
+	 * Dependency injection allows useage of User service without instantiating an object every time.
+	 * @param us This is the class being set.
+	 * @return Nothing.
 	 */
 	@Autowired
 	public void setUserService(UserBusinessInterface us) {
@@ -42,7 +41,8 @@ public class RegistrationController {
 	}
 	
 	/**
-	 * Sends the user to the Registration page
+	 * Sends the user to the Registration page.
+	 * @return ModelAndView This is a new User model being sent to the registration view.
 	 */
 	@RequestMapping(path="/reg", method=RequestMethod.GET)
 	public ModelAndView Registration() {
@@ -53,6 +53,10 @@ public class RegistrationController {
 	 * This method checks the User model data validation and returns them to the registration page if anything is incorrect.
 	 * If the user does not have JavaScript disabled in their browser, none of the validation errors should pop up because
 	 * they are also checked in the browser.
+	 * @param user This is the user model retrieved from the form.
+	 * @param result This is the result returned to check for errors.
+	 * @param session This is the session used to send error messages and save id to session.
+	 * @return ModelAndView This is the updated user object grabbed from the view and either the reg or userhome view.
 	 */
 	@RequestMapping(path="/register", method=RequestMethod.POST)
 	public ModelAndView Register(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session) {

@@ -1,18 +1,15 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            10/14/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     SocialDAO.java
- * Module Version:  1.1
- * Summary:         This class is used for all things involving our social service and the database. Currently this class
- * 					can create the user's social profile, create a feed post, and grab the data as well. In the future,
- * 					this class will allow the user to update their profile (and possibly feed posts) as well as 
- * 					post comments on feed posts.
+ * This class is used for all things involving our social service and the database. Currently this class
+ * can create the user's social profile, create a feed post, and grab the data as well. In the future,
+ * this class will allow the user to update their profile (and possibly feed posts) as well as 
+ * post comments on feed posts.
  * 
- * 					-----UPDATE MILESTONE 4-----
- * 					-Updated to comply with Spring jdbc.
+ * -----UPDATE MILESTONE 4-----
+ * -Updated to comply with Spring jdbc.
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.1
+ * @since   2018-11-25
  */
 
 package com.gcu.data;
@@ -31,7 +28,9 @@ public class SocialDAO implements DataAccessInterface<Social> {
 
 	/**
 	 * This method sets the data source for my database calls and instantiates the
-	 * template
+	 * template.
+	 * @param dataSource.
+	 * @return Nothing.
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -42,6 +41,8 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	 * This method takes the user's id and returns the user model for them. If there
 	 * is no result for that id, the method will catch the exception and return
 	 * null.
+	 * @param id This is the id of the Social profile being fetched.
+	 * @return Social This is the object being returned.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -59,6 +60,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	 * This method returns every single social profile in the database. As of right
 	 * now, this method does not have a purpose, but may be used in the future for
 	 * data purposes.
+	 * @return List<Social> This is the list of Social objects returned.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -70,6 +72,8 @@ public class SocialDAO implements DataAccessInterface<Social> {
 
 	/**
 	 * This method takes the Social model and inserts it into the database.
+	 * @param t This is the social object being created.
+	 * @return boolean This returns the success of database insertion.
 	 */
 	@Override
 	public boolean create(Social t) {
@@ -94,6 +98,8 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	 * from the base ICA update method which would update the entire model. I feel
 	 * like this is more efficient as only the required columns are updated. This is
 	 * currently not in use.
+	 * @param t This is the social object being updated.
+	 * @return boolean This returns the success of the database update.
 	 */
 	@Override
 	public boolean update(Social t) {
@@ -111,6 +117,8 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	/**
 	 * This method deletes the social profile of the logged in user. Currently not
 	 * in use.
+	 * @param id This is the id of the social object being deleted in the database.
+	 * @return boolean This returns the success of the database deletion.
 	 */
 	@Override
 	public boolean delete(int id) {

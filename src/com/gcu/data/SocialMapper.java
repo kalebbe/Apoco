@@ -1,14 +1,12 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            11/04/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     SocialMapper.java
- * Module Version:  1.0
- * Summary:         This class is used to map the data from the database when creating a new
- * 					Social model using Spring JDBC. This was the recommended way to do this
- * 					on TutorialsPoint.
+ * This class is used to map the data from the database when creating a new
+ * Social model using Spring JDBC. This was the recommended way to do this
+ * on TutorialsPoint.
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.0
+ * @since   2018-11-25
  */
 
 package com.gcu.data;
@@ -23,7 +21,10 @@ import com.gcu.model.Social;
 public class SocialMapper implements RowMapper {
 
 	/**
-	 * Quick method for creating and returning a new social object from the database.
+	 * This is a quick method for creating and returning a new social object from the database.
+	 * @param rs This is the result set from the database.
+	 * @param rowNum This is required by RowMapper, but unused.
+	 * @return Social This is the social object returned after being set.
 	 */
 	@Override
 	public Social mapRow(ResultSet rs, int rowNum) throws SQLException {

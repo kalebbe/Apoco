@@ -1,18 +1,16 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            10/14/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     Feed.java
- * Module Version:  1.0
- * Summary:         This model is used for user feed posts. This is pretty simple and
- * 					there isn't much data validation here either. In the future, this will
- * 					have pictures as well.
+ * This model is used for user feed posts. This is pretty simple and
+ * there isn't much data validation here either. In the future, this will
+ * have pictures as well.
  * 
- * 					-----UPDATE MILESTONE 4-----
- * 					-Added userId + getter and setter for spring jdbc purposes
- * 					-Added id + getter and setter for UPDATE purposes.
+ * -----UPDATE MILESTONE 4-----
+ * -Added userId + getter and setter for spring jdbc purposes
+ * -Added id + getter and setter for UPDATE purposes.
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.0
+ * @since   2018-11-25
  */
 package com.gcu.model;
 
@@ -37,51 +35,103 @@ public class Feed {
 	private int id;
 	
 	/**
-	 * Here be getters and setters
+	 * Getter for the userId variable.
+	 * @return int This is the user id of the feed profile's owner.
 	 */
-	
 	public int getUserId() {
 		return userId;
 	}
 	
+	/**
+	 * Setter for the userId variable.
+	 * @param userId This is the new user id for the feed object.
+	 * @return Nothing.
+	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	
+	/**
+	 * Getter for the id variable.
+	 * @return int This is the id of the feed object.
+	 */
 	public int getId() {
 		return id;
 	}
 	
+	/**
+	 * Getter for the link variable.
+	 * @return String This is the link of the feed object.
+	 */
 	public String getLink() {
 		return link;
 	}
 
+	/**
+	 * Setter for the link variable.
+	 * @param link This is the new link for the feed object.
+	 * @return Nothing.
+	 */
 	public void setLink(String link) {
 		this.link = link;
 	}
 
+	/**
+	 * Setter for the id variable.
+	 * @param id This is the new id for the feed object.
+	 * @return Nothing.
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 	
+	/**
+	 * Getter for the name variable.
+	 * @return String This is the name variable of the feed object.
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * Setter for the name variable.
+	 * @param name This is the new name for the feed object.
+	 * @return Nothing.
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/**
+	 * Getter for the privacy boolean.
+	 * @return boolean This is the privacy variable of the feed object.
+	 */
 	public String getPrivacy() {
 		return privacy;
 	}
+	
+	/**
+	 * Setter for the privacy boolean.
+	 * @param privacy This is the new privacy value of the feed object.
+	 * @return Nothing.
+	 */
 	public void setPrivacy(String privacy) {
 		this.privacy = privacy;
 	}
 	
+	/**
+	 * Getter for the feed variable.
+	 * @return String This is the feed variable of the feed object.
+	 */
 	public String getFeed() {
 		return feed;
 	}
+	
+	/**
+	 * Setter for the feed variable.
+	 * @param feed This is the new feed value of the feed object.
+	 * @return Nothing.
+	 */
 	public void setFeed(String feed) {
 		this.feed = feed;
 	}
@@ -101,6 +151,12 @@ public class Feed {
 	/**
 	 * Non-standard constructor used to set model manually from database.
 	 * Done to allow for reading data from database and displaying in view.
+	 * @param id This is the id of the feed object.
+	 * @param userId This is the user id of the creator of the feed object.
+	 * @param feed This is the actual feed post of the feed object.
+	 * @param privacy This is the privacy of the feed object.
+	 * @param name This is the name of the creator of the feed object.
+	 * @param link This is the link attached to the feed post.
 	 */
 	public Feed(int id, int userId, String feed, String privacy, String name, String link) {
 		this.id = id;

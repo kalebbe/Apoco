@@ -12,26 +12,28 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="container">
+<script src="<c:url value="/assets/js/ajaxAccount.js" />"></script>
+<div class="container" id="msg">
 	<div class="row" align="center">
 		<div class="col-md-12">
 			<h1 class="text-center">Edit Account</h1>
-			<c:choose>
-				<c:when test="${sessionScope.message != null || sessionScope.message2 != null}">
-					<p style="color: #a70000;">
-						<c:out value="${sessionScope.message}" />
-						<c:out value="${sessionScope.message2}" />
-					</p>
-					<c:remove var="message" />
-					<c:remove var="message2" />
-				</c:when>
-				<c:when test="${sessionScope.message3 != null}">
-					<p style="color: #000000;">
-						<c:out value="${sessionScope.message3}" />
-					</p>
-					<c:remove var="message3" />
-				</c:when>
-			</c:choose>
+				<c:choose>
+					<c:when
+						test="${sessionScope.message != null || sessionScope.message2 != null}">
+						<p style="color: #a70000;">
+							<c:out value="${sessionScope.message}" />
+							<c:out value="${sessionScope.message2}" />
+						</p>
+						<c:remove var="message" />
+						<c:remove var="message2" />
+					</c:when>
+					<c:when test="${sessionScope.message3 != null}">
+						<p style="color: #000000;">
+							<c:out value="${sessionScope.message3}" />
+						</p>
+						<c:remove var="message3" />
+					</c:when>
+				</c:choose>
 			<br> <br> <br> <br>
 		</div>
 	</div>
@@ -39,48 +41,41 @@
 
 		<div class="col-md-6">
 			<h4>
-				<form method="POST" action="updateFirst">
-					First Name: <input type="text" style="margin-left: 20px;"
-						name="firstName" value="${user.firstName}" minlenght="2" maxlength="30" />
-					<button class="btn action-button" type="submit"
-						style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
-				</form>
-				<br> <br>
-				<form method="POST" action="updateLast">
-					Last Name: <input type="text" style="margin-left: 23px;"
-						name="lastName" value="${user.lastName}" minlength="2" maxlength="30" />
-					<button class="btn action-button" type="submit"
-						style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
-				</form>
-				<br> <br>
-				<form method="POST" action="updateUser">
-					Username: <input type="text" style="margin-left: 27px;"
-						name="username" value="${user.username}" minlength="4" maxlength="30" />
-					<button class="btn action-button" type="submit"
-						style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
-				</form>
+				First Name: <input type="text" style="margin-left: 20px;"
+					id="firstName" name="firstName" value="${user.firstName}"
+					minlenght="2" maxlength="30" />
+				<button class="btn action-button" onclick="updFirst()"
+					style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
+				<br> <br> <br> Last Name: <input type="text"
+					id="lastName" style="margin-left: 23px;" name="lastName"
+					value="${user.lastName}" minlength="2" maxlength="30" />
+				<button class="btn action-button" onclick="updLast()"
+					style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
+				<br> <br> <br> Username: <input type="text"
+					id="username" style="margin-left: 27px;" name="username"
+					value="${user.username}" minlength="4" maxlength="30" />
+				<button class="btn action-button" onclick="updUser()"
+					style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
 			</h4>
 		</div>
 
 		<div class="col-md-6">
 			<h4>
-				<form method="POST" action="updateEmail">
-					Email: <input type="email" style="margin-left: 100px;" name="email"
-						value="${user.email}" minlength="4" maxlength="40" />
-					<button class="btn action-button" type="submit"
-						style="background-color: #000000; color: #ffffff; float: right; margin-right: 10px;">Update</button>
-				</form>
-				<br> <br>
-				<form method="POST" action="updatePass">
-					Old Password: <input type="password" style="margin-left: 9px;"
-						name="oldPass" placeholder="Old Password" minlength="8" maxlength="100" required/> <br> <br> New
-					Password: <input type="password" name="pass"
-						placeholder="New Password" minlength="8" maxlength="100" required/><br><br>
-					Re Password: <input type="password" style="margin-left: 22px;"
-						name="rePass" placeholder="Repeat New Password" minlength="8" maxlength="100" required/>
-					<button class="btn action-button" type="submit"
-						style="background-color: #000000; color: #ffffff; float: right; margin-right: 10px;">Update</button>
-				</form>
+				Email: <input type="email" style="margin-left: 100px;" name="email"
+					value="${user.email}" id="email" minlength="4" maxlength="40" />
+				<button class="btn action-button" onclick="updEmail()"
+					style="background-color: #000000; color: #ffffff; float: right; margin-right: 10px;">Update</button>
+				<br> <br> <br> Old Password: <input type="password"
+					id="oldPass" style="margin-left: 9px;" name="oldPass"
+					placeholder="Old Password" minlength="8" maxlength="100" required />
+				<br> <br> New Password: <input type="password" name="pass"
+					id="pass" placeholder="New Password" minlength="8" maxlength="100"
+					required /><br> <br> Re Password: <input type="password"
+					style="margin-left: 22px;" name="rePass" id="rePass"
+					placeholder="Repeat New Password" minlength="8" maxlength="100"
+					required />
+				<button class="btn action-button" onclick="updPass()"
+					style="background-color: #000000; color: #ffffff; float: right; margin-right: 10px;">Update</button>
 			</h4>
 		</div>
 	</div>

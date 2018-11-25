@@ -1,18 +1,16 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            10/14/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     SocialBusinessService.java
- * Module Version:  1.0
- * Summary:         This business service handles most general traffic coming from the social
- * 					service on the website. The class implements the SocialBuisnessInterface and
- * 					the methods from that interface.
+ * This business service handles most general traffic coming from the social
+ * service on the website. The class implements the SocialBuisnessInterface and
+ * the methods from that interface.
  * 
- * 					-----UPDATE MILESTONE 4-----
- * 					-Added DAO dependency injection.
- * 					-Removed feed logic from Business service.
+ * -----UPDATE MILESTONE 4-----
+ * -Added DAO dependency injection.
+ * -Removed feed logic from Business service.
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.0
+ * @since   2018-11-25
  */
 
 package com.gcu.business;
@@ -29,6 +27,8 @@ public class SocialBusinessService implements SocialBusinessInterface {
 	/**
 	 * This method invokes the create method in SocialDAO to create a new social profile for the
 	 * user submitting their information.
+	 * @param t This is the social profile being created.
+	 * @return boolean This is whether or not the creation was a success.
 	 */
 	@Override
 	public boolean createSocial(Social t) {
@@ -38,6 +38,8 @@ public class SocialBusinessService implements SocialBusinessInterface {
 	/**
 	 * This method checks to see if the user has created a social account. If they have, their navbar will
 	 * allow them to pages that are restricted to others.
+	 * @param id This is the user id being checked for social profile existence.
+	 * @return boolean This is wheether or not the user has a social profile.
 	 */
 	@Override
 	public boolean checkSocial(int id) {

@@ -1,15 +1,13 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            10/14/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     MinesweeperLogic.java
- * Module Version:  1.0
- * Summary:         This class contains the logic for the minesweeper game in my project.
- * 					this class is likely to remain the way it is currently throughout
- * 					the remainder of my project because it does everthing I need it to.
- * 					This class was actually really easy to port over from c#".
+ * This class contains the logic for the minesweeper game in my project.
+ * this class is likely to remain the way it is currently throughout
+ * the remainder of my project because it does everthing I need it to.
+ * This class was actually really easy to port over from c#".
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.0
+ * @since   2018-11-25
  */
 
 package com.gcu.utilities;
@@ -24,28 +22,52 @@ public class MinesweeperLogic {
 	private static boolean win = false;
 	
 	/**
-	 * Getters and setters below
+	 * Getter for the btnHolder multidimensional array.
+	 * @return Button[][] This is the full array of buttons for the board.
 	 */
 	public static Button[][] getBtnHolder() {
 		return btnHolder;
 	}
 
+	/**
+	 * Setter for the btnHolder multidimensional array.
+	 * @param btnHolder This is the new btnHolder array.
+	 * @return Nothing.
+	 */
 	public static void setBtnHolder(Button[][] btnHolder) {
 		MinesweeperLogic.btnHolder = btnHolder;
 	}
 
+	/**
+	 * Getter for the lose boolean.
+	 * @return boolean This is whether or not the user has lost.
+	 */
 	public static boolean isLose() {
 		return lose;
 	}
 
+	/**
+	 * Setter for the lose boolean.
+	 * @param lose This is the new status for the lose boolean.
+	 * @return Nothing.
+	 */
 	public static void setLose(boolean lose) {
 		MinesweeperLogic.lose = lose;
 	}
 
+	/**
+	 * Getter for the win boolean.
+	 * @return boolean This is whether or not the user has won.
+	 */
 	public static boolean isWin() {
 		return win;
 	}
 
+	/**
+	 * Setter for the win boolean.
+	 * @param win This is the new status for the win boolean.
+	 * @return Nothing.
+	 */
 	public static void setWin(boolean win) {
 		MinesweeperLogic.win = win;
 	}
@@ -54,6 +76,8 @@ public class MinesweeperLogic {
 	 * Loops twice to create a multidimensional array of buttons that cover the entire board
 	 * based off the given size and then sets roughly 15 percent of the buttons to have bombs. 
 	 * There is then there's another loop to determine how many live neighbors each button has.
+	 * @param size This is the size of the board being generated.
+	 * @return Nothing.
 	 */
 	public void generateBoard(int size) {
 		btnHolder = new Button[size][size];
@@ -79,6 +103,7 @@ public class MinesweeperLogic {
 	/**
 	 * Short method used to determine if a button is going to be a bomb or not.
 	 * This can be changed to allow for easier games, but I will not be changing it.
+	 * @return boolean This is a return for whether or not the processed button will be a bomb.
 	 */
 	public boolean isActive() {
 		int random = 1 + (int)(Math.random() * 20);
@@ -88,6 +113,10 @@ public class MinesweeperLogic {
 	/**
 	 * This method counts how many live neighbors each button has, so it can be displayed
 	 * to the user when they click on a button
+	 * @param x This is the x coordinate of the button.
+	 * @param y This is the y coordinate of the button.
+	 * @param size This is the size of the board.
+	 * @return Nothing.
 	 */
 	public void countNeighbors(int x, int y, int size) {
 		int count = 0;
@@ -109,6 +138,10 @@ public class MinesweeperLogic {
 	 * naked cells you love on the board when you make that first click.
 	 * Although my version isn't very forgiving and you can die on the first click..
 	 * gotta fix that soon.
+	 * @param x This is the x coordinate of the button.
+	 * @param y This is the y coordinate of the button.
+	 * @param size This is the size of the board.
+	 * @return Nothing.
 	 */
 	public static void processCell(int x, int y, int size) {
 		if(inBounds(x, y, size)) { //This makes sure we don't get an outofbounds exception
@@ -141,6 +174,10 @@ public class MinesweeperLogic {
 	/**
 	 * Short method that checks to see if the button at those coordinates
 	 * is in bounds of the array.
+	 * @param x This is the x coordinate of the button.
+	 * @param y This is the y coordinate of the button.
+	 * @param size This is the size of the board.
+	 * @return boolean This returns whether the button is in bounds of the array or not.
 	 */
 	public static boolean inBounds(int x, int y, int size) {
 		return x >= 0 && x < size && y >= 0 && y < size;
@@ -148,6 +185,8 @@ public class MinesweeperLogic {
 	
 	/**
 	 * All this does is set every cell to visited if the user clicks on a bomb.
+	 * @param size This is the size of the board.
+	 * @return Nothing.
 	 */
 	public static void setLose(int size) {
 		lose = true;
@@ -161,6 +200,8 @@ public class MinesweeperLogic {
 	/**
 	 * Compares the current visited cells with the amount of 
 	 * cells remaining to determine if the user has won or not.
+	 * @param size This is the size of the board.
+	 * @return Nothing.
 	 */
 	public static void checkWin(int size) {
 		int count = 0;

@@ -1,13 +1,11 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            11/04/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.2
- * Module Name:     FeedDAO.java
- * Module Version:  1.0
- * Summary:         This class is used for any database interactions with Feed objects. This was
- * 					separated from SocialDAO because object oriented programming and all that.
+ * This class is used for any database interactions with Feed objects. This was
+ * separated from SocialDAO because object oriented programming and all that.
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.0
+ * @since   2018-11-25
  */
 
 package com.gcu.data;
@@ -27,19 +25,21 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	private JdbcTemplate jdbcTemp;
 
 	/**
-	* Sets the data source for this class and instantiates the spring jdbc template
-	*/
+	 * Sets the data source for this class and instantiates the spring jdbc template.
+	 * @param dataSource.
+	 * @return Nothing.
+	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.jdbcTemp = new JdbcTemplate(dataSource);
 	}
 
 	/**
-	* This method is used to return a socialfeed object by its ID. This is
-	* currently not in use, but will likely be soon.
-	* @param id Used to find a feed object by its ID.
-	* @return Feed This returns the feed object grabbed from DB.
-	*/
+	 * This method is used to return a socialfeed object by its ID. This is
+	 * currently not in use, but will likely be soon.
+	 * @param id Used to find a feed object by its ID.
+	 * @return Feed This returns the feed object grabbed from DB.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Feed findById(int id) {
@@ -49,9 +49,10 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	}
 
 	/**
-	* This method returns all feed posts in the database and will likely be used in
-	* the future for admin/mod powers, but is currently not in use.
-	*/
+	 * This method returns all feed posts in the database and will likely be used in
+	 * the future for admin/mod powers, but is currently not in use.
+	 * @return List<Feed> This returns all of the feed items.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Feed> findAll() {
@@ -67,8 +68,10 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	}
 
 	/**
-	* This method is used to find get all of the feed corresponding to a user id.
-	*/
+	 * This method is used to find get all of the feed corresponding to a user id.
+	 * @param id This is the user's id to grab feed from.
+	 * @return List<Feed> This returns all of the feed correlated to the id.
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Feed> findUserFeed(int id) {
 		String sql = "SELECT * FROM socialfeed WHERE USER_ID=? ORDER BY DATE_POSTED DESC";
@@ -85,8 +88,10 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	}
 
 	/**
-	* This method is used to insert a new Feed object into the database
-	*/
+	 * This method is used to insert a new Feed object into the database.
+	 * @param t This is the feed object being created.
+	 * @return boolean This returns true if the feed is created successfully.
+	 */
 	@Override
 	public boolean create(Feed t) {
 		String sql = "INSERT INTO socialfeed (USER_ID, NAME, POST, PRIVACY, LINK) VALUES (?,?,?,?,?)";
@@ -98,10 +103,12 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	}
 
 	/**
-	* This method is used to update an existing feed object in the database. This
-	* method is now used in milestone 5 to update the POST column. May be updated
-	* in the future for an upvote/downvote update
-	*/
+	 * This method is used to update an existing feed object in the database. This
+	 * method is now used in milestone 5 to update the POST column. May be updated
+	 * in the future for an upvote/downvote update.
+	 * @param t This is the feed object being updated.
+	 * @return boolean This returns true if the feed is updated successfully.
+	 */
 	@Override
 	public boolean update(Feed t) {
 		String sql = "UPDATE socialfeed SET USER_ID = ?, NAME = ?, POST = ?, PRIVACY = ?, LINK = ? WHERE ID = ?";
@@ -113,9 +120,11 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	}
 
 	/**
-	* This method is used to delete the feed object from database using the ID of
-	* the object
-	*/
+	 * This method is used to delete the feed object from database using the ID of
+	 * the object.
+	 * @param id This is the id of the feed being deleted.
+	 * @return boolean This returns true if the feed is deleted successfully.
+	 */
 	@Override
 	public boolean delete(int id) {
 		String sql = "DELETE FROM socialfeed WHERE ID = ? ";

@@ -1,22 +1,20 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            09/23/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     UserDAO.java
- * Module Version:  1.1
- * Summary:         This class does all of the data handling for user login and registration.
- * 					In the future this will include user account editting, but for now this
- * 					is all that will be included here. I know most of this will change with
- * 					the Spring connectors, but I wanted to get something working for now.
+ * This class does all of the data handling for user login and registration.
+ * In the future this will include user account editting, but for now this
+ * is all that will be included here. I know most of this will change with
+ * the Spring connectors, but I wanted to get something working for now.
  * 				
- * 					-----UPDATE MILESTONE 3-----
- * 					-Added the update account method which is used to update the user's
- * 					 information when they want.
+ * -----UPDATE MILESTONE 3-----
+ * -Added the update account method which is used to update the user's
+ * information when they want.
  * 
- * 					-----UPDATE MILESTONE 4-----
- * 					-Refactored to use Spring jdbc
+ * -----UPDATE MILESTONE 4-----
+ * -Refactored to use Spring jdbc
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.1
+ * @since   2018-11-25
  */
 
 package com.gcu.data;
@@ -34,7 +32,9 @@ public class UserDAO implements DataAccessInterface<User> {
 	private JdbcTemplate jdbcTemp;
 
 	/**
-	 * Sets the data source for the spring jdbc template
+	 * Sets the data source for the spring jdbc template.
+	 * @param dataSource.
+	 * @return Nothing.
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -42,18 +42,9 @@ public class UserDAO implements DataAccessInterface<User> {
 	}
 
 	/**
-	 * This method creates a new user in the database using a User object
-	 * 
-	 * UPDATE: per rubric feedback, I will changing the password table to binary because I don't want to
-	 * lose points, but I am going to defend me not having binary beforehand. When a password is hashed
-	 * before being placed into the database, it removes the need to check for case sensitivity because
-	 * the password is first being converted into a hash. A capital "T" will have a different hash value
-	 * than a lowercase "t" and it will be stored as such without requiring a binary call. I do not intend
-	 * to make any of my other columns binary because I do not see the need to do so. I want users
-	 * to be able to login with the username Keberhart or keberhart if they don't feel like capitalizing
-	 * that first letter every time. I also think it would be foolish for one user to have the username
-	 * Keberhart and another to have the username keberhart. That is my design decision for this project..
-	 * the same applies to emails.
+	 * This method creates a new user in the database using a User object.
+	 * @param t This is the user created in the database.
+	 * @return boolean This is the success or failure of the query.
 	 */
 	@Override
 	public boolean create(User t) {
@@ -69,6 +60,7 @@ public class UserDAO implements DataAccessInterface<User> {
 	/**
 	 * This method returns every user in the database as a List. This is currently
 	 * not in use, but will likely be used in the future for Admin purposes.
+	 * @return List<User> This is the list of users returned by this method.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -82,6 +74,8 @@ public class UserDAO implements DataAccessInterface<User> {
 	 * This method uses the user's id to return the user model corresponding to said
 	 * ID. This method is used to display information for edit account and displaying
 	 * their info.
+	 * @param id This is the id of the user being pulled.
+	 * @return User This is the user object returned.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -94,6 +88,8 @@ public class UserDAO implements DataAccessInterface<User> {
 	/**
 	 * This method is used to delete the user's account from the database. This is
 	 * currently not in use, but will be coming in a future update.
+	 * @param id This is the id of the user being deleted.
+	 * @return boolean This is the success or failure of the deletion.
 	 */
 	@Override
 	public boolean delete(int id) {
@@ -109,6 +105,8 @@ public class UserDAO implements DataAccessInterface<User> {
 	 * This method is used to update any bit of the user's information. This was
 	 * changed from the ICA to be a bit more flexible without changing every column
 	 * in the database.
+	 * @param t This is the user being updated.
+	 * @return boolean This is the success or failure of the update.
 	 */
 	@Override
 	public boolean update(User t) {
@@ -124,6 +122,8 @@ public class UserDAO implements DataAccessInterface<User> {
 	/**
 	 * Checks to see if the user's username is already taken. This is used when the
 	 * user registers or when they try to update their username.
+	 * @param username This is the username being checked for duplicity.
+	 * @return boolean This is whether or not the username is taken.
 	 */
 	public boolean checkUsername(String username) {
 		String sql = "SELECT count(*) FROM users WHERE USERNAME =?";
@@ -140,6 +140,8 @@ public class UserDAO implements DataAccessInterface<User> {
 	/**
 	 * This method checks to see if the user's email is already taken. This used to be
 	 * merged with the checkUsername method, but was separated for milestone 5.
+	 * @param email This is the email being checked for duplicity.
+	 * @return boolean This is whether or not the email is taken.
 	 */
 	public boolean checkEmail(String email) {
 		String sql = "SELECT count(*) FROM users WHERE EMAIL = ?";
@@ -156,6 +158,8 @@ public class UserDAO implements DataAccessInterface<User> {
 	/**
 	 * This method grabs the user's ID from their login information. This is
 	 * required so that I can grab the user's id when they log in.
+	 * @param login This is the username or email being used to grab id.
+	 * @return int This is the id returned from the database or 0 if non-existent.
 	 */
 	public int getId(String login) {
 		try {

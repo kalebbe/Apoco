@@ -1,26 +1,24 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            10/14/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     AccountController.java
- * Module Version:  1.1
- * Summary:         This controller handles the revision of user's profile variables.
- * 					In the future, it will be expanded to include deleting user accounts
- * 					and vaulting user accounts. I will probably also do mod promotions here
- *					as well and account suspensions.
+ * This controller handles the revision of user's profile variables.
+ * In the future, it will be expanded to include deleting user accounts
+ * and vaulting user accounts. I will probably also do mod promotions here
+ * as well and account suspensions.
  *
- *					-----UPDATE MILESTONE 4-----
- *					-Refactored for Spring jdbc changes.
+ * -----UPDATE MILESTONE 4-----
+ * -Refactored for Spring jdbc changes.
  *
- *					-----UPDATE MILESTONE 5-----
- *					-Refactored for session error setting in the controller.
- *					-As of right now, if user's input incorrect information, the model will
- *					 still be updated and the incorrect info will be placed on the page, but they
- *					 will receive an error message. I could change it where it resets to the 
- *					 correct information, but this would require another database call. Also
- *					 these checks are done in html, so it shouldn't matter much.
+ * -----UPDATE MILESTONE 5-----
+ * -Refactored for session error setting in the controller.
+ * -As of right now, if user's input incorrect information, the model will
+ *  still be updated and the incorrect info will be placed on the page, but they
+ *	will receive an error message. I could change it where it resets to the 
+ *	correct information, but this would require another database call. Also
+ *	these checks are done in html, so it shouldn't matter much.
+ *
+ *
+ * @author  Kaleb Eberhart
+ * @version 1.1
+ * @since   2018-11-25
  */
 package com.gcu.controller;
 
@@ -44,6 +42,8 @@ public class AccountController {
 	/**
 	 * Dependency injection that instantiates allows me to get the UserBusinessService without
 	 * instantianting the object the normal way.
+	 * @param us This is the class being set.
+	 * @return Nothing.
 	 */
 	@Autowired
 	public void setUserService(UserBusinessInterface us) {
@@ -53,6 +53,8 @@ public class AccountController {
 	/**
 	 * The /account/edit path that loads the editAccount view. Nothing to see here
 	 * really.
+	 * @param session This is the session used to get the user's id.
+	 * @return ModelAndView This is the logged in user's model being sent to the editAccount view.
 	 */
 	@RequestMapping(path="/edit", method=RequestMethod.GET)
 	public ModelAndView editAccount(HttpSession session) {
@@ -63,6 +65,9 @@ public class AccountController {
 	/**
 	 * Calls the UserBusinessService method to update the user's first name in the
 	 * database.
+	 * @param first This is the first name being sent for update.
+	 * @param session This is the session used to return feedback to the user.
+	 * @return ModelAndView This is the updated model being sent back to the editAccount view.
 	 */
 	@RequestMapping(path="/updateFirst", method=RequestMethod.POST)
 	public ModelAndView updateFirst(@RequestParam("firstName") String first,  HttpSession session) {
@@ -80,6 +85,9 @@ public class AccountController {
 	/**
 	 * Calls the UserBusinessService method to update the user's last name in the
 	 * database.
+	 * @param last This is the last name being sent for update.
+	 * @param session This is the session being used to return feedback to the user.
+	 * @return ModelAndView This is the updated model being sent back to the editAccount view.
 	 */
 	@RequestMapping(path="/updateLast", method=RequestMethod.POST)
 	public ModelAndView updateLast(@RequestParam("lastName") String last, HttpSession session) {
@@ -97,6 +105,9 @@ public class AccountController {
 	/**
 	 * Calls the UserBusinessService method to check if the new email exists and then
 	 * updates the email in the database if it does not exist.
+	 * @param email This is the email being sent for update.
+	 * @param session This is the session being used to return feedback to the user.
+	 * @return ModelAndView This is the updated model being sent back to the editAccount view.
 	 */
 	@RequestMapping(path="/updateEmail", method=RequestMethod.POST)
 	public ModelAndView updateEmail(@RequestParam String email, HttpSession session) {
@@ -118,6 +129,9 @@ public class AccountController {
 	/**
 	 * Calls the UserBusinessService to check if the username exists and then
 	 * updates the dao with the new username.
+	 * @param username This is the username being sent for update.
+	 * @param session This is the session being used to return feedback to the user.
+	 * @return ModelAndView This is the updated model being sent back to the editAccount view.
 	 */
 	@RequestMapping(path="/updateUser", method=RequestMethod.POST)
 	public ModelAndView updateUser(@RequestParam String username, HttpSession session) {
@@ -140,9 +154,14 @@ public class AccountController {
 	/**
 	 * Checks to see if the current password is correct, the passwords match, and the password matches the regex requirement
 	 * of atleast one letter and number and 8 characters.
+	 * @param oldPass This is the old pass being sent to check matching old.
+	 * @param pass This is the new pass being sent for update.
+	 * @param rePass This is a copy of the new pass being sent for update.
+	 * @param session This is the session being used to return feedback to the user.
+	 * @return ModelAndView This is the updated model being sent back to the editAccount view.
 	 */
 	@RequestMapping(path="/updatePass", method=RequestMethod.POST)
-	public ModelAndView updatePass(@RequestParam String oldPass, @RequestParam String pass, @RequestParam("rePass") String rePass, HttpSession session) {
+	public ModelAndView updatePass(@RequestParam String oldPass, @RequestParam String pass, @RequestParam String rePass, HttpSession session) {
 		User user = us.findById((int)session.getAttribute("id")); //Grabs old user from databse
 		if(!us.checkPass(oldPass, (int)session.getAttribute("id"))){ //Checks to see if the old pass matches DB pass
 			session.setAttribute("message", "Current password is incorrect!");

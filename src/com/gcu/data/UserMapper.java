@@ -1,14 +1,12 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            11/04/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     UserMapper.java
- * Module Version:  1.0
- * Summary:         This class is used to map the data from the database when creating a new
- * 					user model using Spring JDBC. This was the recommended way to do this
- * 					on TutorialsPoint.
+ * This class is used to map the data from the database when creating a new
+ * user model using Spring JDBC. This was the recommended way to do this
+ * on TutorialsPoint.
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.0
+ * @since   2018-11-25
  */
 
 package com.gcu.data;
@@ -19,7 +17,10 @@ import org.springframework.jdbc.core.RowMapper;
 import com.gcu.model.User;
 
 /**
- * Quick method for creating and returning a new User object
+ * This is a quick method for creating and returning a new User object.
+ * @param rs This is the result set from the database.
+ * @param rowNum This is required by RowMapper, but unused.
+ * @return User This is the user object returned after being set here.
  */
 @SuppressWarnings("rawtypes")
 public class UserMapper implements RowMapper {

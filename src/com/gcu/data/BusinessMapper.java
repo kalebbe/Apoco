@@ -1,14 +1,29 @@
+/**
+ * This class is used to map the data from the database when creating a new
+ * Business object using Spring JDBC.
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @Version 1.0
+ * @since   2018-11-25
+ */
+
 package com.gcu.data;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import org.springframework.jdbc.core.RowMapper;
-
 import com.gcu.model.Business;
 
 @SuppressWarnings("rawtypes")
 public class BusinessMapper implements RowMapper {
+	
+	/**
+	 * This is a quick method for creating and returning a new business object from the database.
+	 * @param rs This is the result set from the database.
+	 * @param rowNum This is required by RowMapper, but unused.
+	 * @return Business This is the business object returned after being characterized by this class.
+	 */
 	@Override
 	public Business mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Business bus = new Business();

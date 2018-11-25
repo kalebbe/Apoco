@@ -1,20 +1,18 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            09/23/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     LoginController.java
- * Module Version:  1.01
- * Summary:         This controller handles user login and gives them an error message if their
- * 					login information is incorrect.
+ * This controller handles user login and gives them an error message if their
+ * login information is incorrect.
  * 
- * 					-----UPDATE MILESTONE 3-----
- * 					-Added a redirect method, so users will know why they are  sent to the login page
- * 					 when they click links they cannot access.
+ * -----UPDATE MILESTONE 3-----
+ * -Added a redirect method, so users will know why they are  sent to the login page
+ * 	when they click links they cannot access.
  * 
- * 					-----UPDATE MILESTONE 4-----
- * 					-User is now sent to home with their user model.
+ * -----UPDATE MILESTONE 4-----
+ * -User is now sent to home with their user model.
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.01
+ * @since   2018-11-25
  */
 
 package com.gcu.controller;
@@ -42,6 +40,8 @@ public class LoginController {
 	
 	/**
 	 * Dependency injection for the UserBusinessService.
+	 * @param us This is the class being set.
+	 * @return Nothing.
 	 */
 	@Autowired
 	public void setUserService(UserBusinessInterface us) {
@@ -50,12 +50,19 @@ public class LoginController {
 	
 	/**
 	 * Dependency injection for the SocialBusinessService.
+	 * @param ss This is the class being set.
+	 * @return Nothing.
 	 */
 	@Autowired
 	public void setSocialService(SocialBusinessInterface ss) {
 		this.ss = ss;
 	}
 	
+	/**
+	 * Dependency injection for the BusinessService.
+	 * @param bs This is the class being set.
+	 * @param bs
+	 */
 	@Autowired
 	public void setBusinessService(BusinessInterface bs) {
 		this.bs = bs;
@@ -63,6 +70,7 @@ public class LoginController {
 	
 	/**
 	 * Points the user to the login page with no messages.
+	 * @return String This returns the login view.
 	 */
 	@RequestMapping(path="/log", method=RequestMethod.GET)
 	public String loginPage() {
@@ -74,6 +82,10 @@ public class LoginController {
 	 * actions there. If the user's login information is correct, the user will
 	 * be sent to their home page. Otherwise, the user will be given an error
 	 * message and sent back to the login page.
+	 * @param email This is the user's email or username for login.
+	 * @param password This is the user's password for login.
+	 * @param session This is the session being used to set ID and bus/social.
+	 * @return ModelAndView This is used to return the login view or userhome with the user's model.
 	 */
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ModelAndView login(@RequestParam String email, @RequestParam String password, HttpSession session) {
@@ -97,6 +109,8 @@ public class LoginController {
 	/**
 	 * This redirection sends the user to the login page with a message telling them why they
 	 * were sent there.
+	 * @param session This is used to send feedback to the user.
+	 * @return String This is used to send the user to the login page.
 	 */
 	@RequestMapping(path="/redirect", method=RequestMethod.GET)
 	public String redirect(HttpSession session) {

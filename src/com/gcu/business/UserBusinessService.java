@@ -1,29 +1,27 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            09/23/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     UserBusinessService.java
- * Module Version:  1.2
- * Summary:         This class handles the business side of user login and registration. It also uses the
- * 				    BCrypt class to hash passwords and check the hash upon login.
+ * This class handles the business side of user login and registration. It also uses the
+ * BCrypt class to hash passwords and check the hash upon login.
  * 					
- * 					-----UPDATES MILESTONE 3-----
- * 					-BCrypt is now imported via jar file
- * 				    -updateAccount method can be used to change any user property in the database minus password.
- * 					-changePass can now be used to change the user's password as long as they know their old
- * 					 password.
- * 					-Implemented UserBusinessInterface for Dependency Injection purposes.
+ * -----UPDATES MILESTONE 3-----
+ * -BCrypt is now imported via jar file
+ * -updateAccount method can be used to change any user property in the database minus password.
+ * -changePass can now be used to change the user's password as long as they know their old
+ *  password.
+ * -Implemented UserBusinessInterface for Dependency Injection purposes.
  * 			
- * 					-----UPDATES MILESTONE 4-----
- * 					-Dependency injeciton added for DAO to be autowired.
- * 					-Class restructured for Spring JDBC.
+ * -----UPDATES MILESTONE 4-----
+ * -Dependency injeciton added for DAO to be autowired.
+ * -Class restructured for Spring JDBC.
  * 
- * 					-----UPDATES MILESTONE 5-----
- * 					-Column updates are now separated in the business service because the session can no longer
- * 					 be passed to my service per rubric feedback. I separated the different updates, so that I can
- * 					 return relevant error messages from the controller.
+ * -----UPDATES MILESTONE 5-----
+ * -Column updates are now separated in the business service because the session can no longer
+ *  be passed to my service per rubric feedback. I separated the different updates, so that I can
+ * 	return relevant error messages from the controller.
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.2
+ * @since   2018-11-25
  */
 
 package com.gcu.business;
@@ -51,6 +49,8 @@ public class UserBusinessService implements UserBusinessInterface {
 	 * This method hashes the user's password then calls the DAO to create a
 	 * new user in the database. Registration logic is now separated into
 	 * multiple methods.
+	 * @param t This is the User object being processed and sent to the database.
+	 * @return int This is the id of the newly created user being inserted. 0 if failure.
 	 */
 	@Override
 	public int register(User t) {
@@ -65,6 +65,9 @@ public class UserBusinessService implements UserBusinessInterface {
 	/**
 	 * This method gets the user's ID from the database if their username or email exists
 	 * otherwise returns a 0. It then calls the DAO to check the validity of the password
+	 * @param login This is the username or email of the user attempting login.
+	 * @param password This is the password of the user attempting login.
+	 * @return int This is the id of the logged in user or 0 if failure.
 	 */
 	@Override
 	public int login(String login, String password) {
@@ -85,6 +88,8 @@ public class UserBusinessService implements UserBusinessInterface {
 	 * pass the required checks. User's password must have a letter and number as
 	 * well as being 8 characters long. This method also uses BCrypt to match the
 	 * user's input to the currently hashed password in the database.
+	 * @param t This is the User who's password is attempting update.
+	 * @return boolean This is the used to give feedback on password failure.
 	 */
 	@Override
 	public boolean changePass(User t) {
@@ -104,6 +109,9 @@ public class UserBusinessService implements UserBusinessInterface {
 	 * This method is used to check the user's input password with the password in the
 	 * database. This was separated in Milestone 5 for the purpose of specific error
 	 * messaging in the controller
+	 * @param pass This is the password being checked to match with the old password.
+	 * @param id This is the id of the user who is checking their password.
+	 * @return boolean This tells the user if their password matched or did not.
 	 */
 	@Override
 	public boolean checkPass(String pass, int id) {
@@ -121,6 +129,8 @@ public class UserBusinessService implements UserBusinessInterface {
 	 * then updated in the database to match their new name. In the future, turning off auto
 	 * commit database changes for the purpose of not submitting database changes if one fails
 	 * would be vital for this method and the updateLast method.
+	 * @param t This is the user attempting first name change.
+	 * @return boolean This returns false if the users' first name doesn't match requirements.
 	 */
 	@Override
 	public boolean updateFirst(User t) {
@@ -145,6 +155,8 @@ public class UserBusinessService implements UserBusinessInterface {
 	 * This method does the same thing as the updateFirst method for the last name. I'm going
 	 * to avoid commenting this up because it is literally the same as the firstName update for
 	 * the last name.
+	 * @param t This is the user attempting last name change.
+	 * @return boolean This returns false if the user's last name doesn't match requirements.
 	 */
 	@Override
 	public boolean updateLast(User t) {
@@ -170,6 +182,8 @@ public class UserBusinessService implements UserBusinessInterface {
 	 * 30 characters and updates the database. There is now another method
 	 * for checking the existence of the previous username that is used for
 	 * this and registration.
+	 * @param t This is the user attempting username change.
+	 * @return boolean This returns false if the user's username doesn't match requirements.
 	 */
 	@Override
 	public boolean updateUser(User t) {
@@ -187,6 +201,8 @@ public class UserBusinessService implements UserBusinessInterface {
 	/**
 	 * This method checks to see if the username already exists in the database.
 	 * This is used for registration and account editing.
+	 * @param t This is the user checking username existence.
+	 * @return boolean This returns false if the username does not exist.
 	 */
 	@Override
 	public boolean checkUser(User t) {
@@ -196,6 +212,8 @@ public class UserBusinessService implements UserBusinessInterface {
 	/**
 	 * This method checks to see if the email already exists in the database.
 	 * This is used for registration and account editing.
+	 * @param t This is the user checking email existence.
+	 * @return boolean This returns false if the email does not exist.
 	 */
 	@Override
 	public boolean checkEmail(User t) {
@@ -205,6 +223,8 @@ public class UserBusinessService implements UserBusinessInterface {
 	/**
 	 * This method checks to see if the email is valid using basic xyz@xyz checks
 	 * then updates the database.
+	 * @param t This is the user attempting email change.
+	 * @return boolean This returns false if the email is not a valid email.
 	 */
 	@Override
 	public boolean updateEmail(User t) {
@@ -224,6 +244,8 @@ public class UserBusinessService implements UserBusinessInterface {
 	/**
 	 * Returns a user model through the use of their ID. This is now used for the
 	 * account editor rather than saving all information to the session.
+	 * @param id This is the id of the user being looked up in the DAO.
+	 * @return User This is the User being returned from the database.
 	 */
 	@Override
 	public User findById(int id) {

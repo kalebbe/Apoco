@@ -18,6 +18,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="count" value="0" scope="page" />
 <script>
 	//jQuery for autosizing textareas on page load
 	$(function() {
@@ -25,8 +26,30 @@
 			this.style.height = (this.scrollHeight + 10) + 'px';
 		});
 	});
+	
+	function updFeed(){
+		var ajax_control = $.ajax({
+			url: '/Apoco/feed/updateFeed',
+			type: 'POST',
+			data: {id: $('#idTarget${count}').val(),
+				feed: $('#feedTarget${count}').val()}
+		});
+		ajax_control.always(function(){
+			$('#content').html(ajax_control.responseText);
+		});
+	}
+	
+	function delFeed(){
+		var ajax_control = $.ajax({
+			url: '/Apoco/feed/deleteFeed',
+			type: 'POST',
+			data: {id: $('#idTarget${count}').val()}
+		});
+		ajax_control.always(function(){
+			$('#content').html(ajax_control.responseText);
+		});
+	}
 </script>
-<c:set var="count" value="0" scope="page" />
 <div align="center">
 	<h1>Your feed</h1>
 	<p style="font-size: xx-small;">Soon you'll be able to post
@@ -103,7 +126,6 @@
 			<tr>
 				<td><c:choose>
 						<c:when test="${feed.userId == sessionScope.id}">
-							<form method="POST" action="updateFeed">
 								<div
 									onclick="$('#feedTarget${count}').attr('disabled', false); $('#target${count}').css('display', 'inline-block');">
 
@@ -113,12 +135,11 @@
 											value="${feed.feed}" /></textarea>
 								</div>
 								<div id="target${count}" style="display: none;">
-									<button class="btn" value="${feed.id}" name="id"
+									<button class="btn" id="idTarget${count}" value="${feed.id}" name="id" onclick="updFeed()"
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue;">
 										Update</button>
 									<br>
 								</div>
-							</form>
 							<p style="font-size: xx-small;" align="center">Double click
 								your post to edit it!</p>
 						</c:when>
@@ -141,16 +162,15 @@
 				<c:when test="${feed.userId == sessionScope.id}">
 					<tr
 						style="border-bottom: 1px solid rgba(0, 0, 0, .1); margin-bottom: 50px;">
-						<td align="center"><form:form method="POST"
-								modelAttribute="feed" action="deleteFeed">
+						<td align="center">
 								<p style="font-size: small; font-weight: bold;">
 									<c:out
 										value="${feed.privacy.equals('public') ? 'Everyone' : 'Friends'}" />
 									can see your post
-									<button value="${feed.id}" name="id"
+									<button value="${feed.id}" name="id" id="idTarget${count}" onclick="delFeed()"
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Remove</button>
 								</p>
-							</form:form></td>
+							</td>
 					</tr>
 				</c:when>
 			</c:choose>

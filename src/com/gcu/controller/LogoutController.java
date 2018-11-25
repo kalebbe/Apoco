@@ -1,19 +1,17 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            09/23/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     LogoutController.java
- * Module Version:  1.01
- * Summary:         This controller handles the user logout and deletes all of the session
- * 					information. This controller causes a known bug that will be fixed in
- * 					the upcoming milestone. The user is forwarded to /logout/login which
- * 					causes errors if the user tries to log in from there. Bug can be avoided
- * 					by clicking the login link after reaching the logout/login page.
+ * This controller handles the user logout and deletes all of the session
+ * information. This controller causes a known bug that will be fixed in
+ * the upcoming milestone. The user is forwarded to /logout/login which
+ * causes errors if the user tries to log in from there. Bug can be avoided
+ * by clicking the login link after reaching the logout/login page.
  * 
- * 					-----UPDATE MILESTONE 5-----
- * 					-Small update- changed to a redirect, so there aren't problems with paths
+ * -----UPDATE MILESTONE 5-----
+ * -Small update- changed to a redirect, so there aren't problems with paths
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.01
+ * @since   2018-11-25
  */
 
 package com.gcu.controller;
@@ -29,6 +27,8 @@ public class LogoutController {
 	
 	/**
 	 * Clears the session and sends user to the login page.
+	 * @param session This is the session being crabbed, so it can be cleared.
+	 * @return String This is the view being returned through redirect.
 	 */
 	@RequestMapping(path="/log", method=RequestMethod.GET)
 	public String logout(HttpSession session) {

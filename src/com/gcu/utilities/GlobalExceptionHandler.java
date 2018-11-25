@@ -1,14 +1,12 @@
 /**
- * Author:          Kaleb Eberhart
- * Date:            11/10/18
- * Course:          CST-341
- * Project Name:    Apoco
- * Project Version: 1.3
- * Module Name:     GlobalExceptionHandler.java
- * Module Version:  1.0
- * Summary:         This class is used to give instructions to each controller when they receive
- * 					an exception. As of right now, only database exceptions and 500 errors + null pointers
- * 					are being caught here, but it may be updated in the future if required.
+ * This class is used to give instructions to each controller when they receive
+ * an exception. As of right now, only database exceptions and 500 errors + null pointers
+ * are being caught here, but it may be updated in the future if required.
+ * 
+ * 
+ * @author  Kaleb Eberhart
+ * @version 1.0
+ * @since   2018-11-25
  */
 
 package com.gcu.utilities;
@@ -27,6 +25,9 @@ public class GlobalExceptionHandler {
 	/**
 	 * This method handles all SQLExceptions and DataAccessExceptions that are caught through the application.
 	 * Users will be redirected to a screen that tells them the database is currently down.
+	 * @param session This is used to set the theme of the webpage.
+	 * @param e This is used to print the stacktrace of the error.
+	 * @return String This is returning to the databaseError view.
 	 */
 	@ExceptionHandler({ SQLException.class, DataAccessException.class })
 	public String databaseError(HttpSession session, SQLException e) {
@@ -41,6 +42,8 @@ public class GlobalExceptionHandler {
 	 * I'm using Spring. The way I understand it, they will only be redirected if
 	 * their session times out and they try to access a page that requires a session variable.
 	 * I might be wrong about this though.
+	 * @param session This is used to get the id of the user and send feedback.
+	 * @return String This is returning the user to home or the login page.
 	 */
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //500 error
 	@ExceptionHandler(NullPointerException.class)
