@@ -20,19 +20,21 @@ import javax.validation.constraints.Size;
 public class Feed {
 	@NotNull(message = "You must choose a privacy option!")
 	private String privacy;
-	
 	@NotNull(message = "Your post cannot be null!")
 	@Size(min = 20, max = 5000, message="Your post must have more than 20 characters!")
 	private String feed;
-	
 	private String name;
-	
-	@Size(min = 10, max = 100, message="Link should be between 10 and 100 characters!")
 	private String link;
-	
 	private int userId;
-	
 	private int id;
+	private int votes;
+	private String vote;
+	
+	@Override
+	public String toString() {
+		return "Privacy = " + privacy + "\nFeed = " + feed + "\nName = " + name + "\nLink = " + link +
+				"\nUser Id = " + userId + "\nId = " + id + "\nVotes = " + votes + "\nVote = " + vote;
+	}
 	
 	/**
 	 * Getter for the userId variable.
@@ -136,6 +138,22 @@ public class Feed {
 		this.feed = feed;
 	}
 	
+	public int getVotes() {
+		return votes;
+	}
+
+	public void setVotes(int votes) {
+		this.votes = votes;
+	}
+	
+	public String getVote() {
+		return vote;
+	}
+
+	public void setVote(String vote) {
+		this.vote = vote;
+	}
+	
 	/**
 	 * Default constructor to give default values to the model
 	 */
@@ -146,6 +164,7 @@ public class Feed {
 		this.name = "";
 		this.id = 0;
 		this.userId = 0;
+		this.votes = 0;
 	}
 	
 	/**
@@ -158,12 +177,13 @@ public class Feed {
 	 * @param name This is the name of the creator of the feed object.
 	 * @param link This is the link attached to the feed post.
 	 */
-	public Feed(int id, int userId, String feed, String privacy, String name, String link) {
+	public Feed(int id, int userId, String feed, String privacy, String name, String link, int votes) {
 		this.id = id;
+		this.votes = votes;
 		this.feed = feed;
 		this.privacy = privacy;
 		this.name = name;
 		this.link = link;
 		this.userId = userId;
-	}
+	}	
 }

@@ -22,7 +22,7 @@
 			</h2>
 		</div>
 		<div class="row people">
-			<div class="col-md-6 col-lg-4 item" style="color: #0fb800;">
+			<div class="col-md-6 col-lg-6 item" style="color: #0fb800;">
 				<div class="box">
 					<c:choose>
 						<c:when test="${sessionScope.hasSocial != true}">
@@ -40,7 +40,7 @@
 					</c:choose>
 				</div>
 			</div>
-			<div class="col-md-6 col-lg-4 item" style="color: rgb(0, 7, 169);">
+			<div class="col-md-6 col-lg-6 item" style="color: rgb(0, 7, 169);">
 				<div class="box">
 					<c:choose>
 						<c:when test="${sessionScope.hasBusiness != true}">
@@ -55,15 +55,6 @@
 							<p class="description">Business mini dashboard coming soon!</p>
 						</c:otherwise>
 					</c:choose>
-				</div>
-			</div>
-			<div class="col-md-6 col-lg-4 item" style="color: #dd00c8;">
-				<div class="box">
-					<h3 class="name">Apoco Dating</h3>
-					<p class="description">You have not set up a dating account!</p>
-					<a class="btn btn-light action-button" role="button" href="#"
-						style="background-color: #dd00c8; color: #ffffff; font-size: 14px;">Create
-						Profile</a>
 				</div>
 			</div>
 		</div>

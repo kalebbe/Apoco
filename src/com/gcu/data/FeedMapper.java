@@ -35,6 +35,7 @@ public class FeedMapper implements RowMapper {
 		feed.setLink(rs.getString("LINK"));
 		feed.setName(rs.getString("NAME"));
 		feed.setPrivacy(rs.getString("PRIVACY"));
+		feed.setVotes(rs.getInt("VOTES"));
 		return feed;
 	}
 

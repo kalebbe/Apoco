@@ -71,7 +71,7 @@ public class RegistrationController {
 			session.setAttribute("message2", "Username is already taken!");
 			return new ModelAndView("registration", "user", user);
 		}
-		if(user.getPassword().equals(user.getPassRe())) { //Ensure matching passwords. Regex checked in model
+		if(!user.getPassword().equals(user.getPassRe())) { //Ensure matching passwords. Regex checked in model
 			session.setAttribute("message3", "Passwords must match!");
 			return new ModelAndView("registration", "user", user);
 		}

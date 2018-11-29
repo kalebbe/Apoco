@@ -26,26 +26,56 @@
 			this.style.height = (this.scrollHeight + 10) + 'px';
 		});
 	});
-	
-	function updFeed(){
+
+	function updFeed() {
 		var ajax_control = $.ajax({
-			url: '/Apoco/feed/updateFeed',
-			type: 'POST',
-			data: {id: $('#idTarget${count}').val(),
-				feed: $('#feedTarget${count}').val()}
+			url : '/Apoco/feed/updateFeed',
+			type : 'POST',
+			data : {
+				id : $('#idTarget${count}').val(),
+				feed : $('#feedTarget${count}').val()
+			}
 		});
-		ajax_control.always(function(){
+		ajax_control.always(function() {
+			$('#content').html(ajax_control.responseText);
+		});
+	}
+
+	function delFeed() {
+		var ajax_control = $.ajax({
+			url : '/Apoco/feed/deleteFeed',
+			type : 'POST',
+			data : {
+				id : $('#idTarget${count}').val()
+			}
+		});
+		ajax_control.always(function() {
 			$('#content').html(ajax_control.responseText);
 		});
 	}
 	
-	function delFeed(){
+	function like(){
 		var ajax_control = $.ajax({
-			url: '/Apoco/feed/deleteFeed',
-			type: 'POST',
-			data: {id: $('#idTarget${count}').val()}
+			url : '/Apoco/feed/likeFeed',
+			type : 'POST',
+			data : {
+				id : $('#likeTarget${count}').val()
+			}
 		});
-		ajax_control.always(function(){
+		ajax_control.always(function() {
+			$('#content').html(ajax_control.responseText);
+		});
+	}
+	
+	function dislike(){
+		var ajax_control = $.ajax({
+			url : '/Apoco/feed/dislikeFeed',
+			type : 'POST',
+			data : {
+				id : $('#dislikeTarget${count}').val()
+			}
+		});
+		ajax_control.always(function() {
 			$('#content').html(ajax_control.responseText);
 		});
 	}
@@ -60,7 +90,7 @@
 		<form:input size="50" path="link" minlength="10" maxlength="100" />
 		<p style="font-size: xx-small;">*Not required. Only for youtube
 			videos</p>
-			
+
 		<!-- 
 		   - Removes scroll bar + resize button from textarea. Form will auto resize as the
 		   - user updates.
@@ -97,7 +127,7 @@
 				<p style="color: #a70000;">
 					<c:out value="${sessionScope.message2}" />
 				</p>
-				<c:remove var="message2"/>
+				<c:remove var="message2" />
 			</c:when>
 			<c:when test="${sessionScope.message3 != null}">
 				<p style="color: #000000;">
@@ -126,27 +156,68 @@
 			<tr>
 				<td><c:choose>
 						<c:when test="${feed.userId == sessionScope.id}">
-								<div
-									onclick="$('#feedTarget${count}').attr('disabled', false); $('#target${count}').css('display', 'inline-block');">
+							<div
+								onclick="$('#feedTarget${count}').attr('disabled', false); $('#target${count}').css('display', 'inline-block');">
 
-									<textarea id="feedTarget${count}" cols="65" disabled="disabled" name="feed" minlength="20" maxlength="5000"
-										style="white-space: pre-wrap; border: none; outline: none; background-color: white; resize: none; overflow: hidden;"
-										oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'><c:out
-											value="${feed.feed}" /></textarea>
-								</div>
-								<div id="target${count}" style="display: none;">
-									<button class="btn" id="idTarget${count}" value="${feed.id}" name="id" onclick="updFeed()"
-										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue;">
-										Update</button>
-									<br>
-								</div>
+								<textarea id="feedTarget${count}" cols="65" disabled="disabled"
+									name="feed" minlength="20" maxlength="5000"
+									style="white-space: pre-wrap; border: none; outline: none; background-color: white; resize: none; overflow: hidden;"
+									oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'><c:out
+										value="${feed.feed}" /></textarea>
+							</div>
+							<div id="target${count}" style="display: none;">
+								<button class="btn" id="idTarget${count}" value="${feed.id}"
+									name="id" onclick="updFeed()"
+									style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue;">
+									Update</button>
+								<br>
+							</div>
 							<p style="font-size: xx-small;" align="center">Double click
 								your post to edit it!</p>
 						</c:when>
 						<c:otherwise>
-							<p style="white-space: pre-wrap"><c:out value="${feed.feed}" /></p>
+							<p style="white-space: pre-wrap">
+								<c:out value="${feed.feed}" />
+							</p>
 						</c:otherwise>
-					</c:choose></td>
+					</c:choose>
+					<div class="row">
+						<div class="col-md-4">
+							<c:choose>
+								<c:when test="${feed.vote.equals('Like')}">
+									<button class="btn" id="likeTarget${count}" value="${feed.id}" onclick="like()"
+										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: #0fb800; font-size: small;">Like</button>
+								</c:when>
+								<c:when test="${feed.vote.equals('Dislike')}">
+									<button class="btn" disabled
+										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Like</button>
+								</c:when>
+								<c:otherwise>
+									<button class="btn" id="likeTarget${count}" value="${feed.id}" onclick="like()"
+										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Like</button>
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<div class="col-md-4">
+							<p style="font-size: small;"><c:out value="${feed.votes}" /></p>
+						</div>
+						<div class="col-md-4">
+							<c:choose>
+								<c:when test="${feed.vote.equals('Dislike')}">
+									<button class="btn" id="dislikeTarget${count}" value="${feed.id}" onclick="dislike()"
+										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: #a70000; font-size: small;">Dislike</button>
+								</c:when>
+								<c:when test="${feed.vote.equals('Like')}">
+									<button class="btn" disabled
+										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Dislike</button>
+								</c:when>
+								<c:otherwise>
+									<button class="btn" id="dislikeTarget${count}" value="${feed.id}" onclick="dislike()"
+										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Dislike</button>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div></td>
 			</tr>
 			<div>
 				<c:choose>
@@ -163,14 +234,15 @@
 					<tr
 						style="border-bottom: 1px solid rgba(0, 0, 0, .1); margin-bottom: 50px;">
 						<td align="center">
-								<p style="font-size: small; font-weight: bold;">
-									<c:out
-										value="${feed.privacy.equals('public') ? 'Everyone' : 'Friends'}" />
-									can see your post
-									<button value="${feed.id}" name="id" id="idTarget${count}" onclick="delFeed()"
-										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Remove</button>
-								</p>
-							</td>
+							<p style="font-size: small; font-weight: bold;">
+								<c:out
+									value="${feed.privacy.equals('public') ? 'Everyone' : 'Friends'}" />
+								can see your post
+								<button value="${feed.id}" name="id" id="idTarget${count}"
+									onclick="delFeed()"
+									style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Remove</button>
+							</p>
+						</td>
 					</tr>
 				</c:when>
 			</c:choose>

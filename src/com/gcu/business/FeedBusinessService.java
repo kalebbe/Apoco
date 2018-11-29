@@ -94,4 +94,33 @@ public class FeedBusinessService implements FeedBusinessInterface {
 	public Feed findById(int id) {
 		return dao.findById(id);
 	}
+	
+	@Override
+	public String voted(int fId, int uId) {
+		return dao.voted(fId, uId);
+	}
+	
+	@Override
+	public boolean createVote(Feed t, int uId, String vote) {
+		if(!dao.createVote(t.getId(), uId, vote)) {
+			return false;
+		}
+		return dao.update(t);
+	}
+	
+	@Override
+	public boolean deleteVote(Feed t, int uId) {
+		if(!dao.deleteVote(t.getId(), uId)) {
+			return false;
+		}
+		return dao.update(t);
+	}
+	
+	@Override
+	public List<Feed> setVoted(int uId, List<Feed> feedList){
+		for(Feed f: feedList) {
+			f.setVote(this.voted(f.getId(), uId));
+		}
+		return feedList;
+	}
 }

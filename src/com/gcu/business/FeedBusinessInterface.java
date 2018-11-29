@@ -48,4 +48,12 @@ public interface FeedBusinessInterface {
 	 * @return Feed this is the Feed object returned.
 	 */
 	public Feed findById(int id);
+
+	public String voted(int fId, int uId);
+
+	public List<Feed> setVoted(int uid, List<Feed> feedList);
+
+	public boolean createVote(Feed t, int uId, String vote);
+
+	public boolean deleteVote(Feed t, int uId);
 }

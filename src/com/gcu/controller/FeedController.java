@@ -69,9 +69,10 @@ public class FeedController {
 	 * @return ModelAndView This is the list of feed being sent to the socialFeed view.
 	 */
 	@RequestMapping(path="/feed", method = RequestMethod.GET)
-	public ModelAndView displayFeed(@ModelAttribute("feed") Feed feed, HttpSession session) {
+	public ModelAndView displayFeed(@ModelAttribute Feed feed, @ModelAttribute String vote, HttpSession session) {
 		//Grabs all user's feed. This will be changed soon to include friends and public depending on settings.
 		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id"));
+		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
 		return new ModelAndView("socialFeed", "feedList", feedList);
 	}
 	
@@ -84,8 +85,8 @@ public class FeedController {
 	 * @param session This is the session used to get user model and get feed list.
 	 * @return ModelAndView This is the feedList being sent back to the socialFeed view.
 	 */
-	@RequestMapping(path="createFeed", method=RequestMethod.POST)
-	public ModelAndView postFeed(@Valid @ModelAttribute("feed") Feed feed, BindingResult result, HttpSession session) {
+	@RequestMapping(path="/createFeed", method=RequestMethod.POST)
+	public ModelAndView postFeed(@Valid @ModelAttribute Feed feed, BindingResult result, HttpSession session) {
 		if(result.hasErrors()) {
 			List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id"));
 			return new ModelAndView("socialFeed", "feedList", feedList);
@@ -106,6 +107,7 @@ public class FeedController {
 		}
 		
 		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id"));
+		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
 		return new ModelAndView("socialFeed", "feedList", feedList);
 	}
 	
@@ -117,8 +119,8 @@ public class FeedController {
 	 * @param session This is the session used to send feedback and get the feed list.
 	 * @return ModelAndView This is the feedList being sent back to the socialFeed view.
 	 */
-	@RequestMapping(path="deleteFeed", method=RequestMethod.POST)
-	public ModelAndView deleteFeed(@ModelAttribute("feed") Feed feed, @RequestParam("id") int id, HttpSession session) {
+	@RequestMapping(path="/deleteFeed", method=RequestMethod.POST)
+	public ModelAndView deleteFeed(@ModelAttribute Feed feed, @RequestParam("id") int id, HttpSession session) {
 		if(fs.delete(id)) { //User deletes their feed. Currently no warning message
 			session.setAttribute("message3", "You have deleted your post successfully!");
 		}
@@ -126,6 +128,7 @@ public class FeedController {
 			session.setAttribute("message2", "Something went wrong!"); //Database error. Usually a SQLException handled by globalexchandler
 		}
 		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id"));
+		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
 		return new ModelAndView("socialFeed", "feedList", feedList);
 	}
 	
@@ -140,8 +143,8 @@ public class FeedController {
 	 * @param session This is the session used to send feedback and get the feed list.
 	 * @return ModelAndView This is the feedList being sent back to the socialFeed view.
 	 */
-	@RequestMapping(path="updateFeed", method=RequestMethod.POST)
-	public ModelAndView updateFeed(@ModelAttribute("feed") Feed feed, @RequestParam("id") int id, @RequestParam("feed") String post, HttpSession session) {
+	@RequestMapping(path="/updateFeed", method=RequestMethod.POST)
+	public ModelAndView updateFeed(@ModelAttribute Feed feed, @RequestParam int id, @RequestParam("feed") String post, HttpSession session) {
 		Feed newFeed = fs.findById(id); //Set to newFeed to avoid modelAttribute collision
 		newFeed.setFeed(post); //Changes the post portion of the Feed object.
 		if(post.length() >= 20) { //Ensures the post is atleast 20 charactesr
@@ -158,6 +161,52 @@ public class FeedController {
 		
 		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id")); //Grabs updated feedlist
 		feed.setFeed(""); //See method comment
+		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
 		return new ModelAndView("socialFeed", "feedList", feedList);
 	}
+	
+	@RequestMapping(path="/likeFeed", method=RequestMethod.POST)
+	public ModelAndView likeFeed(@ModelAttribute Feed feed, @RequestParam int id, HttpSession session) {
+		feed = fs.findById(id);
+		feed.setVote(fs.voted(feed.getId(), (int)session.getAttribute("id")));
+		if(feed.getVote() == null) {
+			feed.setVotes(feed.getVotes() + 1);
+			if(!fs.createVote(feed, (int)session.getAttribute("id"), "Like")) {
+				session.setAttribute("message2", "Something went wrong!");
+			}
+		}
+		else if(feed.getVote().equals("Like")) {
+			feed.setVotes(feed.getVotes() - 1);
+			if(!fs.deleteVote(feed, (int)session.getAttribute("id"))){
+				session.setAttribute("message2", "Something went wrong!");
+			}
+		}
+		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id")); //Grabs updated feedlist
+		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
+		return new ModelAndView("socialFeed", "feedList", feedList);
+	}
+	
+	@RequestMapping(path="/dislikeFeed", method=RequestMethod.POST)
+	public ModelAndView dislikeFeed(@ModelAttribute Feed feed, @RequestParam int id, HttpSession session) {
+		feed = fs.findById(id);
+		feed.setVote(fs.voted(feed.getId(), (int)session.getAttribute("id")));
+		if(feed.getVote() == null) {
+			feed.setVotes(feed.getVotes() - 1);
+			if(!fs.createVote(feed, (int)session.getAttribute("id"), "Dislike")) {
+				session.setAttribute("message2", "Something went wrong!");
+			}
+		}
+		else if(feed.getVote().equals("Dislike")) {
+			feed.setVotes(feed.getVotes() + 1);
+			if(!fs.deleteVote(feed, (int)session.getAttribute("id"))){
+				session.setAttribute("message2", "Something went wrong!");
+			}
+		}
+		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id")); //Grabs updated feedlist
+		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
+		return new ModelAndView("socialFeed", "feedList", feedList);
+	}
+	
+	
+	
 }

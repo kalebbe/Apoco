@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
+
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import com.gcu.model.Feed;
@@ -111,9 +113,9 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	 */
 	@Override
 	public boolean update(Feed t) {
-		String sql = "UPDATE socialfeed SET USER_ID = ?, NAME = ?, POST = ?, PRIVACY = ?, LINK = ? WHERE ID = ?";
+		String sql = "UPDATE socialfeed SET USER_ID = ?, NAME = ?, POST = ?, PRIVACY = ?, LINK = ?, VOTES = ? WHERE ID = ?";
 		boolean result = false;
-		if (jdbcTemp.update(sql, t.getUserId(), t.getName(), t.getFeed(), t.getPrivacy(), t.getLink(), t.getId()) == 1) {
+		if (jdbcTemp.update(sql, t.getUserId(), t.getName(), t.getFeed(), t.getPrivacy(), t.getLink(), t.getVotes(), t.getId()) == 1) {
 			result = true;
 		}
 		return result;
@@ -135,4 +137,32 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 		return result;
 	}
 
+	public boolean createVote(int fId, int uId, String vote) {
+		String sql = "INSERT INTO votes (USER_ID, FEED_ID, VOTE) VALUES(?,?,?)";
+		boolean result = false;
+		if(jdbcTemp.update(sql, uId, fId, vote) == 1) {
+			result = true;
+		}
+		return result;
+	}
+	
+	public boolean deleteVote(int fId, int uId) {
+		String sql = "DELETE FROM votes WHERE FEED_ID = ? AND USER_ID = ?";
+		boolean result = false;
+		if(jdbcTemp.update(sql, fId, uId) == 1) {
+			result = true;
+		}
+		return result;
+	}
+	
+	public String voted(int fId, int uId) {
+		try {
+		String sql = "SELECT VOTE FROM votes WHERE FEED_ID = ? AND USER_ID = ?";		
+		String vote = jdbcTemp.queryForObject(sql, new Object[] { fId, uId }, String.class);
+		return vote;
+		}
+		catch(EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 }
