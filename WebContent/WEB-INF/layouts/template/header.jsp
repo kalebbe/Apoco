@@ -129,12 +129,15 @@
 								<c:when test="${sessionScope.hasSocial != null}">
 									<li class="nav-item" role="presentation"><a style="color: #ffffff;" class="nav-link" href="../social/social">Dashboard</a></li>
 									<li class="nav-item" role="presentation"><a style="color: #ffffff;" class="nav-link" href="../feed/feed">View Feed</a></li>
+									<li class="nav-item" role="presentation"><a style="color: #ffffff;" class="nav-link" href="#">Messages</a></li>
 									<li class="nav-item" role="presentation"><a style="color: #ffffff;" class="nav-link" href="../social/games">Play Games</a></li>
 								</c:when>
 							</c:choose>
 						</ul>
-						<span class="navbar-text actions"> <a href="../home/user"
-							class="login" style="color: #ffffff; font-size: 14px;"><!-- View Profile --></a><a
+						<span class="navbar-text actions">
+						
+						 <a href="#"
+							class="login" style="color: #ffffff; font-size: 14px;">My Profile</a><a
 							class="btn btn-light action-button" role="button"
 							href="../logout/log"
 							style="background-color: #000000; color: #ffffff; font-size: 14px;">Log

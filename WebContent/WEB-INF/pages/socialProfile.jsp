@@ -95,7 +95,7 @@
 			</h5>
 			<p style="font-size: xx-small;">
 				Privacy mode will make it so other users will only be able to look
-				you up by your full name. Users will not be able to view any details<br>
+				you up by your email. Users will not be able to view any details<br>
 				about you or anything you have posted on your profile. Other users
 				will not be able to message you without having you as a friend.
 			</p>

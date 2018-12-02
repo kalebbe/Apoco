@@ -19,6 +19,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="count" value="0" scope="page" />
+<script src="<c:url value="/assets/js/ajaxPost.js" />"></script>
 <script>
 	//jQuery for autosizing textareas on page load
 	$(function() {
@@ -26,59 +27,6 @@
 			this.style.height = (this.scrollHeight + 10) + 'px';
 		});
 	});
-
-	function updFeed() {
-		var ajax_control = $.ajax({
-			url : '/Apoco/feed/updateFeed',
-			type : 'POST',
-			data : {
-				id : $('#idTarget${count}').val(),
-				feed : $('#feedTarget${count}').val()
-			}
-		});
-		ajax_control.always(function() {
-			$('#content').html(ajax_control.responseText);
-		});
-	}
-
-	function delFeed() {
-		var ajax_control = $.ajax({
-			url : '/Apoco/feed/deleteFeed',
-			type : 'POST',
-			data : {
-				id : $('#idTarget${count}').val()
-			}
-		});
-		ajax_control.always(function() {
-			$('#content').html(ajax_control.responseText);
-		});
-	}
-	
-	function like(){
-		var ajax_control = $.ajax({
-			url : '/Apoco/feed/likeFeed',
-			type : 'POST',
-			data : {
-				id : $('#likeTarget${count}').val()
-			}
-		});
-		ajax_control.always(function() {
-			$('#content').html(ajax_control.responseText);
-		});
-	}
-	
-	function dislike(){
-		var ajax_control = $.ajax({
-			url : '/Apoco/feed/dislikeFeed',
-			type : 'POST',
-			data : {
-				id : $('#dislikeTarget${count}').val()
-			}
-		});
-		ajax_control.always(function() {
-			$('#content').html(ajax_control.responseText);
-		});
-	}
 </script>
 <div align="center">
 	<h1>Your feed</h1>
@@ -167,7 +115,7 @@
 							</div>
 							<div id="target${count}" style="display: none;">
 								<button class="btn" id="idTarget${count}" value="${feed.id}"
-									name="id" onclick="updFeed()"
+									name="id" onclick="ajaxFeed('feed/updateFeed', 'id', '#idTarget${count}', 'feed', '#feedTarget${count}')"
 									style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue;">
 									Update</button>
 								<br>
@@ -185,7 +133,7 @@
 						<div class="col-md-4">
 							<c:choose>
 								<c:when test="${feed.vote.equals('Like')}">
-									<button class="btn" id="likeTarget${count}" value="${feed.id}" onclick="like()"
+									<button class="btn" id="likeTarget${count}" value="${feed.id}" onclick="ajaxFeed('feed/likeFeed', 'id', '#likeTarget${count}')"
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: #0fb800; font-size: small;">Like</button>
 								</c:when>
 								<c:when test="${feed.vote.equals('Dislike')}">
@@ -193,7 +141,7 @@
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Like</button>
 								</c:when>
 								<c:otherwise>
-									<button class="btn" id="likeTarget${count}" value="${feed.id}" onclick="like()"
+									<button class="btn" id="likeTarget${count}" value="${feed.id}" onclick="ajaxFeed('feed/likeFeed', 'id', '#likeTarget${count}')"
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Like</button>
 								</c:otherwise>
 							</c:choose>
@@ -204,7 +152,7 @@
 						<div class="col-md-4">
 							<c:choose>
 								<c:when test="${feed.vote.equals('Dislike')}">
-									<button class="btn" id="dislikeTarget${count}" value="${feed.id}" onclick="dislike()"
+									<button class="btn" id="dislikeTarget${count}" value="${feed.id}" onclick="ajaxFeed('feed/dislikeFeed', 'id', '#dislikeTarget${count}')"
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: #a70000; font-size: small;">Dislike</button>
 								</c:when>
 								<c:when test="${feed.vote.equals('Like')}">
@@ -212,7 +160,7 @@
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Dislike</button>
 								</c:when>
 								<c:otherwise>
-									<button class="btn" id="dislikeTarget${count}" value="${feed.id}" onclick="dislike()"
+									<button class="btn" id="dislikeTarget${count}" value="${feed.id}" onclick="ajaxFeed('feed/dislikeFeed', 'id', '#dislikeTarget${count}')"
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Dislike</button>
 								</c:otherwise>
 							</c:choose>
@@ -239,7 +187,7 @@
 									value="${feed.privacy.equals('public') ? 'Everyone' : 'Friends'}" />
 								can see your post
 								<button value="${feed.id}" name="id" id="idTarget${count}"
-									onclick="delFeed()"
+									onclick="ajaxFeed('feed/deleteFeed', 'id', '#idTarget${count}')"
 									style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Remove</button>
 							</p>
 						</td>

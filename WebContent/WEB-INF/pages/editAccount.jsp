@@ -12,7 +12,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="<c:url value="/assets/js/ajaxAccount.js" />"></script>
+<script src="<c:url value="/assets/js/ajaxPost.js" />"></script>
 <div class="container" id="msg">
 	<div class="row" align="center">
 		<div class="col-md-12">
@@ -44,17 +44,17 @@
 				First Name: <input type="text" style="margin-left: 20px;"
 					id="firstName" name="firstName" value="${user.firstName}"
 					minlenght="2" maxlength="30" />
-				<button class="btn action-button" onclick="updFirst()"
+				<button class="btn action-button" onclick="ajaxPost('account/updateFirst', 'firstName')"
 					style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
 				<br> <br> <br> Last Name: <input type="text"
 					id="lastName" style="margin-left: 23px;" name="lastName"
 					value="${user.lastName}" minlength="2" maxlength="30" />
-				<button class="btn action-button" onclick="updLast()"
+				<button class="btn action-button" onclick="ajaxPost('account/updateLast', 'lastName')"
 					style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
 				<br> <br> <br> Username: <input type="text"
 					id="username" style="margin-left: 27px;" name="username"
 					value="${user.username}" minlength="4" maxlength="30" />
-				<button class="btn action-button" onclick="updUser()"
+				<button class="btn action-button" onclick="ajaxPost('account/updateUser', 'username')"
 					style="background-color: #000000; color: #ffffff; float: right; margin-right: 30px;">Update</button>
 			</h4>
 		</div>
@@ -63,7 +63,7 @@
 			<h4>
 				Email: <input type="email" style="margin-left: 100px;" name="email"
 					value="${user.email}" id="email" minlength="4" maxlength="40" />
-				<button class="btn action-button" onclick="updEmail()"
+				<button class="btn action-button" onclick="ajaxPost('account/updateEmail', 'email')"
 					style="background-color: #000000; color: #ffffff; float: right; margin-right: 10px;">Update</button>
 				<br> <br> <br> Old Password: <input type="password"
 					id="oldPass" style="margin-left: 9px;" name="oldPass"
@@ -74,7 +74,7 @@
 					style="margin-left: 22px;" name="rePass" id="rePass"
 					placeholder="Repeat New Password" minlength="8" maxlength="100"
 					required />
-				<button class="btn action-button" onclick="updPass()"
+				<button class="btn action-button" onclick="ajaxPost('account/updatePass', 'oldPass', null, 'pass', 'rePass')"
 					style="background-color: #000000; color: #ffffff; float: right; margin-right: 10px;">Update</button>
 			</h4>
 		</div>
