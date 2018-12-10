@@ -138,18 +138,36 @@ public class Feed {
 		this.feed = feed;
 	}
 	
+	/**
+	 * This gets the number of votes for the post.
+	 * @return int This is the number of votes returned.
+	 */
 	public int getVotes() {
 		return votes;
 	}
 
+	/**
+	 * This method sets the number of votes for the post.
+	 * @param votes This is the new number of votes.
+	 * @return Nothing.
+	 */
 	public void setVotes(int votes) {
 		this.votes = votes;
 	}
 	
+	/**
+	 * This gets the vote given by the user on a feed post. Different for every user.
+	 * @return String This is either like or dislike.
+	 */
 	public String getVote() {
 		return vote;
 	}
 
+	/**
+	 * This sets the vote for a certain user on a feed post. Different for every user.
+	 * @param vote This is the new vote.
+	 * @return Nothing.
+	 */
 	public void setVote(String vote) {
 		this.vote = vote;
 	}
@@ -176,6 +194,7 @@ public class Feed {
 	 * @param privacy This is the privacy of the feed object.
 	 * @param name This is the name of the creator of the feed object.
 	 * @param link This is the link attached to the feed post.
+	 * @param votes This is the number of votes the post has.
 	 */
 	public Feed(int id, int userId, String feed, String privacy, String name, String link, int votes) {
 		this.id = id;

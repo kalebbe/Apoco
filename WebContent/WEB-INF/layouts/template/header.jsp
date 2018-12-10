@@ -61,15 +61,15 @@
 		<div>
 			<nav
 				class="navbar navbar-light navbar-expand-md navigation-clean-button"
-				style="background-color: #6c6a6a; height: 50px;">
+				style="background-color: #000000; height: 50px;">
 				<div class="container">
-					<a class="navbar-brand" href="#" style="height: 0px;"></a>
+					
 					<button class="navbar-toggler" data-toggle="collapse"
-						data-target="#navcol-1">
+						data-target="#navcol-2">
 						<span class="sr-only">Toggle navigation</span><span
 							class="navbar-toggler-icon"></span>
 					</button>
-					<div class="collapse navbar-collapse" id="navcol-1">
+					<div class="collapse navbar-collapse" id="navcol-2">
 						<ul class="nav navbar-nav mr-auto"></ul>
 						<span class="navbar-text actions"> <!-- Changes the default navbar if the user is logged in -->
 							<c:choose>
@@ -78,7 +78,7 @@
 										style="color: #ffffff; font-size: 14px;">Edit Account</a>
 									<a class="btn btn-light action-button" role="button"
 										href="../logout/log"
-										style="background-color: #000000; color: #ffffff; font-size: 14px;">Log
+										style="background-color: #a70000; color: #ffffff; font-size: 14px;">Log
 										Out</a>
 								</c:when>
 								<c:otherwise>
@@ -86,7 +86,7 @@
 										style="color: #ffffff; font-size: 14px;">Log In</a>
 									<a class="btn btn-light action-button" role="button"
 										href="../registration/reg"
-										style="background-color: #000000; color: #ffffff; font-size: 14px;">Sign
+										style="background-color: #a70000; color: #ffffff; font-size: 14px;">Sign
 										Up</a>
 								</c:otherwise>
 							</c:choose>
@@ -121,26 +121,49 @@
 		<div>
 			<nav
 				class="navbar navbar-light navbar-expand-md navigation-clean-button"
-				style="background-color: #6c6a6a; height: 60px;">
+				style="background-color: #000000; height: 50px;">
 				<div class="container">
-					<div class="collapse navbar-collapse" id="navcol-1">
+					<button class="navbar-toggler" data-toggle="collapse"
+						data-target="#navcol-2">
+						<span class="sr-only">Toggle navigation</span><span
+							class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navcol-2">
 						<ul class="nav navbar-nav mr-auto">
 							<c:choose>
 								<c:when test="${sessionScope.hasSocial != null}">
-									<li class="nav-item" role="presentation"><a style="color: #ffffff;" class="nav-link" href="../social/social">Dashboard</a></li>
-									<li class="nav-item" role="presentation"><a style="color: #ffffff;" class="nav-link" href="../feed/feed">View Feed</a></li>
-									<li class="nav-item" role="presentation"><a style="color: #ffffff;" class="nav-link" href="#">Messages</a></li>
-									<li class="nav-item" role="presentation"><a style="color: #ffffff;" class="nav-link" href="../social/games">Play Games</a></li>
+									<li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link"
+										href="../social/social">Dashboard</a></li>
+									<li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link" href="../feed/feed">View
+											Feed</a></li>
+									<li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link" href="#">Messages</a></li>
+									<li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link" href="#">Friends</a></li>
+									<li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link"
+										href="../social/games">Play Games</a></li>
+									<form class="navbar-form navbar-left" method="POST" action="../friends/search">
+										<div class="input-group">
+											<input type="text" name="search" class="form-control" size="10"
+												style="font-size: 12px; background: none; border: none; color: #ffffff;" placeholder="Search people">
+											<span class="input-group-btn">
+												<button type="submit" style="background: none; border: none;">
+													<i class="material-icons" style="color: #ffffff;">search</i>
+												</button>
+											</span>
+										</div>
+									</form>
 								</c:when>
 							</c:choose>
 						</ul>
-						<span class="navbar-text actions">
-						
-						 <a href="#"
-							class="login" style="color: #ffffff; font-size: 14px;">My Profile</a><a
-							class="btn btn-light action-button" role="button"
+						<span class="navbar-text actions"> <a href="#"
+							class="login" style="color: #ffffff; font-size: 14px;">My
+								Profile</a><a class="btn btn-light action-button" role="button"
 							href="../logout/log"
-							style="background-color: #000000; color: #ffffff; font-size: 14px;">Log
+							style="background-color: #0fb800;; color: #ffffff; font-size: 14px;">Log
 								Out</a></span>
 					</div>
 				</div>
@@ -172,20 +195,27 @@
 		<div>
 			<nav
 				class="navbar navbar-light navbar-expand-md navigation-clean-button"
-				style="background-color: #6c6a6a; height: 60px;">
+				style="background-color: #000000; height: 50px;">
 				<div class="container">
-					<div class="collapse navbar-collapse" id="navcol-1">
+					<button class="navbar-toggler" data-toggle="collapse"
+						data-target="#navcol-2">
+						<span class="sr-only">Toggle navigation</span><span
+							class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navcol-2">
 						<ul class="nav navbar-nav mr-auto">
 							<c:choose>
 								<c:when test="${sessionScope.hasBusiness != null}">
-									<li class="nav-item" role="presentation"><a style="color: #ffffff;" class="nav-link" href="../business/bus">Dashboard</a></li>
+									<li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link"
+										href="../business/bus">Dashboard</a></li>
 								</c:when>
 							</c:choose>
 						</ul>
 						<span class="navbar-text actions"><a
 							class="btn btn-light action-button" role="button"
 							href="../logout/log"
-							style="background-color: #000000; color: #ffffff; font-size: 14px;">Log
+							style="background-color: #0007a9; color: #ffffff; font-size: 14px;">Log
 								Out</a></span>
 					</div>
 				</div>

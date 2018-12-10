@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.gcu.business.UserBusinessInterface;
+import com.gcu.model.User;
 
 
 @Controller
@@ -51,6 +52,9 @@ private UserBusinessInterface us;
 	 */
 	@RequestMapping(path="/user", method=RequestMethod.GET)
 	public ModelAndView goHome(HttpSession session) {
+		if(session.getAttribute("id") == null) {
+			return new ModelAndView("redirect:../login/log", "user", new User());
+		}
 		session.setAttribute("theme", null); //Regular red header and footer with all tabs
 		return new ModelAndView("userHome", "user", us.findById((int)session.getAttribute("id")));
 	}

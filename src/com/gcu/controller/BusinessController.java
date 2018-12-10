@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.gcu.business.BusinessInterface;
 import com.gcu.model.Business;
+import com.gcu.model.User;
 
 @Controller
 @RequestMapping("/business")
@@ -51,6 +52,9 @@ public class BusinessController {
 	 */
 	@RequestMapping(path = "/bus", method = RequestMethod.GET)
 	public ModelAndView businessProfile(@ModelAttribute("business") Business bus, HttpSession session) {
+		if(session.getAttribute("id") == null) {
+			return new ModelAndView("redirect:../login/log", "user", new User());
+		}
 		session.setAttribute("theme", "business");
 		if(session.getAttribute("hasBusiness") != null) {
 			//Dashboard is returned if the user has a business profile
@@ -200,10 +204,10 @@ public class BusinessController {
 	@ModelAttribute("ethList")
 	public List<String> getEthList(){
 		List<String> ethList = new ArrayList<String>();
-		ethList.add("American Indian or Alaska Native");
+		ethList.add("Native American");
 		ethList.add("Asian");
 		ethList.add("Black or African American");
-		ethList.add("Native Hawaiian or Other Pacific Islander");
+		ethList.add("Pacific Islander");
 		ethList.add("Hispanic or Latino");
 		ethList.add("White");
 		ethList.add("Other");
@@ -222,7 +226,7 @@ public class BusinessController {
 		edList.add("Elementary");
 		edList.add("Middle School");
 		edList.add("Some High School");
-		edList.add("General Education Development");
+		edList.add("GED");
 		edList.add("High School Diploma");
 		edList.add("Some College");
 		edList.add("Associates Degree");

@@ -85,7 +85,7 @@
 				Word count: <span id="display_count">0</span> of 200 (Max)<br>
 			</p>
 			<form:textarea style="white-space: pre-wrap;" id="word_count"
-				path="bio" rows="10" cols="150" minlength="50" maxlength="5000" />
+				path="bio" rows="10" cols="40" minlength="50" maxlength="5000" />
 			<h5>
 				<br> Privacy Mode:
 				<form:radiobutton path="privacy" name="privacy" value="true"

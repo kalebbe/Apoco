@@ -13,7 +13,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="com.gcu.utilities.MinesweeperLogic"%>
-<script src="<c:url value="/assets/js/click.js" />"></script>
 <script src="<c:url value="/assets/js/ajaxPost.js" />"></script>
 <script>
 	document.addEventListener('contextmenu', function(e) {
@@ -23,7 +22,7 @@
 <div align="center">
 	<h1>Minesweeper</h1>
 
-	<div id="board">
+	<div id="board" class="table-responsive-sm">
 		<table>
 			<c:forEach var="i" begin="0" end="${sessionScope.size - 1}">
 				<tr>

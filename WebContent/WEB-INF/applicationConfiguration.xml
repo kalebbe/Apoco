@@ -61,11 +61,13 @@
 	<bean id="socialController" class="com.gcu.controller.SocialController"/>
 	<bean id="businessController" class="com.gcu.controller.BusinessController"/>
 	<bean id="feedController" class="com.gcu.controller.FeedController" />
+	<bean id="friendController" class="com.gcu.controller.FriendController" />
 	<bean id="userService" class="com.gcu.business.UserBusinessService" />
  	<bean id="socialService" class="com.gcu.business.SocialBusinessService" />
  	<bean id="businessService" class="com.gcu.business.BusinessService" />
  	<bean id="minesweeperLogic" class="com.gcu.utilities.MinesweeperLogic" />
  	<bean id="feedService" class="com.gcu.business.FeedBusinessService" />
+ 	<bean id="friendService" class="com.gcu.business.FriendBusinessService" />
  	<bean id="feedDAO" class="com.gcu.data.FeedDAO">
  		<property name="dataSource" ref="dataSource"/>
  	</bean>
@@ -78,5 +80,7 @@
  	<bean id="businessDAO" class="com.gcu.data.BusinessDAO">
  		<property name="dataSource" ref="dataSource"/>
  	</bean>
-   
+   	<bean id="friendDAO" class="com.gcu.data.FriendDAO">
+   		<property name="dataSource" ref="dataSource"/>
+   	</bean>
  </beans>

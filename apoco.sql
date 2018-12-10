@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2018 at 05:00 AM
+-- Generation Time: Dec 10, 2018 at 11:57 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -46,8 +46,19 @@ CREATE TABLE `busprofiles` (
 --
 
 INSERT INTO `busprofiles` (`ID`, `USER_ID`, `DOB`, `GENDER`, `ETHNICITY`, `CITY`, `STATE`, `EDUCATION`, `PROFESSION`, `PICTURE`) VALUES
-(1, 44, '8/10/1992', 'Male', 'White', 'Glendale', 'AZ', 'Associates Degree', 'Technology', NULL),
-(2, 46, '8/10/1992', 'Male', 'White', 'Glendale', 'AZ', 'Some College', 'Technology', NULL);
+(5, 46, '8/10/1992', 'Male', 'White', 'Glendale', 'AZ', 'Some College', 'Technology', NULL),
+(6, 44, '1/1/2015', 'Male', 'Black or African American', 'Glendale', 'AZ', 'Elementary', 'Banking', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `friends`
+--
+
+CREATE TABLE `friends` (
+  `USER_ID` int(11) NOT NULL,
+  `FRIEND_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -62,8 +73,16 @@ CREATE TABLE `socialfeed` (
   `POST` varchar(5000) NOT NULL,
   `PRIVACY` varchar(20) NOT NULL,
   `LINK` varchar(500) DEFAULT NULL,
-  `DATE_POSTED` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `DATE_POSTED` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `VOTES` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `socialfeed`
+--
+
+INSERT INTO `socialfeed` (`ID`, `USER_ID`, `NAME`, `POST`, `PRIVACY`, `LINK`, `DATE_POSTED`, `VOTES`) VALUES
+(4, 46, 'Kaleb Eberhart', 'This is a new feed post for example purposes.', 'public', NULL, '2018-12-10 14:39:42', 0);
 
 -- --------------------------------------------------------
 
@@ -94,7 +113,8 @@ CREATE TABLE `socialprofiles` (
 --
 
 INSERT INTO `socialprofiles` (`ID`, `USER_ID`, `PICTURE`, `CAREER`, `CITY`, `STATE`, `RELATIONSHIP`, `BIO`, `EDUCATION`, `SCHOOL`, `JOB`, `BIRTH_DATE`, `ROLE`, `PRIVACY`, `STATUS`) VALUES
-(55, 46, NULL, 'Technology', 'Glendale', 'AZ', 'Single', 'Well this is about my 20th \"real\" bio on here. Some day I\'ll keep one on here.. but for now, who really cares. I\'m just trying to test my garbo ass website.', 'Some College', 'Grand Canyon University', 'Contractor', '8/10/1992', 'user', 0, 'active');
+(61, 46, NULL, 'Technology', 'Glendale', 'AZ', 'Single', 'This is a biography, I don\'t know what much more to put here other than that.', 'Some College', 'Grand Canyon University', 'contractor', '8/1/1983', 'user', 0, 'active'),
+(62, 44, NULL, 'Warehouse', 'wot', 'AR', 'Widowed', 'Here\'s a biography being created for my video presentation. Be amazed.', 'None', 'Nowhere', 'nothing', '1/5/2016', 'user', 1, 'active');
 
 -- --------------------------------------------------------
 
@@ -119,7 +139,20 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`EMAIL`, `USERNAME`, `FIRST_NAME`, `LAST_NAME`, `PASSWORD`, `ID`, `ROLE`, `STATUS`) VALUES
 ('rickjames@gmail.com', 'keberhart', 'Kaleb', 'Eberhart', '$2a$10$k4/vA/XgaYV6NsIcCstJ7euyE30eiKgm10ubJ4EiiGgtwa0uVcGoW', 44, 'user', 'active'),
-('kalebeberhart10@gmail.com', 'kaleb_be', 'Kaleb', 'Eberhart', '$2a$10$rRvruUwbWazBI847rOHXIexMHL8DtDS.w0cIzyCmPqdvXFTmRjtwe', 46, 'user', 'active');
+('kalebeberhart10@gmail.com', 'kaleb_be', 'Kaleb', 'Eberhart', '$2a$10$Y9hPTxiZTnowy1O5NDXh7eD3PLEdGX6C5MnfrewcKMLDWoTmmbwgm', 46, 'user', 'active'),
+('example@email.com', 'example', 'example', 'example', '$2a$10$q3NKQOIOudHMEBTCsy7EUus6BmpoPmFbJKdolpRzHo1SiachXKwJq', 49, 'user', 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `votes`
+--
+
+CREATE TABLE `votes` (
+  `USER_ID` int(11) NOT NULL,
+  `FEED_ID` int(11) NOT NULL,
+  `VOTE` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -129,22 +162,19 @@ INSERT INTO `users` (`EMAIL`, `USERNAME`, `FIRST_NAME`, `LAST_NAME`, `PASSWORD`,
 -- Indexes for table `busprofiles`
 --
 ALTER TABLE `busprofiles`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `user_id_idx` (`USER_ID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `socialfeed`
 --
 ALTER TABLE `socialfeed`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `User_id_idx` (`USER_ID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `socialprofiles`
 --
 ALTER TABLE `socialprofiles`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `uid_idx` (`USER_ID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `users`
@@ -160,47 +190,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `busprofiles`
 --
 ALTER TABLE `busprofiles`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `socialfeed`
 --
 ALTER TABLE `socialfeed`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `socialprofiles`
 --
 ALTER TABLE `socialprofiles`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `busprofiles`
---
-ALTER TABLE `busprofiles`
-  ADD CONSTRAINT `bus_user_key` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `socialfeed`
---
-ALTER TABLE `socialfeed`
-  ADD CONSTRAINT `User_id` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `socialprofiles`
---
-ALTER TABLE `socialprofiles`
-  ADD CONSTRAINT `uid` FOREIGN KEY (`USER_ID`) REFERENCES `users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

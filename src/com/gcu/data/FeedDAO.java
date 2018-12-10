@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
-
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -22,8 +21,6 @@ import com.gcu.model.Feed;
 
 public class FeedDAO implements DataAccessInterface<Feed> {
 
-	@SuppressWarnings("unused")
-	private DataSource dataSource;
 	private JdbcTemplate jdbcTemp;
 
 	/**
@@ -32,7 +29,6 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	 * @return Nothing.
 	 */
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 		this.jdbcTemp = new JdbcTemplate(dataSource);
 	}
 
@@ -136,7 +132,14 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * This method creates a new like or dislike in the database for a specified feed post.
+	 * @param fId This is the id of the feed being voted on.
+	 * @param uId This is the id of the user voting.
+	 * @param vote This is whether the vote is a like or dislike.
+	 * @return boolean This returns whether or not the update was successful.
+	 */
 	public boolean createVote(int fId, int uId, String vote) {
 		String sql = "INSERT INTO votes (USER_ID, FEED_ID, VOTE) VALUES(?,?,?)";
 		boolean result = false;
@@ -146,6 +149,12 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 		return result;
 	}
 	
+	/**
+	 * This method deletes the like or dislike for a specified feed post.
+	 * @param fId This is the id of the feed post being updated.
+	 * @param uId This is the id of the user deleting their vote.
+	 * @return boolean This returns whether or not the update was successful.
+	 */
 	public boolean deleteVote(int fId, int uId) {
 		String sql = "DELETE FROM votes WHERE FEED_ID = ? AND USER_ID = ?";
 		boolean result = false;
@@ -155,6 +164,14 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 		return result;
 	}
 	
+	/**
+	 * This method is to used to check if a user has voted on a post and what they
+	 * voted on the post. Null is returned if they have not voted; otherwise, like
+	 * or dislike is returned.
+	 * @param fId
+	 * @param uId
+	 * @return
+	 */
 	public String voted(int fId, int uId) {
 		try {
 		String sql = "SELECT VOTE FROM votes WHERE FEED_ID = ? AND USER_ID = ?";		

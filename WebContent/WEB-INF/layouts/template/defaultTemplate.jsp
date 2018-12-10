@@ -26,6 +26,7 @@
 	href="https://fonts.googleapis.com/css?family=Abril+Fatface">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Aldrich">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Alegreya+SC">
 <link href="<c:url value="/assets/css/Footer-Basic.css" />"

@@ -61,7 +61,7 @@
 
 		<div class="col-md-6">
 			<h4>
-				Email: <input type="email" style="margin-left: 100px;" name="email"
+				Email: <input type="email" style="margin-left: 20px;" name="email"
 					value="${user.email}" id="email" minlength="4" maxlength="40" />
 				<button class="btn action-button" onclick="ajaxPost('account/updateEmail', 'email')"
 					style="background-color: #000000; color: #ffffff; float: right; margin-right: 10px;">Update</button>

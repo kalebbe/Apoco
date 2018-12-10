@@ -7,6 +7,9 @@
  * -----UPDATE MILESTONE 5-----
  * -Feed can now be updated
  * 
+ * -----UPDATE MILESTONE 7-----
+ * -Added the like and dislike system to the project.
+ * 
  * @author  Kaleb Eberhart
  * @version 1.0
  * @since   2018-11-25
@@ -95,11 +98,24 @@ public class FeedBusinessService implements FeedBusinessInterface {
 		return dao.findById(id);
 	}
 	
+	/**
+	 * This method is used to check if a user has already voted on a certain feed post.
+	 * @param fId This is the id of the feed.
+	 * @param uId This is the id of the user being checked.
+	 * @return String This returns whether the user liked or disliked the post.
+	 */
 	@Override
 	public String voted(int fId, int uId) {
 		return dao.voted(fId, uId);
 	}
 	
+	/**
+	 * This method is used to create a vote in the database whether it's a like or dislike.
+	 * @param t This is the feed post being like or disliked.
+	 * @param uId This is the user id of the person giving the vote.
+	 * @param vote This is whether the vote is a like or dislike.
+	 * @return boolean This returns whether or not the database was updated.
+	 */
 	@Override
 	public boolean createVote(Feed t, int uId, String vote) {
 		if(!dao.createVote(t.getId(), uId, vote)) {
@@ -108,6 +124,12 @@ public class FeedBusinessService implements FeedBusinessInterface {
 		return dao.update(t);
 	}
 	
+	/**
+	 * This method is used to delete a vote in the database.
+	 * @param t This is the feed post being updated.
+	 * @param uId This is the user id of the person deleting their vote.
+	 * @return boolean This returns whether or not the vote was deleted.
+	 */
 	@Override
 	public boolean deleteVote(Feed t, int uId) {
 		if(!dao.deleteVote(t.getId(), uId)) {
@@ -116,6 +138,12 @@ public class FeedBusinessService implements FeedBusinessInterface {
 		return dao.update(t);
 	}
 	
+	/**
+	 * This method is used to set that the user has voted on this feed post.
+	 * @param uId This is the user id being set for voted.
+	 * @param feedList This is the list of feed that's being checked.
+	 * @return List<Feed> This returns the updated feed list.
+	 */
 	@Override
 	public List<Feed> setVoted(int uId, List<Feed> feedList){
 		for(Feed f: feedList) {

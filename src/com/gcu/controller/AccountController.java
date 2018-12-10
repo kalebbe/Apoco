@@ -58,6 +58,9 @@ public class AccountController {
 	 */
 	@RequestMapping(path="/edit", method=RequestMethod.GET)
 	public ModelAndView editAccount(HttpSession session) {
+		if(session.getAttribute("id") == null) {
+			return new ModelAndView("redirect:../login/log", "user", new User());
+		}
 		//Returns editAccount with he user's model passed in
 		return new ModelAndView("editAccount", "user", us.findById((int)session.getAttribute("id")));
 	}

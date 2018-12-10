@@ -59,21 +59,21 @@
 	<div>
 		<nav
 			class="navbar navbar-light navbar-expand-md navigation-clean-button"
-			style="background-color: #6c6a6a; height: 50px;">
+			style="background-color: #000000; height: 50px;">
 			<div class="container">
-				<a class="navbar-brand" href="#" style="height: 0px;"></a>
+				
 				<button class="navbar-toggler" data-toggle="collapse"
-					data-target="#navcol-1">
+					data-target="#navcol-2">
 					<span class="sr-only">Toggle navigation</span><span
 						class="navbar-toggler-icon"></span>
 				</button>
-				<div class="collapse navbar-collapse" id="navcol-1">
+				<div class="collapse navbar-collapse" id="navcol-2">
 					<ul class="nav navbar-nav mr-auto"></ul>
 					<span class="navbar-text actions"> <a href="login/log"
 						class="login" style="color: #ffffff; font-size: 14px;">Log In</a><a
 						class="btn btn-light action-button" role="button"
 						href="registration/reg"
-						style="background-color: #000000; color: #ffffff; font-size: 14px;">Sign
+						style="background-color: #a70000; color: #ffffff; font-size: 14px;">Sign
 							Up</a></span>
 				</div>
 			</div>

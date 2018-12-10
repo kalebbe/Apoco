@@ -15,18 +15,20 @@
 	<h1>Minesweeper</h1>
 	<hr />
 	<form method="POST" action="../mines/start">
-		<div class="row">
-			<div class="col-md-4">
-				<button class="btn btn-primary btn-large" style="float: right;" name="diff" value="1">Play
-					an easy game</button>
-			</div>
-			<div class="col-md-4">
-				<button class="btn btn-warning btn-large" name="diff" value="2">Play
-					a medium game</button>
-			</div>
-			<div class="col-md-4">
-				<button class="btn btn-danger btn-large" style="float: left;" name="diff" value="3">Play
-					a hard game</button>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<button class="btn btn-primary" style="float: right;" name="diff"
+						value="1">Play an easy game</button>
+				</div>
+				<div class="col-md-4">
+					<button class="btn btn-warning" name="diff" value="2">Play
+						a medium game</button>
+				</div>
+				<div class="col-md-4">
+					<button class="btn btn-danger" style="float: left;" name="diff"
+						value="3">Play a hard game</button>
+				</div>
 			</div>
 		</div>
 	</form>

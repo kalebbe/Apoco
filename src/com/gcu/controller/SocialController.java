@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.gcu.business.SocialBusinessInterface;
 import com.gcu.model.Social;
+import com.gcu.model.User;
 
 @Controller
 @RequestMapping("/social")
@@ -55,6 +56,9 @@ public class SocialController {
 	 */
 	@RequestMapping(path = "/social", method = RequestMethod.GET)
 	public ModelAndView socialProfile(@ModelAttribute("social") Social social, HttpSession session) {
+		if(session.getAttribute("id") == null) {
+			return new ModelAndView("redirect:../login/log", "user", new User());
+		}
 		session.setAttribute("theme", "social"); //Makes header and footer of page green and removes social link
 		if(session.getAttribute("hasSocial") != null) {
 			//Returns the dashboard if the user has a social profile
@@ -72,7 +76,10 @@ public class SocialController {
 	 * @return String This is the playGames view being returned.
 	 */
 	@RequestMapping(path = "/games", method = RequestMethod.GET)
-	public String getGames() {
+	public String getGames(HttpSession session) {
+		if(session.getAttribute("id") == null) {
+			return "redirect:../login/log";
+		}
 		return "playGames"; //No model required
 	}
 
@@ -90,7 +97,7 @@ public class SocialController {
 		if (result.hasErrors()) {
 			return new ModelAndView("socialProfile", "social", social); //Returns socialProfile with errors
 		}
-		
+		social.setUserId((int)session.getAttribute("id"));
 		if(ss.createSocial(social)) {
 			session.setAttribute("hasSocial", true); //This allows the user to land at the dashboard when they go to social
 			return new ModelAndView("socialDash", "social", social);
@@ -226,7 +233,7 @@ public class SocialController {
 		edList.add("Elementary");
 		edList.add("Middle School");
 		edList.add("Some High School");
-		edList.add("General Education Development");
+		edList.add("GED");
 		edList.add("High School Diploma");
 		edList.add("Some College");
 		edList.add("Associates Degree");

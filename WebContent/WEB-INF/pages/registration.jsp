@@ -14,8 +14,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="register-photo">
-	<div class="form-container" style="width: 411px; color: #000000;">
-		<form:form method="POST" modelAttribute="user" action="register" style="width:796px; background-color: #a70000;">
+	<div class="form-container" style="max-width: 411px; color: #000000;">
+		<form:form method="POST" modelAttribute="user" action="register" style="background-color: #a70000;">
 			<h2 class="text-center" style="color: #000000;">
 				<strong>Registration</strong>
 			</h2>

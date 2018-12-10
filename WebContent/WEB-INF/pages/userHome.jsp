@@ -46,7 +46,7 @@
 						<c:when test="${sessionScope.hasBusiness != true}">
 							<h3 class="name">Apoco Business</h3>
 							<p class="description">You have not set up a business account!</p>
-							<a class="btn btn-light action-button" role="button" href="#"
+							<a class="btn btn-light action-button" role="button" href="../business/bus"
 								style="background-color: rgb(0, 7, 169); color: #ffffff; font-size: 14px;">Create
 								Profile</a>
 						</c:when>

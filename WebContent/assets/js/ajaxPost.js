@@ -1,5 +1,6 @@
-//I attempted to put all of these into one method, but it didn't seem possible
-//due to the data portion. May try again later.
+//This method works for minesweeper and editting the accounts.
+//Could be updated to include other edits, but would start becoming
+//more complex.
 function ajaxPost(url, name, value, name2, name3){
 	var dataObject = {};
 	if(value == null){
@@ -29,6 +30,7 @@ function ajaxPost(url, name, value, name2, name3){
 	});
 }
 
+//This method was separated to make the other method less complex.
 function ajaxFeed(url, name, value, name2, value2){
 	var dataObject = {};
 	dataObject[name] = $(value).val();

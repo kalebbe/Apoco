@@ -35,7 +35,7 @@
 	<hr>
 	<form:form method="POST" modelAttribute="feed" action="createFeed">
 		<h5>Youtube Link</h5>
-		<form:input size="50" path="link" minlength="10" maxlength="100" />
+		<form:input path="link" size="40" minlength="10" maxlength="100" />
 		<p style="font-size: xx-small;">*Not required. Only for youtube
 			videos</p>
 
@@ -45,7 +45,7 @@
 		 -->
 		<form:textarea
 			style="white-space: pre-wrap; resize:none; overflow:hidden;"
-			id="word_count" path="feed" cols="65" minlength="20" maxlength="5000"
+			id="word_count" path="feed" cols="40" minlength="20" maxlength="5000"
 			oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' />
 		<p style="font-size: xx-small;">
 			Word count: <span id="display_count">0</span> of 200 (Max)
@@ -107,7 +107,7 @@
 							<div
 								onclick="$('#feedTarget${count}').attr('disabled', false); $('#target${count}').css('display', 'inline-block');">
 
-								<textarea id="feedTarget${count}" cols="65" disabled="disabled"
+								<textarea id="feedTarget${count}" cols="40" disabled="disabled"
 									name="feed" minlength="20" maxlength="5000"
 									style="white-space: pre-wrap; border: none; outline: none; background-color: white; resize: none; overflow: hidden;"
 									oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'><c:out
@@ -115,7 +115,8 @@
 							</div>
 							<div id="target${count}" style="display: none;">
 								<button class="btn" id="idTarget${count}" value="${feed.id}"
-									name="id" onclick="ajaxFeed('feed/updateFeed', 'id', '#idTarget${count}', 'feed', '#feedTarget${count}')"
+									name="id"
+									onclick="ajaxFeed('feed/updateFeed', 'id', '#idTarget${count}', 'feed', '#feedTarget${count}')"
 									style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue;">
 									Update</button>
 								<br>
@@ -133,7 +134,8 @@
 						<div class="col-md-4">
 							<c:choose>
 								<c:when test="${feed.vote.equals('Like')}">
-									<button class="btn" id="likeTarget${count}" value="${feed.id}" onclick="ajaxFeed('feed/likeFeed', 'id', '#likeTarget${count}')"
+									<button class="btn" id="likeTarget${count}" value="${feed.id}"
+										onclick="ajaxFeed('feed/likeFeed', 'id', '#likeTarget${count}')"
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: #0fb800; font-size: small;">Like</button>
 								</c:when>
 								<c:when test="${feed.vote.equals('Dislike')}">
@@ -141,18 +143,23 @@
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Like</button>
 								</c:when>
 								<c:otherwise>
-									<button class="btn" id="likeTarget${count}" value="${feed.id}" onclick="ajaxFeed('feed/likeFeed', 'id', '#likeTarget${count}')"
+									<button class="btn" id="likeTarget${count}" value="${feed.id}"
+										onclick="ajaxFeed('feed/likeFeed', 'id', '#likeTarget${count}')"
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Like</button>
 								</c:otherwise>
 							</c:choose>
 						</div>
 						<div class="col-md-4">
-							<p style="font-size: small;"><c:out value="${feed.votes}" /></p>
+							<p style="font-size: small;">
+								<c:out value="${feed.votes}" />
+							</p>
 						</div>
 						<div class="col-md-4">
 							<c:choose>
 								<c:when test="${feed.vote.equals('Dislike')}">
-									<button class="btn" id="dislikeTarget${count}" value="${feed.id}" onclick="ajaxFeed('feed/dislikeFeed', 'id', '#dislikeTarget${count}')"
+									<button class="btn" id="dislikeTarget${count}"
+										value="${feed.id}"
+										onclick="ajaxFeed('feed/dislikeFeed', 'id', '#dislikeTarget${count}')"
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: #a70000; font-size: small;">Dislike</button>
 								</c:when>
 								<c:when test="${feed.vote.equals('Like')}">
@@ -160,7 +167,9 @@
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Dislike</button>
 								</c:when>
 								<c:otherwise>
-									<button class="btn" id="dislikeTarget${count}" value="${feed.id}" onclick="ajaxFeed('feed/dislikeFeed', 'id', '#dislikeTarget${count}')"
+									<button class="btn" id="dislikeTarget${count}"
+										value="${feed.id}"
+										onclick="ajaxFeed('feed/dislikeFeed', 'id', '#dislikeTarget${count}')"
 										style="background: none !important; color: inherit; border: none; padding: 0 !important; font: inherit; cursor: pointer; color: blue; font-size: small;">Dislike</button>
 								</c:otherwise>
 							</c:choose>
@@ -171,8 +180,12 @@
 				<c:choose>
 					<c:when test="${feed.link != null}">
 						<tr>
-							<td><iframe id="video" width="500" height="300"
-									src="https://www.youtube.com/embed/${feed.link}"></iframe></td>
+							<td>
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe id="video" class="embed-responsive-item"
+										src="https://www.youtube.com/embed/${feed.link}"></iframe>
+								</div>
+							</td>
 						</tr>
 					</c:when>
 				</c:choose>

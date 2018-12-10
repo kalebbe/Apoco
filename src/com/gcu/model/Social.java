@@ -23,39 +23,26 @@ public class Social {
 	//private String picture;
 
 	private boolean privacy; //This determines if randoms can see this user's feed and details
-
 	private String career; //Generic career field
-
 	@NotNull(message = "You must enter a city!")
 	@Size(min = 2, max = 40, message = "City must be between 2 and 40 characters!")
 	private String city;
-
 	private String State;
-
 	private String status; //Relationship status
-
 	@NotNull(message = "You must enter a biography!")
 	@Size(min = 50, max = 5000,  message = "Your biography must be atleast 50 characters!")
 	private String bio;
-
 	private String education; //Generic education level
-
 	@NotNull(message = "Please enter your most recent school!")
 	@Size(min = 2, max = 100, message = "Your school must be between 2 and 100 characters!")
 	private String school; //Actual school
-
 	@NotNull(message = "Please enter your most recent job!")
 	@Size(min = 2, max = 100, message = "Your job name must be between 2 and 100 characters!")
 	private String job; //Actual job
-
 	private int birthMonth;
-
 	private int birthDay;
-
 	private int birthYear;
-	
 	private int userId;
-	
 	private int id;
 
 	/**

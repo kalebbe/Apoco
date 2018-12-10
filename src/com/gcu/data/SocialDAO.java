@@ -29,6 +29,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	/**
 	 * This method sets the data source for my database calls and instantiates the
 	 * template.
+	 * 
 	 * @param dataSource.
 	 * @return Nothing.
 	 */
@@ -41,6 +42,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	 * This method takes the user's id and returns the user model for them. If there
 	 * is no result for that id, the method will catch the exception and return
 	 * null.
+	 * 
 	 * @param id This is the id of the Social profile being fetched.
 	 * @return Social This is the object being returned.
 	 */
@@ -60,6 +62,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	 * This method returns every single social profile in the database. As of right
 	 * now, this method does not have a purpose, but may be used in the future for
 	 * data purposes.
+	 * 
 	 * @return List<Social> This is the list of Social objects returned.
 	 */
 	@SuppressWarnings("unchecked")
@@ -72,6 +75,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 
 	/**
 	 * This method takes the Social model and inserts it into the database.
+	 * 
 	 * @param t This is the social object being created.
 	 * @return boolean This returns the success of database insertion.
 	 */
@@ -98,6 +102,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	 * from the base ICA update method which would update the entire model. I feel
 	 * like this is more efficient as only the required columns are updated. This is
 	 * currently not in use.
+	 * 
 	 * @param t This is the social object being updated.
 	 * @return boolean This returns the success of the database update.
 	 */
@@ -117,6 +122,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	/**
 	 * This method deletes the social profile of the logged in user. Currently not
 	 * in use.
+	 * 
 	 * @param id This is the id of the social object being deleted in the database.
 	 * @return boolean This returns the success of the database deletion.
 	 */
@@ -128,5 +134,21 @@ public class SocialDAO implements DataAccessInterface<Social> {
 			result = true;
 		}
 		return result;
+	}
+
+	/**
+	 * This method gets the user's privacy level from the database .
+	 * @param id User id being checked.
+	 * @return int This is the actual privacy level being returned.
+	 */
+	public int getPrivacy(int id) {
+		try {
+			String sql = "SELECT PRIVACY FROM socialprofiles WHERE USER_ID = ?";
+			int priv = jdbcTemp.queryForObject(sql, new Object[] { id }, Integer.class);
+			return priv;
+		} catch (EmptyResultDataAccessException e) {
+			return -1;
+		}
+
 	}
 }

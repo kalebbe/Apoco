@@ -5,6 +5,9 @@
  * -----UPDATE MILESTONE 5-----
  * -Users can now update their feed post. Link is not editable.
  * 
+ * -----UPDATE MILESTONE 7-----
+ * -Added the like/dislike system to feed posts.
+ * 
  * 
  * @author  Kaleb Eberhart
  * @version 1.0
@@ -70,6 +73,9 @@ public class FeedController {
 	 */
 	@RequestMapping(path="/feed", method = RequestMethod.GET)
 	public ModelAndView displayFeed(@ModelAttribute Feed feed, @ModelAttribute String vote, HttpSession session) {
+		if(session.getAttribute("id") == null) {
+			return new ModelAndView("redirect:../login/log", "user", new User());
+		}
 		//Grabs all user's feed. This will be changed soon to include friends and public depending on settings.
 		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id"));
 		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
@@ -165,18 +171,28 @@ public class FeedController {
 		return new ModelAndView("socialFeed", "feedList", feedList);
 	}
 	
+	/**
+	 * This method is called when the user presses like on a feed post. This method can create
+	 * a new like or delete the existing like in the database. Users cannot switch from like to dislike
+	 * currently without first deleting their like at the moment. This will likely not be changed this
+	 * semester.
+	 * @param feed
+	 * @param id
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(path="/likeFeed", method=RequestMethod.POST)
 	public ModelAndView likeFeed(@ModelAttribute Feed feed, @RequestParam int id, HttpSession session) {
-		feed = fs.findById(id);
-		feed.setVote(fs.voted(feed.getId(), (int)session.getAttribute("id")));
-		if(feed.getVote() == null) {
+		feed = fs.findById(id); //Grabs the feed post from the DB.
+		feed.setVote(fs.voted(feed.getId(), (int)session.getAttribute("id"))); //This sets the feed post as voted or unvoted
+		if(feed.getVote() == null) { //New vote
 			feed.setVotes(feed.getVotes() + 1);
 			if(!fs.createVote(feed, (int)session.getAttribute("id"), "Like")) {
 				session.setAttribute("message2", "Something went wrong!");
 			}
 		}
 		else if(feed.getVote().equals("Like")) {
-			feed.setVotes(feed.getVotes() - 1);
+			feed.setVotes(feed.getVotes() - 1); //Removing the vote
 			if(!fs.deleteVote(feed, (int)session.getAttribute("id"))){
 				session.setAttribute("message2", "Something went wrong!");
 			}
@@ -186,6 +202,14 @@ public class FeedController {
 		return new ModelAndView("socialFeed", "feedList", feedList);
 	}
 	
+	/**
+	 * This method is called when the user presses dislike on a feed post. This method can create a new
+	 * dislike or delete the existing dislike in the database. Same system as the likes.
+	 * @param feed
+	 * @param id
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(path="/dislikeFeed", method=RequestMethod.POST)
 	public ModelAndView dislikeFeed(@ModelAttribute Feed feed, @RequestParam int id, HttpSession session) {
 		feed = fs.findById(id);

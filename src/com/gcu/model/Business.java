@@ -22,7 +22,6 @@ public class Business {
 	private String profession;
 	private String gender; //For presentation not applications
 	private String ethnicity; //For applications, can use other if not comfortable answering
-	
 	@NotNull(message="You must enter a city!")
 	@Size(min = 2, max = 40, message = "City must be between 2 and 40 characters!")
 	private String city; //Only field put in manually.
