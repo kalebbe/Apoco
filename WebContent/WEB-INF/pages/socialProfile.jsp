@@ -73,6 +73,10 @@
 					<form:select path="status">
 						<form:options items="${statusList}" />
 					</form:select>
+					<br> <br> Gender:
+					<form:radiobutton path="gender" value="Male" label="Male" />
+					&nbsp
+					<form:radiobutton path="gender" value="Female" label="Female" />
 				</h5>
 			</div>
 		</div>

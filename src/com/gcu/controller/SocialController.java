@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.gcu.business.SocialBusinessInterface;
+import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.Social;
 import com.gcu.model.User;
 
@@ -36,6 +37,7 @@ import com.gcu.model.User;
 public class SocialController {
 
 	private SocialBusinessInterface ss;
+	private UserBusinessInterface us;
 
 	/**
 	 * Dependency injection for the SocialBusinessService
@@ -47,6 +49,11 @@ public class SocialController {
 		this.ss = ss;
 	}
 
+	@Autowired
+	public void setUserService(UserBusinessInterface us) {
+		this.us = us;
+	}
+	
 	/**
 	 * Sets the user's theme to social which changes their navbar and footer to green. It then checks if the
 	 * user has a profile and then either sends them to the creator or the dashboard.
@@ -68,6 +75,13 @@ public class SocialController {
 			//Pushes user to social creator if they don't have a social profile
 			return new ModelAndView("socialProfile", "social", new Social()); 
 		}
+	}
+	
+	@RequestMapping(path = "/profile", method = RequestMethod.GET)
+	public ModelAndView viewProfile(HttpSession session) {
+		User user = us.findById((int)session.getAttribute("id"));
+		session.setAttribute("profile", "user");
+		return new ModelAndView("viewProfile", "user", user);
 	}
 	
 	/**

@@ -10,6 +10,8 @@
 
 package com.gcu.business;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import javax.mail.internet.AddressException;
@@ -19,6 +21,7 @@ import com.gcu.data.FriendDAO;
 import com.gcu.data.UserDAO;
 import com.gcu.data.SocialDAO;
 import com.gcu.model.Friend;
+import com.gcu.model.Social;
 import com.gcu.model.User;
 
 public class FriendBusinessService implements FriendBusinessInterface {
@@ -65,14 +68,20 @@ public class FriendBusinessService implements FriendBusinessInterface {
 			if (!type.equals("email")) { //Email overrules the privacy.
 				if (sDao.getPrivacy(u.getId()) == 0) {
 					if(sDao.findById(u.getId()) != null) {
-						u.setSocial(sDao.findById(u.getId()));
+						Social soc = sDao.findById(u.getId());
+						LocalDate birthDate = LocalDate.of(soc.getBirthYear(), soc.getBirthMonth(), soc.getBirthDay());
+						soc.setAge(Period.between(birthDate, LocalDate.now()).getYears());
+						u.setSocial(soc);
 						newUsers.add(u);
 					}
 				}
 			}
 			else { //Goes here if it's an email search
 				if(sDao.findById(u.getId()) != null) {
-					u.setSocial(sDao.findById(u.getId()));
+					Social soc = sDao.findById(u.getId());
+					LocalDate birthDate = LocalDate.of(soc.getBirthYear(), soc.getBirthMonth(), soc.getBirthDay());
+					soc.setAge(Period.between(birthDate, LocalDate.now()).getYears());
+					u.setSocial(soc);
 					newUsers.add(u);
 				}
 			}

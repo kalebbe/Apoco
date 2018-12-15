@@ -44,6 +44,8 @@ public class Social {
 	private int birthYear;
 	private int userId;
 	private int id;
+	private String gender;
+	private int age;
 
 	/**
 	 * Getter for the userId variable.
@@ -282,6 +284,17 @@ public class Social {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
+	
+	
 	/*
 	public String getPicture() {
 		return picture;
@@ -291,6 +304,16 @@ public class Social {
 		this.picture = picture;
 	}
 	*/
+
+	
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
 
 	/**
 	 * Non-default constructor used for creating a Social model from the database.
@@ -310,7 +333,7 @@ public class Social {
 	 * @param userId This is the user id of the profile's owner.
 	 */
 	public Social(String bio, boolean privacy, String career, String city, String state, int birthDay, int id,
-			int birthMonth, int birthYear, String education, String status, String job, String school, int userId) {
+			int birthMonth, int birthYear, String education, String status, String job, String school, String gender, int userId) {
 		//this.picture = pic;
 		this.id = id;
 		this.bio = bio;
@@ -326,6 +349,7 @@ public class Social {
 		this.job = job;
 		this.school = school;
 		this.userId = userId;
+		this.gender = gender;
 	}
 
 	/**
@@ -347,5 +371,6 @@ public class Social {
 		this.school = "";
 		this.userId = 0;
 		this.id = 0;
+		this.gender = "Male";
 	}
 }

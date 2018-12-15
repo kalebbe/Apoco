@@ -141,14 +141,14 @@
 									<li class="nav-item" role="presentation"><a
 										style="color: #ffffff;" class="nav-link" href="#">Messages</a></li>
 									<li class="nav-item" role="presentation"><a
-										style="color: #ffffff;" class="nav-link" href="#">Friends</a></li>
+										style="color: #ffffff;" class="nav-link" href="../friends/friendlist">Friends</a></li>
 									<li class="nav-item" role="presentation"><a
 										style="color: #ffffff;" class="nav-link"
 										href="../social/games">Play Games</a></li>
 									<form class="navbar-form navbar-left" method="POST" action="../friends/search">
 										<div class="input-group">
 											<input type="text" name="search" class="form-control" size="10"
-												style="font-size: 12px; background: none; border: none; color: #ffffff;" placeholder="Search people">
+												style="font-size: 12px; background: none; border: none; color: #ffffff;" placeholder="Search people" required>
 											<span class="input-group-btn">
 												<button type="submit" style="background: none; border: none;">
 													<i class="material-icons" style="color: #ffffff;">search</i>
@@ -159,7 +159,7 @@
 								</c:when>
 							</c:choose>
 						</ul>
-						<span class="navbar-text actions"> <a href="#"
+						<span class="navbar-text actions"> <a href="../social/profile"
 							class="login" style="color: #ffffff; font-size: 14px;">My
 								Profile</a><a class="btn btn-light action-button" role="button"
 							href="../logout/log"

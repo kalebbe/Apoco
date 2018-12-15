@@ -82,7 +82,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	@Override
 	public boolean create(Social t) {
 		String sql = "INSERT INTO socialprofiles (USER_ID, CAREER, CITY, STATE, RELATIONSHIP, BIO,"
-				+ " EDUCATION, SCHOOL, JOB, BIRTH_DATE, PRIVACY) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+				+ " EDUCATION, SCHOOL, JOB, BIRTH_DATE, PRIVACY, GENDER) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 		boolean result = false;
 
 		// Makes a simple String date with / between numbers
@@ -91,7 +91,7 @@ public class SocialDAO implements DataAccessInterface<Social> {
 		// This checks to see if the insertion into the database returns 1 as a result
 		// which would mean the insertion was successful.
 		if (jdbcTemp.update(sql, t.getUserId(), t.getCareer(), t.getCity(), t.getState(), t.getStatus(), t.getBio(),
-				t.getEducation(), t.getSchool(), t.getJob(), date, t.isPrivacy()) == 1) {
+				t.getEducation(), t.getSchool(), t.getJob(), date, t.isPrivacy(), t.getGender()) == 1) {
 			result = true;
 		}
 		return result;
@@ -109,11 +109,11 @@ public class SocialDAO implements DataAccessInterface<Social> {
 	@Override
 	public boolean update(Social t) {
 		String sql = "UPDATE socialprofiles SET CAREER = ?, CITY = ?, STATE = ?, RELATIONSHIP = ?, BIO = ?, EDUCATION = ?, "
-				+ "SCHOOL = ?, JOB = ?, BIRTH_DATE = ?, PRIVACY = ? WHERE ID = ?";
+				+ "SCHOOL = ?, JOB = ?, BIRTH_DATE = ?, PRIVACY = ?, GENDER = ? WHERE ID = ?";
 		boolean result = false;
 		String date = t.getBirthMonth() + "/" + t.getBirthDay() + t.getBirthYear();
 		if (jdbcTemp.update(sql, t.getCareer(), t.getCity(), t.getState(), t.getStatus(), t.getBio(), t.getEducation(),
-				t.getSchool(), t.getJob(), date, t.isPrivacy(), t.getId()) == 1) {
+				t.getSchool(), t.getJob(), date, t.isPrivacy(), t.getGender(), t.getId()) == 1) {
 			result = true;
 		}
 		return result;

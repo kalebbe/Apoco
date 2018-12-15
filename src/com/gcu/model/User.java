@@ -13,6 +13,7 @@
 
 package com.gcu.model;
 
+import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -47,6 +48,7 @@ public class User {
 	private String passRe;
 	private int id;
 	private Social social; //Added for purpose of listing friends.
+	private List<Feed> feed;
 
 	/**
 	 * Getter for the id variable.
@@ -185,6 +187,14 @@ public class User {
 		this.social = social;
 	}
 	
+	public List<Feed> getFeed() {
+		return feed;
+	}
+
+	public void setFeed(List<Feed> feed) {
+		this.feed = feed;
+	}
+	
 	/**
 	 * Simple User constructor that sets everything to empty. May include a non-default for this
 	 * model in the future if I feel a need for it.
@@ -197,6 +207,4 @@ public class User {
 		this.password = "";
 		this.passRe = "";
 	}
-
-	
 }

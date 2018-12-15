@@ -48,6 +48,7 @@ public class SocialMapper implements RowMapper {
 		social.setState(rs.getString("STATE"));
 		social.setStatus(rs.getString("RELATIONSHIP"));
 		social.setUserId(rs.getInt("USER_ID"));
+		social.setGender(rs.getString("GENDER"));
 		return social;
 	}
 }

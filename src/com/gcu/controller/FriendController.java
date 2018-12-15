@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.gcu.business.FriendBusinessInterface;
+import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.User;
 
 @Controller
 @RequestMapping("/friends")
 public class FriendController {
 	private FriendBusinessInterface fs;
+	private UserBusinessInterface us;
 
 	/**
 	 * Dependency injection that instantiates allows me to get the FriendBusinessService without
@@ -35,6 +37,11 @@ public class FriendController {
 	@Autowired
 	public void setFriendBusinessService(FriendBusinessInterface fs) {
 		this.fs = fs;
+	}
+	
+	@Autowired
+	public void setUserBusinessService(UserBusinessInterface us) {
+		this.us = us;
 	}
 
 	/**
@@ -48,5 +55,12 @@ public class FriendController {
 		List<User> users = fs.searchPeople(search);
 		session.setAttribute("page", "search");
 		return new ModelAndView("friendList", "users", users);
+	}
+	
+	@RequestMapping(path = "/view", method = RequestMethod.POST)
+	public ModelAndView viewProfile(@RequestParam int id, HttpSession session) {
+		User user = us.findById(id);
+		session.setAttribute("profile", "friend");
+		return new ModelAndView("viewProfile", "user", user);
 	}
 }

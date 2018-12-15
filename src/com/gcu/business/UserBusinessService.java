@@ -26,6 +26,8 @@
 
 package com.gcu.business;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import javax.mail.internet.AddressException;
@@ -34,8 +36,10 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gcu.data.FeedDAO;
+import com.gcu.data.SocialDAO;
 import com.gcu.data.UserDAO;
 import com.gcu.model.Feed;
+import com.gcu.model.Social;
 import com.gcu.model.User;
 
 public class UserBusinessService implements UserBusinessInterface {
@@ -44,6 +48,9 @@ public class UserBusinessService implements UserBusinessInterface {
 	
 	@Autowired
 	private FeedDAO fDAO;
+	
+	@Autowired
+	private SocialDAO sDAO;
 
 	/**
 	 * This method hashes the user's password then calls the DAO to create a
@@ -249,6 +256,13 @@ public class UserBusinessService implements UserBusinessInterface {
 	 */
 	@Override
 	public User findById(int id) {
-		return dao.findById(id);
+		User user = dao.findById(id);
+		Social social = sDAO.findById(id);
+		LocalDate birthDate = LocalDate.of(social.getBirthYear(), social.getBirthDay(), 
+			social.getBirthMonth());
+		social.setAge(Period.between(birthDate, LocalDate.now()).getYears());
+		user.setSocial(social);
+		user.setFeed(fDAO.findUserFeed(id));
+		return user;
 	}
 }
