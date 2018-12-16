@@ -1,6 +1,6 @@
 /**
  * This interface gives the methods required in the UserBusinessService class and any
- * other classes that may eventually implement this interafce.
+ * other classes that may eventually implement this interface.
  * 
  * 
  * @author  Kaleb Eberhart
@@ -90,6 +90,6 @@ public interface UserBusinessInterface {
 	 * @param id This is the ID used to get the user.
 	 * @return User This is the user returned.
 	 */
-	public User findById(int id);
+	public User findById(int id, int userId);
 	
 }

@@ -72,6 +72,7 @@ public class FeedBusinessService implements FeedBusinessInterface {
 	 */
 	@Override
 	public boolean delete(int id) {
+		dao.deleteAllVotes(id);
 		return dao.delete(id);
 	}
 	

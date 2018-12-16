@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.gcu.business.FeedBusinessInterface;
+import com.gcu.business.FriendBusinessInterface;
 import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.Feed;
 import com.gcu.model.User;
@@ -41,6 +42,7 @@ public class FeedController {
 	 * Changed to private per rubric
 	 */
 	private FeedBusinessInterface fs;
+	private FriendBusinessInterface frs;
 	private UserBusinessInterface us;
 	
 	/**
@@ -51,6 +53,11 @@ public class FeedController {
 	@Autowired
 	public void setFeedService(FeedBusinessInterface fs) {
 		this.fs = fs;
+	}
+	
+	@Autowired
+	public void setFriendService(FriendBusinessInterface frs) {
+		this.frs = frs;
 	}
 	
 	/**
@@ -76,6 +83,7 @@ public class FeedController {
 		if(session.getAttribute("id") == null) {
 			return new ModelAndView("redirect:../login/log", "user", new User());
 		}
+		session.setAttribute("profile", "feed"); //This is for returning to the right page when updating feed.
 		//Grabs all user's feed. This will be changed soon to include friends and public depending on settings.
 		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id"));
 		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
@@ -100,7 +108,7 @@ public class FeedController {
 		if(feed.getLink() == "") { //sets link to null if the user doesn't put anything in
 			feed.setLink(null);
 		}
-		User user = us.findById((int)session.getAttribute("id")); //Gets current user's model
+		User user = us.findById((int)session.getAttribute("id"), 0); //Gets current user's model
 		String name = user.getFirstName() + " " + user.getLastName(); //Sets users name to feed
 		feed.setName(name);
 		feed.setUserId((int)session.getAttribute("id")); //Sets user's id to their session id
@@ -133,9 +141,14 @@ public class FeedController {
 		else {
 			session.setAttribute("message2", "Something went wrong!"); //Database error. Usually a SQLException handled by globalexchandler
 		}
-		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id"));
-		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
-		return new ModelAndView("socialFeed", "feedList", feedList);
+		int uid = (int)session.getAttribute("id");
+		if(session.getAttribute("profile").equals("user")) { //This is being checked to see if the user is coming from profile page.
+			User user = us.findById(uid, uid);
+			return new ModelAndView("viewProfile", "user", user); //Returns user to profile page.
+		}
+		List<Feed> feedList = fs.findUserFeed(uid);
+		feedList = fs.setVoted(uid, feedList);
+		return new ModelAndView("socialFeed", "feedList", feedList); //Returns user to socialFeed view.
 	}
 	
 	/**
@@ -164,10 +177,15 @@ public class FeedController {
 		else {
 			session.setAttribute("message2", "Your post must be atleast 20 characters!");
 		}
+		int uid = (int)session.getAttribute("id");
+		if(session.getAttribute("profile").equals("user")) { //Added FINAL Sends user to profile if they came from there.
+			User user = us.findById(uid, uid);
+			return new ModelAndView("viewProfile", "user", user);
+		}
 		
-		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id")); //Grabs updated feedlist
+		List<Feed> feedList = fs.findUserFeed(uid); //Grabs updated feedlist
 		feed.setFeed(""); //See method comment
-		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
+		feedList = fs.setVoted(uid, feedList);
 		return new ModelAndView("socialFeed", "feedList", feedList);
 	}
 	
@@ -197,8 +215,19 @@ public class FeedController {
 				session.setAttribute("message2", "Something went wrong!");
 			}
 		}
-		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id")); //Grabs updated feedlist
-		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
+		
+		int uid = (int)session.getAttribute("id");
+		if(session.getAttribute("profile").equals("user")) { //Sends user back to THEIR profile view page.
+			User user = us.findById(uid, uid);
+			return new ModelAndView("viewProfile", "user", user);
+		}
+		else if(session.getAttribute("profile").equals("friend")) { //Sends user back to other person's profile page.
+			User user = us.findById(feed.getUserId(), uid);
+			user.setFriend(frs.checkFriend(uid, feed.getUserId()));
+			return new ModelAndView("viewProfile", "user", user);
+		}
+		List<Feed> feedList = fs.findUserFeed(uid); //Grabs updated feedlist
+		feedList = fs.setVoted(uid, feedList);
 		return new ModelAndView("socialFeed", "feedList", feedList);
 	}
 	
@@ -226,8 +255,18 @@ public class FeedController {
 				session.setAttribute("message2", "Something went wrong!");
 			}
 		}
-		List<Feed> feedList = fs.findUserFeed((int)session.getAttribute("id")); //Grabs updated feedlist
-		feedList = fs.setVoted((int)session.getAttribute("id"), feedList);
+		int uid = (int)session.getAttribute("id");
+		if(session.getAttribute("profile").equals("user")) { //Sends the user back to their profile page.
+			User user = us.findById(uid, uid);
+			return new ModelAndView("viewProfile", "user", user);
+		}
+		else if(session.getAttribute("profile").equals("friend")) { //Sends the user back to another user's profile page.
+			User user = us.findById(feed.getUserId(), uid);
+			user.setFriend(frs.checkFriend(uid, feed.getUserId()));
+			return new ModelAndView("viewProfile", "user", user);
+		}
+		List<Feed> feedList = fs.findUserFeed(uid); //Grabs updated feedlist
+		feedList = fs.setVoted(uid, feedList);
 		return new ModelAndView("socialFeed", "feedList", feedList);
 	}
 	

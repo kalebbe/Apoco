@@ -192,13 +192,14 @@ public class UserDAO implements DataAccessInterface<User> {
 	 * @return List<User> This is the list of users being returned.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<User> searchUsers(String search) {
-		String sql = "SELECT * FROM users WHERE FIRST_NAME LIKE ? OR LAST_NAME LIKE ?";
+	public List<User> searchUsers(String search, int id) {
+		String sql = "SELECT * FROM users WHERE ID <> ? AND FIRST_NAME LIKE ? OR LAST_NAME LIKE ?";
 		List<User> users = jdbcTemp.query(sql, new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
-				ps.setString(1, "%" + search + "%"); //Search with wildcards.
-				ps.setString(2, "%" + search + "%");
+				ps.setString(2, "%" + search + "%"); //Search with wildcards.
+				ps.setString(3, "%" + search + "%");
+				ps.setInt(1, id);
 			}
 		}, new UserMapper());
 		return users;
@@ -210,10 +211,10 @@ public class UserDAO implements DataAccessInterface<User> {
 	 * @return User This is the user being returned.
 	 */
 	@SuppressWarnings("unchecked")
-	public User searchEmail(String email) {
+	public User searchEmail(String email, int id) {
 		try {
-			String sql = "SELECT * FROM users WHERE EMAIL=?";
-			User user = (User) jdbcTemp.queryForObject(sql, new Object[] { email }, new UserMapper());
+			String sql = "SELECT * FROM users WHERE EMAIL=? AND ID <> ?";
+			User user = (User) jdbcTemp.queryForObject(sql, new Object[] { email, id }, new UserMapper());
 			return user;
 		} catch (EmptyResultDataAccessException e) {
 			return null;

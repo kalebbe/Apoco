@@ -49,6 +49,8 @@ public class User {
 	private int id;
 	private Social social; //Added for purpose of listing friends.
 	private List<Feed> feed;
+	private boolean friend;
+	private int messageId;
 
 	/**
 	 * Getter for the id variable.
@@ -179,6 +181,23 @@ public class User {
 	}
 
 	/**
+	 * Getter to see if a user is a friend. Added with the friend functionality.
+	 * @return boolean Well. This is a true or false, so that only makes sense.
+	 */
+	public boolean isFriend() {
+		return friend;
+	}
+
+	/**
+	 * Setter to say if someone is a friend or not.
+	 * @param friend True or false.
+	 * @return Nothing.
+	 */
+	public void setFriend(boolean friend) {
+		this.friend = friend;
+	}
+
+	/**
 	 * Setter for the social variable. Same reason as above.
 	 * @param social This is the new Social profile being set.
 	 * @return Nothing.
@@ -187,12 +206,38 @@ public class User {
 		this.social = social;
 	}
 	
+	/**
+	 * Getter to grab all of the feed posts from the user. Added with profile viewing system.
+	 * @return List<Feed> The list of feed posts.
+	 */
 	public List<Feed> getFeed() {
 		return feed;
 	}
 
+	/**
+	 * Setter to put all the feed posts in the model. Added with profile viewing system.
+	 * @param feed The list of feed being applied.
+	 * @return Nothing.
+	 */
 	public void setFeed(List<Feed> feed) {
 		this.feed = feed;
+	}
+	
+	/**
+	 * Getter for grabbing a friend request message id. Added with the friend request system.
+	 * @return int The id of the message.
+	 */
+	public int getMessageId() {
+		return messageId;
+	}
+
+	/**
+	 * Setter for the message id of a friend request sent by this user. Added with friend request system.
+	 * @param messageId The id of the request being set.
+	 * @return Nothing.
+	 */
+	public void setMessageId(int messageId) {
+		this.messageId = messageId;
 	}
 	
 	/**

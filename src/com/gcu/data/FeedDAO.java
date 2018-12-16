@@ -165,6 +165,20 @@ public class FeedDAO implements DataAccessInterface<Feed> {
 	}
 	
 	/**
+	 * This method deletes all of the votes that a feed post has. Used
+	 * for feed post deletion.
+	 * @param fId Id of the chopping block post.
+	 * @return boolean Whether or not there haas been success.
+	 */
+	public boolean deleteAllVotes(int fId) {
+		String sql = "DELETE FROM votes WHERE FEED_ID = ?";
+		if(jdbcTemp.update(sql, fId) == 1) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * This method is to used to check if a user has voted on a post and what they
 	 * voted on the post. Null is returned if they have not voted; otherwise, like
 	 * or dislike is returned.

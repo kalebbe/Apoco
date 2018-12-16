@@ -98,7 +98,7 @@ public class LoginController {
 				session.setAttribute("hasBusiness", true);
 			}
 			session.setAttribute("id", id); //Sets user id for grabbing data
-			return new ModelAndView("userHome", "user", us.findById(id));
+			return new ModelAndView("userHome", "user", us.findById(id, -1));
 		}
 		else { //id==0 if the user/pass combo doesn't match. No 0 IDs in the database
 			session.setAttribute("message", "Username/password combination is incorrect!");

@@ -12,6 +12,7 @@ package com.gcu.business;
 import java.util.List;
 
 import com.gcu.model.Friend;
+import com.gcu.model.Message;
 import com.gcu.model.User;
 
 public interface FriendBusinessInterface {
@@ -21,7 +22,7 @@ public interface FriendBusinessInterface {
 	 * @param search This is the search term.
 	 * @return List<User> This is the list of Users.
 	 */
-	public List<User> searchPeople(String search);
+	public List<User> searchPeople(String search, int id);
 
 	/**
 	 * This method calls the dao to add a friend to the database.
@@ -44,4 +45,33 @@ public interface FriendBusinessInterface {
 	 * @return List<User> This is the list of users returned that have a profile.
 	 */
 	public List<User> checkProfiles(List<User> users, String type);
+
+	/**
+	 * This method gets all of the friends of a user.
+	 * @param id Id of the user checking all his 5 friends...
+	 * @return List<User> The actual list.. impressive.
+	 */
+	public List<User> getFriends(int id);
+
+	/**
+	 * This method checks if that rando is really a friend.
+	 * @param userId Id of logged in user.
+	 * @param friendId Id of suspectttt.
+	 * @return boolean Well this one is obvious.
+	 */
+	public boolean checkFriend(int userId, int friendId);
+
+	/**
+	 * This method sends that's coveted friend request.
+	 * @param t Friend requests are actually messages.. who'd've thunk.
+	 * @return boolean Whether or not it worked.
+	 */
+	public boolean sendRequest(Message t);
+
+	/**
+	 * This method gets the profiles of them dudes sending requests.
+	 * @param msg List of friend request messages.
+	 * @return List<User> Their profiles duddeeeee.
+	 */
+	public List<User> getRequestProfiles(List<Message> msg);
 }

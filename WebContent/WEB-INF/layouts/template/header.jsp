@@ -138,10 +138,11 @@
 									<li class="nav-item" role="presentation"><a
 										style="color: #ffffff;" class="nav-link" href="../feed/feed">View
 											Feed</a></li>
+									<!-- 
 									<li class="nav-item" role="presentation"><a
-										style="color: #ffffff;" class="nav-link" href="#">Messages</a></li>
+										style="color: #ffffff;" class="nav-link" href="../messages/inbox">Messages</a></li> -->
 									<li class="nav-item" role="presentation"><a
-										style="color: #ffffff;" class="nav-link" href="../friends/friendlist">Friends</a></li>
+										style="color: #ffffff;" class="nav-link" href="../friends/friendList">Friends</a></li>
 									<li class="nav-item" role="presentation"><a
 										style="color: #ffffff;" class="nav-link"
 										href="../social/games">Play Games</a></li>

@@ -76,4 +76,21 @@ public class FriendDAO{
 		}
 		return result;
 	}
+	
+	/**
+	 * This method is used to check if a certain user is a friend of the logged in user.
+	 * @param userId The id of the logged in user.
+	 * @param friendId The id of the unlucky participant.
+	 * @return boolean Whether or not they are a friend.
+	 */
+	public boolean checkFriend(int userId, int friendId) {
+		String sql = "SELECT count(*) FROM friends WHERE USER_ID=? AND FRIEND_ID=?";
+		boolean result = true;
+		
+		int count = jdbcTemp.queryForObject(sql, new Object[] {userId, friendId}, Integer.class);
+		if(count > 0) { //This means there are 1 or more users that are friends with this user. Surprising.
+			result = false;
+		}
+		return result;
+	}
 }

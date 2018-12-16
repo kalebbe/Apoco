@@ -56,6 +56,6 @@ private UserBusinessInterface us;
 			return new ModelAndView("redirect:../login/log", "user", new User());
 		}
 		session.setAttribute("theme", null); //Regular red header and footer with all tabs
-		return new ModelAndView("userHome", "user", us.findById((int)session.getAttribute("id")));
+		return new ModelAndView("userHome", "user", us.findById((int)session.getAttribute("id"), -1));
 	}
 }

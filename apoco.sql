@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2018 at 11:57 PM
+-- Generation Time: Dec 16, 2018 at 10:28 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -46,8 +46,10 @@ CREATE TABLE `busprofiles` (
 --
 
 INSERT INTO `busprofiles` (`ID`, `USER_ID`, `DOB`, `GENDER`, `ETHNICITY`, `CITY`, `STATE`, `EDUCATION`, `PROFESSION`, `PICTURE`) VALUES
-(5, 46, '8/10/1992', 'Male', 'White', 'Glendale', 'AZ', 'Some College', 'Technology', NULL),
-(6, 44, '1/1/2015', 'Male', 'Black or African American', 'Glendale', 'AZ', 'Elementary', 'Banking', NULL);
+(1, 54, '8/10/1992', 'Male', 'White', 'Glendale', 'AZ', 'Some College', 'Technology', NULL),
+(5, 59, '8/8/2006', 'Female', 'White', 'Boston', 'PA', 'Some College', 'Technology', NULL),
+(6, 60, '8/10/1980', 'Male', 'White', 'Boston', 'CA', 'Associates Degree', 'Technology', NULL),
+(7, 61, '4/1/2014', 'Male', 'Black or African American', 'New York', 'AR', 'Some High School', 'Technology', NULL);
 
 -- --------------------------------------------------------
 
@@ -58,6 +60,21 @@ INSERT INTO `busprofiles` (`ID`, `USER_ID`, `DOB`, `GENDER`, `ETHNICITY`, `CITY`
 CREATE TABLE `friends` (
   `USER_ID` int(11) NOT NULL,
   `FRIEND_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `ID` int(11) NOT NULL,
+  `SENDER_ID` int(11) NOT NULL,
+  `RECEIVER_ID` int(11) NOT NULL,
+  `BODY` varchar(10000) DEFAULT NULL,
+  `TYPE` varchar(20) NOT NULL,
+  `DATE_SENT` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -82,7 +99,9 @@ CREATE TABLE `socialfeed` (
 --
 
 INSERT INTO `socialfeed` (`ID`, `USER_ID`, `NAME`, `POST`, `PRIVACY`, `LINK`, `DATE_POSTED`, `VOTES`) VALUES
-(4, 46, 'Kaleb Eberhart', 'This is a new feed post for example purposes.', 'public', NULL, '2018-12-10 14:39:42', 0);
+(15, 57, 'John Doe', 'here\'s another one for ya', 'public', 'watch?v=KH57lIgwe2g&index=20&list=PL4cUxeGkcC9i9Ae2D9Ee1RvylH38dKuET', '2018-12-16 11:00:43', 0),
+(17, 59, 'John Doe', 'Here is a feed post for demonstration! Watch me edit!!! and again... this text box resizes as I type!', 'public', 'watch?v=KH57lIgwe2g&index=20&list=PL4cUxeGkcC9i9Ae2D9Ee1RvylH38dKuET', '2018-12-16 11:18:29', 0),
+(18, 61, 'Johnathn Dope', 'This is an example feed post for demonstration purposes. we can edit here', 'public', 'watch?v=KH57lIgwe2g&index=20&list=PL4cUxeGkcC9i9Ae2D9Ee1RvylH38dKuET', '2018-12-16 13:50:46', 2);
 
 -- --------------------------------------------------------
 
@@ -103,6 +122,7 @@ CREATE TABLE `socialprofiles` (
   `SCHOOL` varchar(200) NOT NULL,
   `JOB` varchar(200) NOT NULL,
   `BIRTH_DATE` varchar(10) NOT NULL,
+  `GENDER` varchar(20) NOT NULL,
   `ROLE` varchar(20) NOT NULL DEFAULT 'user',
   `PRIVACY` tinyint(1) NOT NULL,
   `STATUS` varchar(20) NOT NULL DEFAULT 'active'
@@ -112,9 +132,11 @@ CREATE TABLE `socialprofiles` (
 -- Dumping data for table `socialprofiles`
 --
 
-INSERT INTO `socialprofiles` (`ID`, `USER_ID`, `PICTURE`, `CAREER`, `CITY`, `STATE`, `RELATIONSHIP`, `BIO`, `EDUCATION`, `SCHOOL`, `JOB`, `BIRTH_DATE`, `ROLE`, `PRIVACY`, `STATUS`) VALUES
-(61, 46, NULL, 'Technology', 'Glendale', 'AZ', 'Single', 'This is a biography, I don\'t know what much more to put here other than that.', 'Some College', 'Grand Canyon University', 'contractor', '8/1/1983', 'user', 0, 'active'),
-(62, 44, NULL, 'Warehouse', 'wot', 'AR', 'Widowed', 'Here\'s a biography being created for my video presentation. Be amazed.', 'None', 'Nowhere', 'nothing', '1/5/2016', 'user', 1, 'active');
+INSERT INTO `socialprofiles` (`ID`, `USER_ID`, `PICTURE`, `CAREER`, `CITY`, `STATE`, `RELATIONSHIP`, `BIO`, `EDUCATION`, `SCHOOL`, `JOB`, `BIRTH_DATE`, `GENDER`, `ROLE`, `PRIVACY`, `STATUS`) VALUES
+(61, 46, NULL, 'Technology', 'Glendale', 'AZ', 'Single', 'This is a biography, I don\'t know what much more to put here other than that.', 'Some College', 'Grand Canyon University', 'contractor', '8/10/1992', 'Male', 'user', 0, 'active'),
+(63, 44, NULL, 'Technology', 'Downey', 'AR', 'Engaged', 'Here is a random biography.. well I don\'t know what to talk about here since this is just being used as an example.. weird.', 'Middle School', 'street', 'researcher', '4/4/2010', 'Female', 'user', 0, 'active'),
+(69, 59, NULL, 'Shipping', 'New York', 'AZ', 'Widowed', 'This is an example biography being used to show off my inferior typing abilities. Just kidding, look at the word count above!', 'Middle School', 'Sunburst', 'Being a bum', '7/8/2017', 'Male', 'user', 1, 'active'),
+(70, 61, NULL, 'Technology', 'New York', 'AL', 'Separated', 'This iss an example biography and i\'ve written way too many of these to count.', 'Middle School', 'Sunburst', 'Being a bum', '11/5/2014', 'Male', 'user', 1, 'active');
 
 -- --------------------------------------------------------
 
@@ -138,9 +160,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`EMAIL`, `USERNAME`, `FIRST_NAME`, `LAST_NAME`, `PASSWORD`, `ID`, `ROLE`, `STATUS`) VALUES
-('rickjames@gmail.com', 'keberhart', 'Kaleb', 'Eberhart', '$2a$10$k4/vA/XgaYV6NsIcCstJ7euyE30eiKgm10ubJ4EiiGgtwa0uVcGoW', 44, 'user', 'active'),
-('kalebeberhart10@gmail.com', 'kaleb_be', 'Kaleb', 'Eberhart', '$2a$10$Y9hPTxiZTnowy1O5NDXh7eD3PLEdGX6C5MnfrewcKMLDWoTmmbwgm', 46, 'user', 'active'),
-('example@email.com', 'example', 'example', 'example', '$2a$10$q3NKQOIOudHMEBTCsy7EUus6BmpoPmFbJKdolpRzHo1SiachXKwJq', 49, 'user', 'active');
+('rickjames@gmail.com', 'rickjames', 'Rick', 'James', '$2a$10$k4/vA/XgaYV6NsIcCstJ7euyE30eiKgm10ubJ4EiiGgtwa0uVcGoW', 44, 'user', 'active'),
+('kalebeberhart10@gmail.com', 'kaleb_be', 'Kaleb', 'Eberhart', '$2a$10$s7sCmcPzCwBcZCKfm7byQuJt20bJgxlcJdcD4eYT26xFb1HEP4cKm', 46, 'user', 'active'),
+('JohnDoe@email.com', 'JohnDoe', 'John', 'Doe', '$2a$10$fTpmN3THqTk/vPEVCpQnzuHCypkKPzxOS8ot2jZmHPIm0bcMOjf5a', 59, 'user', 'active'),
+('example2@email.com', 'johnDoe2', 'John', 'Doe', '$2a$10$AF8T39J15dB7ViTmvy2gQ.NSW8BpIQ0zGONrDQYbAn5ZvbRBPTtOe', 60, 'user', 'active'),
+('example3@email.com', 'Somethingrandom', 'Johnathn', 'Dope', '$2a$10$ZwlxoUBUwAbW1s0HYVInueWaLrTg7fDbwSVAzNBtHgbjVVcicv6JK', 61, 'user', 'active');
 
 -- --------------------------------------------------------
 
@@ -155,6 +179,14 @@ CREATE TABLE `votes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `votes`
+--
+
+INSERT INTO `votes` (`USER_ID`, `FEED_ID`, `VOTE`) VALUES
+(61, 18, 'Like'),
+(46, 18, 'Like');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -162,6 +194,12 @@ CREATE TABLE `votes` (
 -- Indexes for table `busprofiles`
 --
 ALTER TABLE `busprofiles`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -190,25 +228,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `busprofiles`
 --
 ALTER TABLE `busprofiles`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `socialfeed`
 --
 ALTER TABLE `socialfeed`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `socialprofiles`
 --
 ALTER TABLE `socialprofiles`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

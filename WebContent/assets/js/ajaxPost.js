@@ -4,12 +4,7 @@
 function ajaxPost(url, name, value, name2, name3){
 	var dataObject = {};
 	if(value == null){
-		if(value2 == null){
-			dataObject[name] = $("#" + name).val();
-		}
-		else{
-			dataObject[name] = $("#" + value).val();
-		}
+		dataObject[name] = $("#" + name).val();
 	}
 	else{
 		dataObject[name] = value;

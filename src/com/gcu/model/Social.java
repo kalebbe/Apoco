@@ -285,15 +285,22 @@ public class Social {
 		this.id = id;
 	}
 	
+	/**
+	 * Getter for gender. Added for additional information
+	 * @return String Male or female.. like come on.
+	 */
 	public String getGender() {
 		return gender;
 	}
 
+	/**
+	 * Setter for gender. Again male or female.
+	 * @param gender Male or female.
+	 * @return Nothing.
+	 */
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	
 	
 	/*
 	public String getPicture() {
@@ -305,12 +312,19 @@ public class Social {
 	}
 	*/
 
-	
-
+	/**
+	 * Getter for the age of a user. Added for more information.
+	 * @return int The age.
+	 */
 	public int getAge() {
 		return age;
 	}
 
+	/**
+	 * Setter for the age of a user.
+	 * @param age The new age.
+	 * @return Nothing.
+	 */
 	public void setAge(int age) {
 		this.age = age;
 	}

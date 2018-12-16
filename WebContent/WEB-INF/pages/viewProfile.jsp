@@ -11,17 +11,31 @@
 	});
 </script>
 <div class="container">
+	<div align="center">
 	<c:choose>
 		<c:when test="${sessionScope.profile.equals('user')}">
-			<div align="center">
-				<h1>Your Profile</h1>
-			</div>
+			<h1>Your Profile</h1>
 			<br>
 		</c:when>
 		<c:otherwise>
 			<br>
 		</c:otherwise>
 	</c:choose>
+	<c:choose>
+		<c:when test="${sessionScope.message != null}">
+			<p style="color: #a70000;">
+				<c:out value="${sessionScope.message}" />
+			</p>
+			<c:remove var="message" />
+		</c:when>
+		<c:when test="${sessionScope.message1 != null}">
+			<p style="color: #000000;">
+				<c:out value="${sessionScope.message1}" />
+			</p>
+			<c:remove var="message1" />
+		</c:when>	
+	</c:choose>
+	</div>
 	<div class="row">
 		<div class="col-md-3">
 			<h3>
@@ -39,7 +53,6 @@
 				<br> <strong>Location:</strong>&nbsp
 				<c:out value="${user.social.city}, ${user.social.state}" />
 			</p>
-
 		</div>
 		<div class="col-md-9">
 
@@ -51,23 +64,46 @@
 				<br> <br> <strong>Current/Most Recent Job</strong><br>
 				<c:out value="${user.social.job}" />
 			</p>
-		</div>	
+		</div>
 	</div>
 	<c:choose>
-				<c:when test="${!sessionScope.profile.equals('user')}">
-					<form method="POST" action="../friends/addFriend">
-						<div align="center">
-						<button class="btn"
+		<c:when test="${!sessionScope.profile.equals('user')}">
+			<c:choose>
+				<c:when test="${user.friend == true}">
+					<div align="center">
+						<button class="btn" id="sendReq" onclick="ajaxFeed('friends/sendRequest', 'id', '#sendReq')"
 							style="background-color: #000000; color: #ffffff;"
-							value="${user.id}" name="id">Add Friend</button>
-						</div>
-					</form>
+							value="${user.id}">Send Friend Request</button>
+					</div>
 				</c:when>
+				<c:otherwise>
+					<div align="center">
+						<button class="btn" id="remFriend" onclick="ajaxFeed('friends/removeFriend', 'id', '#remFriend')"
+							style="background-color: #a70000; color: #ffffff;"
+							value="${user.id}">Remove Friend</button>
+					</div>
+				</c:otherwise>
 			</c:choose>
+		</c:when>
+	</c:choose>
 	<div align="center">
 		<h2>User Posts</h2>
 		<br>
 		<table>
+			<c:choose>
+			<c:when test="${sessionScope.message2 != null}">
+				<p style="color: #a70000;">
+					<c:out value="${sessionScope.message2}" />
+				</p>
+				<c:remove var="message2" />
+			</c:when>
+			<c:when test="${sessionScope.message3 != null}">
+				<p style="color: #000000;">
+					<c:out value="${sessionScope.message3}" />
+				</p>
+				<c:remove var="message3" />
+			</c:when>
+		</c:choose>
 			<c:forEach var="feed" items="${user.feed}">
 				<tr>
 					<td>

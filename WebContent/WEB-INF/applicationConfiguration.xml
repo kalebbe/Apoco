@@ -68,6 +68,7 @@
  	<bean id="minesweeperLogic" class="com.gcu.utilities.MinesweeperLogic" />
  	<bean id="feedService" class="com.gcu.business.FeedBusinessService" />
  	<bean id="friendService" class="com.gcu.business.FriendBusinessService" />
+ 	<bean id="messageService" class="com.gcu.business.MessageBusinessService" />
  	<bean id="feedDAO" class="com.gcu.data.FeedDAO">
  		<property name="dataSource" ref="dataSource"/>
  	</bean>
@@ -81,6 +82,9 @@
  		<property name="dataSource" ref="dataSource"/>
  	</bean>
    	<bean id="friendDAO" class="com.gcu.data.FriendDAO">
+   		<property name="dataSource" ref="dataSource"/>
+   	</bean>
+   	<bean id="messageDAO" class="com.gcu.data.MessageDAO">
    		<property name="dataSource" ref="dataSource"/>
    	</bean>
  </beans>

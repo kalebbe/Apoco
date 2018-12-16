@@ -49,6 +49,11 @@ public class SocialController {
 		this.ss = ss;
 	}
 
+	/**
+	 * Dependency injection for the UserBusinessService
+	 * @param us This is the class being set.
+	 * @return Nothing.
+	 */
 	@Autowired
 	public void setUserService(UserBusinessInterface us) {
 		this.us = us;
@@ -77,9 +82,15 @@ public class SocialController {
 		}
 	}
 	
+	/**
+	 * This method is being used to send the user to their own profile.
+	 * @param session The session for changing profile in session.
+	 * @return ModelAndView The viewProfile view with its user model.
+	 */
 	@RequestMapping(path = "/profile", method = RequestMethod.GET)
 	public ModelAndView viewProfile(HttpSession session) {
-		User user = us.findById((int)session.getAttribute("id"));
+		int id = (int)session.getAttribute("id");
+		User user = us.findById(id, id);
 		session.setAttribute("profile", "user");
 		return new ModelAndView("viewProfile", "user", user);
 	}
