@@ -3,7 +3,7 @@
  * that needs to be validated because everything else is done through a dropdown box or a radio button.
  * There may more properties added in the future, but this is it for now.
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */

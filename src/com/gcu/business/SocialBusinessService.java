@@ -3,12 +3,8 @@
  * service on the website. The class implements the SocialBuisnessInterface and
  * the methods from that interface.
  * 
- * -----UPDATE MILESTONE 4-----
- * -Added DAO dependency injection.
- * -Removed feed logic from Business service.
  * 
- * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torre
  * @version 1.0
  * @since   2018-11-25
  */

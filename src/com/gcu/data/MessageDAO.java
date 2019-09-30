@@ -5,7 +5,7 @@
  * possibly some new ones.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @author  Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-16
  */

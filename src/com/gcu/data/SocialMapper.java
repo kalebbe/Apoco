@@ -1,10 +1,9 @@
 /**
  * This class is used to map the data from the database when creating a new
- * Social model using Spring JDBC. This was the recommended way to do this
- * on TutorialsPoint.
+ * Social model using Spring JDBC.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */

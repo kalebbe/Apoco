@@ -1,9 +1,8 @@
 /**
- * This controller is used to handle all things relating to friends in the social platform. This
- * will be updated heavily for the final milestone.
+ * This controller is used to handle all things relating to friends in the social platform.
  * 
  *
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-10
  */

@@ -1,15 +1,9 @@
 /**
  * This controller handles the user logout and deletes all of the session
- * information. This controller causes a known bug that will be fixed in
- * the upcoming milestone. The user is forwarded to /logout/login which
- * causes errors if the user tries to log in from there. Bug can be avoided
- * by clicking the login link after reaching the logout/login page.
- * 
- * -----UPDATE MILESTONE 5-----
- * -Small update- changed to a redirect, so there aren't problems with paths
+ * information.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.01
  * @since   2018-11-25
  */

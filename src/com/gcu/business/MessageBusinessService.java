@@ -3,7 +3,7 @@
  * logic for the messaging service. There are still some things in use here, but not much.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-16
  */

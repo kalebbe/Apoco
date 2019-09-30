@@ -1,12 +1,8 @@
 <!-- 
-   - Author:		  Kaleb Eberhart
-   - Date:            09/23/18
-   - Course:          CST-341
-   - Project Name:    Apoco
-   - Project Version: 1.1
-   - Module Name:     login.jsp
+   - Authors:		  Kaleb Eberhart, Mick Torres
+   - Since:           09/23/18
    - Module Version:  1.0
-   - Summary:         This is the user's login page for my website. User can log in with their
+   - Summary:         This is the user's login page for Apoco. User can log in with their
    - 				  email or username.
  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"

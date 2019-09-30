@@ -2,15 +2,8 @@
  * This controller handles user login and gives them an error message if their
  * login information is incorrect.
  * 
- * -----UPDATE MILESTONE 3-----
- * -Added a redirect method, so users will know why they are  sent to the login page
- * 	when they click links they cannot access.
  * 
- * -----UPDATE MILESTONE 4-----
- * -User is now sent to home with their user model.
- * 
- * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.01
  * @since   2018-11-25
  */

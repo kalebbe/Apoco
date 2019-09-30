@@ -1,13 +1,10 @@
 /**
  * This controller is used to handle most things that are involved with the
  * social service in this project. Will be expanded in the future for more
- * social functions. Either that or the controller will be chopped into smaller controllers.
- * 					
- * -----UPDATES MILESTONE 4-----
- * -Feed logic removed from SocialController and pushed to its own controller.
+ * social functions.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Kaleb Eberhart
  * @version 1.01
  * @since   2018-11-25
  */

@@ -1,12 +1,9 @@
 /**
  * This model holds all of the user fields and completes data validation for
- * each field. I will try to add email validation again in the future, but
- * it was causing exceptions every time I tried to use it. The email is checked
- * in the JavaScript regardless and it doesn't seeem that important because the
- * email is easy to spoof anyways.
+ * each field. Email validation is done in javascript/html5.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */

@@ -3,7 +3,7 @@
  * in this project. This will likely be expanded in the future to include updating and
  * deleting profiles.
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */

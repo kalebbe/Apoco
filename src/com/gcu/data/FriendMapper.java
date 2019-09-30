@@ -2,7 +2,7 @@
  * This class is used to save database information to a Friend object.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-10
  */

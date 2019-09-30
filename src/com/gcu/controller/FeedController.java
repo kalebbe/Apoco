@@ -1,15 +1,8 @@
 /**
- * This controller handles all of the controlling for feed posts. This was 
- * removed from the SocialController because I felt it deserved its own controller.
- * 
- * -----UPDATE MILESTONE 5-----
- * -Users can now update their feed post. Link is not editable.
- * 
- * -----UPDATE MILESTONE 7-----
- * -Added the like/dislike system to feed posts.
+ * This controller handles all of the controlling for feed posts.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */

@@ -1,7 +1,7 @@
 /**
  * This interface sets for the guidelines for the BusinessService class.
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */

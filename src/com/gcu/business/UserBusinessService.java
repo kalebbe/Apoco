@@ -1,25 +1,9 @@
 /**
  * This class handles the business side of user login and registration. It also uses the
  * BCrypt class to hash passwords and check the hash upon login.
- * 					
- * -----UPDATES MILESTONE 3-----
- * -BCrypt is now imported via jar file
- * -updateAccount method can be used to change any user property in the database minus password.
- * -changePass can now be used to change the user's password as long as they know their old
- *  password.
- * -Implemented UserBusinessInterface for Dependency Injection purposes.
- * 			
- * -----UPDATES MILESTONE 4-----
- * -Dependency injeciton added for DAO to be autowired.
- * -Class restructured for Spring JDBC.
- * 
- * -----UPDATES MILESTONE 5-----
- * -Column updates are now separated in the business service because the session can no longer
- *  be passed to my service per rubric feedback. I separated the different updates, so that I can
- * 	return relevant error messages from the controller.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.2
  * @since   2018-11-25
  */

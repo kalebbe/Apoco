@@ -1,9 +1,8 @@
 /**
- * This model is used for the purpose of creating and deleting friends from teh database. This may
- * be removed entirely in the future, but I'm not sure how I want to approach this just yet.
+ * This model is used for the purpose of creating and deleting friends from the database.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-10
  */

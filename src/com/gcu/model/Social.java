@@ -1,12 +1,9 @@
 /**
  * This model is used for the social profile and its attributes. There isn't much data
- * validation here because most of the attributes are derived from dropdwon boxes. This will also
- * have a picture in the future
+ * validation here because most of the attributes are derived from dropdwon boxes.
  * 
- * -----UPDATE MILESTONE 4-----
- * -Added userId integer + getters and setters for spring jdbc purposes.
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.01
  * @since   2018-11-25
  */
@@ -17,10 +14,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Social {
-
-	//Temporarily scrapped
-	//@NotNull(message = "You must select a picture!")
-	//private String picture;
 
 	private boolean privacy; //This determines if randoms can see this user's feed and details
 	private String career; //Generic career field

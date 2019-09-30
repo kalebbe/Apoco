@@ -1,10 +1,10 @@
 /**
- * This model is used for all things involved with messages in teh social platform of the
+ * This model is used for all things involved with messages in the social platform of the
  * website. This will be used a lot more in the future, but right now is only used for 
  * friend requests.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-16
  */

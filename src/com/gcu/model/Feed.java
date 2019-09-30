@@ -1,14 +1,9 @@
 /**
  * This model is used for user feed posts. This is pretty simple and
- * there isn't much data validation here either. In the future, this will
- * have pictures as well.
- * 
- * -----UPDATE MILESTONE 4-----
- * -Added userId + getter and setter for spring jdbc purposes
- * -Added id + getter and setter for UPDATE purposes.
+ * there isn't much data validation here either.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */

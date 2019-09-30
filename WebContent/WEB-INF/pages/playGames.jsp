@@ -1,11 +1,7 @@
 <!-- 
-   - Author:		  Kaleb Eberhart
-   - Date:            10/14/18
-   - Course:          CST-341
-   - Project Name:    Apoco
-   - Project Version: 1.1
-   - Module Name:     playGames.jsp
-   - Module Version:  1.0
+   - Authors:		  Kaleb Eberhart, Mick Torres
+   - Since:           10/14/18
+   - Version:  		  1.0
    - Summary:         This view is used to load the minesweeper game with the desired difficulty
  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"

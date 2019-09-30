@@ -2,11 +2,8 @@
  * This class is used to search for friends and will be used to add and delete friends 
  * in the final update.
  *
- *-----UPDATE FINAL-----
- *-Added friend requests, adding friends, and deleting friends.
  *
- *
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-10
  */

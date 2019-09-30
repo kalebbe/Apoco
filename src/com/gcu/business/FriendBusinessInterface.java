@@ -1,9 +1,8 @@
 /**
- * This interface defines the methods required in the FriendsBusinessService class. Will likely be updated
- * before the final project.
+ * This interface defines the methods required in the FriendsBusinessService class.
  *
  *
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-10
  */

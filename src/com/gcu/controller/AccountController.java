@@ -1,22 +1,9 @@
 /**
  * This controller handles the revision of user's profile variables.
- * In the future, it will be expanded to include deleting user accounts
- * and vaulting user accounts. I will probably also do mod promotions here
- * as well and account suspensions.
- *
- * -----UPDATE MILESTONE 4-----
- * -Refactored for Spring jdbc changes.
- *
- * -----UPDATE MILESTONE 5-----
- * -Refactored for session error setting in the controller.
- * -As of right now, if user's input incorrect information, the model will
- *  still be updated and the incorrect info will be placed on the page, but they
- *	will receive an error message. I could change it where it resets to the 
- *	correct information, but this would require another database call. Also
- *	these checks are done in html, so it shouldn't matter much.
+ * Mod promotions will likely be done here in the future.
  *
  *
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.1
  * @since   2018-11-25
  */

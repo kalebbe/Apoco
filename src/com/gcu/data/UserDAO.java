@@ -1,21 +1,8 @@
 /**
  * This class does all of the data handling for user login and registration.
- * In the future this will include user account editting, but for now this
- * is all that will be included here. I know most of this will change with
- * the Spring connectors, but I wanted to get something working for now.
- * 				
- * -----UPDATE MILESTONE 3-----
- * -Added the update account method which is used to update the user's
- * information when they want.
- * 
- * -----UPDATE MILESTONE 4-----
- * -Refactored to use Spring jdbc
- * 
- * -----UPDATE MILESTONE 7-----
- * -Added search users and search email for friend searches.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.1
  * @since   2018-11-25
  */
@@ -34,7 +21,7 @@ import com.gcu.model.User;
 public class UserDAO implements DataAccessInterface<User> {
 
 	@SuppressWarnings("unused")
-	private DataSource dataSource; // Changed to private per rubric feedback
+	private DataSource dataSource;
 	private JdbcTemplate jdbcTemp;
 
 	/**

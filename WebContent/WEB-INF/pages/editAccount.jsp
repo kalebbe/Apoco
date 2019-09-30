@@ -1,13 +1,8 @@
 <!-- 
-   - Author:		  Kaleb Eberhart
-   - Date:            10/14/18
-   - Course:          CST-341
-   - Project Name:    Apoco
-   - Project Version: 1.1
-   - Module Name:     editAccount.jsp
-   - Module Version:  1.0
-   - Summary:         This is where the user can edit their account. Will be updated
-   - 				  next milestone to include acocunt deletion and vaulting.
+   - Authors:		  Kaleb Eberhart, Mick Torres
+   - Since:           10/14/18
+   - Version:  		  1.0
+   - Summary:         This is where the user can edit their account.
  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
