@@ -1,18 +1,12 @@
 # Apoco
 ---
 ### Directory
-- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/model">Models</a>- Classes containing object definitions.
-- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/controller">Controller</a>- Classes controlling the flow of the application.
-- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/data">Data services</a>- Classes handling persistent data.
-- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/business">Business services</a>- Classes handling the business logic of the application.
-- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/utilities">Utilities</a>- Classes containing functions used throughout the application.
-- <a href="https://github.com/kalebbe/Apoco/tree/master/WebContent/WEB-INF/pages">Views</a>- Contains the visual pages of the website.
-- [Models](https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/model)- Classes containing object definitions.
-- [Controllers](https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/controller)- Classes controlling the flow of the application.
-- [Data services](https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/data)- Classes handling persistent data.
-- [Business services](https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/business)- Classes handling the business logic of the application.
-- [Utilities](https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/utilities)- Classes containing functions used throughout the application.
-- [Views](https://github.com/kalebbe/Apoco/tree/master/WebContent/WEB-INF/pages)- Contains the visual pages of the website.
+- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/model" target="_blank">Models</a>- Classes containing object definitions.
+- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/controller" target="_blank">Controller</a>- Classes controlling the flow of the application.
+- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/data" target="_blank">Data services</a>- Classes handling persistent data.
+- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/business" target="_blank">Business services</a>- Classes handling the business logic of the application.
+- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/utilities" target="_blank">Utilities</a>- Classes containing functions used throughout the application.
+- <a href="https://github.com/kalebbe/Apoco/tree/master/WebContent/WEB-INF/pages" target="_blank">Views</a>- Contains the visual pages of the website.
 ---
 ### Global (Login/Registration/Landing page)
 ### Social Platform
