@@ -8,9 +8,19 @@
 - [Utilities](https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/utilities)- Classes containing functions used throughout the application.
 - [Views](https://github.com/kalebbe/Apoco/tree/master/WebContent/WEB-INF/pages)- Contains the visual pages of the website.
 ---
+### Global (Login/Registration/Landing page)
 ### Social Platform
 ##### Overview
+This section will give a brief explanation of the purpose of our social platform and a list of files used in the creation of the social platform.
+##### Purpose
 ##### Social Views
+- [socialProfile.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/socialProfile.jsp)
+- [socialDash.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/socialDash.jsp)
+- [socialFeed.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/socialFeed.jsp)
+- [viewProfile.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/viewProfile.jsp)
+- [playGames.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/playGames.jsp)
+- [minesweeper.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/minesweeper.jsp)
+- [friendList.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/friendList.jsp)
 ##### Social Controllers
 ##### Social Models
 ##### Social Business Services
