@@ -9,6 +9,12 @@
 - [Views](https://github.com/kalebbe/Apoco/tree/master/WebContent/WEB-INF/pages)- Contains the visual pages of the website.
 ---
 ### Social Platform
+##### Overview
+##### Social Views
+##### Social Controllers
+##### Social Models
+##### Social Business Services
+##### Social Data Services
 ---
 ### Business Platform
 ---
