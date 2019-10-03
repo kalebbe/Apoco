@@ -1,6 +1,12 @@
 # Apoco
 ---
 ### Directory
+- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/model">Models</a>- Classes containing object definitions.
+- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/controller">Controller</a>- Classes controlling the flow of the application.
+- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/data">Data services</a>- Classes handling persistent data.
+- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/business">Business services</a>- Classes handling the business logic of the application.
+- <a href="https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/utilities">Utilities</a>- Classes containing functions used throughout the application.
+- <a href="https://github.com/kalebbe/Apoco/tree/master/WebContent/WEB-INF/pages">Views</a>- Contains the visual pages of the website.
 - [Models](https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/model)- Classes containing object definitions.
 - [Controllers](https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/controller)- Classes controlling the flow of the application.
 - [Data services](https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/data)- Classes handling persistent data.
