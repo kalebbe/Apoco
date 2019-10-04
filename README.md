@@ -3,16 +3,33 @@
 ### Table of Contents
 - [Directory](https://github.com/kalebbe/Apoco#directory)
 - [Global](https://github.com/kalebbe/Apoco#global-loginregistrationlanding-page)
+   * [Overview](https://github.com/kalebbe/Apoco#overview)
+   * [Purpose](https://github.com/kalebbe/Apoco#purpose)
+   * [Functionality](https://github.com/kalebbe/Apoco#functionality)
+   * [Views](https://github.com/kalebbe/Apoco#views)
+   * [Controllers](https://github.com/kalebbe/Apoco#controllers)
+   * [Models](https://github.com/kalebbe/Apoco#models)
+   * [Business Services](https://github.com/kalebbe/Apoco#business-services)
+   * [Data Services](https://github.com/kalebbe/Apoco#data-services)
+   * [Utilities](https://github.com/kalebbe/Apoco#utilities)
 - [Social Platform](https://github.com/kalebbe/Apoco#social-platform)
    * [Overview](https://github.com/kalebbe/Apoco#overview)
    * [Purpose](https://github.com/kalebbe/Apoco#purpose)
    * [Functionality](https://github.com/kalebbe/Apoco#functionality)
-   * [Social Views](https://github.com/kalebbe/Apoco#social-views)
-   * [Social Controllers](https://github.com/kalebbe/Apoco#social-controllers)
-   * [Social Models](https://github.com/kalebbe/Apoco#social-models)
-   * [Social Business Services](https://github.com/kalebbe/Apoco#social-business-services)
-   * [Social Data Services](https://github.com/kalebbe/Apoco#social-data-services)
+   * [Views](https://github.com/kalebbe/Apoco#views-1)
+   * [Controllers](https://github.com/kalebbe/Apoco#controllers-1)
+   * [Models](https://github.com/kalebbe/Apoco#models-1)
+   * [Business Services](https://github.com/kalebbe/Apoco#business-services-1)
+   * [Data Services](https://github.com/kalebbe/Apoco#data-services-1)
 - [Business Platform](https://github.com/kalebbe/Apoco#business-platform)
+   * [Overview](https://github.com/kalebbe/Apoco#overview-2)
+   * [Purpose](https://github.com/kalebbe/Apoco#purpose-2)
+   * [Functionality](https://github.com/kalebbe/Apoco#functionality-2)
+   * [Views](https://github.com/kalebbe/Apoco#views-2)
+   * [Controllers](https://github.com/kalebbe/Apoco#controllers-2)
+   * [Models](https://github.com/kalebbe/Apoco#models-2)
+   * [Business Services](https://github.com/kalebbe/Apoco#business-services-2)
+   * [Data Services](https://github.com/kalebbe/Apoco#data-services-2)
 - [Dating Platform](https://github.com/kalebbe/Apoco#dating-platform)
 ### Directory
 - [Models](https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/model)- Classes containing object definitions.
@@ -48,7 +65,7 @@
 - [DataAccessInterface.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/data/DataAccessInterface.java)
 - [UserDAO.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/data/UserDAO.java)
 - [UserMapper.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/data/UserMapper.java)
-##### Utilities)
+##### Utilities
 - [GlobalExceptionHandler.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/utilities/GlobalExceptionHandler.java)
 - [MinesweeperLogic.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/utilities/MinesweeperLogic.java)
 ---
@@ -105,7 +122,7 @@ This section will give a brief explanation of the purpose of our social platform
 ##### Controllers
 - [BusinessController.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/controller/BusinessController.java)
 ##### Models
--[Business.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/model/Business.java)
+- [Business.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/model/Business.java)
 ##### Business Services
 - [BusinessInterface.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/business/BusinessInterface.java)
 - [BusinessService.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/business/BusinessService.java)
