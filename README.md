@@ -26,7 +26,7 @@ This section will give a brief explanation of the purpose of our social platform
 - [SocialController.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/controller/SocialController.java)
 - [MineController.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/controller/MineController.java)
 - [FriendController.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/controller/FriendController.java)
-- [FeedController.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/controller/FeedController.java
+- [FeedController.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/controller/FeedController.java)
 ##### Social Models
 - [Social.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/model/Social.java)
 - [Message.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/model/Message.java)
@@ -41,7 +41,7 @@ This section will give a brief explanation of the purpose of our social platform
 - [FriendBusinessInterface.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/business/FriendBusinessInterface.java)
 - [FriendBusinessService.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/business/FriendBusinessService.java)
 - [FeedBusinessInterface.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/business/FeedBusinessInterface.java)
-- [FeedBusinessService.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/business/FeedBusinessService.java
+- [FeedBusinessService.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/business/FeedBusinessService.java)
 ##### Social Data Services
 - [SocialDAO.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/data/SocialDAO.java)
 - [SocialMapper.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/data/SocialMapper.java)
