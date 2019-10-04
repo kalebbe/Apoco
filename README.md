@@ -31,7 +31,7 @@
 - [login.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/login.jsp)
 - [registration.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/registration.jsp)
 - [userHome.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/userHome.jsp)
-- [editAccount.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/editAccount.jsp
+- [editAccount.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/editAccount.jsp)
 - [databaseError.jsp](https://github.com/kalebbe/Apoco/blob/master/WebContent/WEB-INF/pages/databaseError.jsp)
 ##### Controllers
 - [RegistrationController.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/controller/RegistrationController.java)
@@ -50,7 +50,7 @@
 - [UserMapper.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/data/UserMapper.java)
 ##### Utilities)
 - [GlobalExceptionHandler.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/utilities/GlobalExceptionHandler.java)
-- [MinesweeperLogic.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/utilities/MinesweeperLogic.java
+- [MinesweeperLogic.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/utilities/MinesweeperLogic.java)
 ---
 ### Social Platform
 ##### Overview
@@ -108,7 +108,7 @@ This section will give a brief explanation of the purpose of our social platform
 -[Business.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/model/Business.java)
 ##### Business Services
 - [BusinessInterface.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/business/BusinessInterface.java)
-- [BusinessService.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/business/BusinessService.java
+- [BusinessService.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/business/BusinessService.java)
 ##### Data Services
 - [BusinessDAO.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/data/BusinessDAO.java)
 - [BusinessMapper.java](https://github.com/kalebbe/Apoco/blob/master/src/com/gcu/data/BusinessMapper.java)
