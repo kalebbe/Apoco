@@ -22,10 +22,10 @@
 <body>
 	<div style="background-color: #ff0000;">
 		<nav class="navbar navbar-light navbar-expand-md navigation-clean"
-			style="background-color: #a70000;">
+			style="background-color: #660000;">
 			<div class="container">
 				<a class="navbar-brand" href="#"
-					style="color: #000000; font-size: 30px;">Apoco</a>
+					style="color: #ffffff; font-size: 30px;">Apoco</a>
 				<button class="navbar-toggler" data-toggle="collapse"
 					data-target="#navcol-1">
 					<span class="sr-only">Toggle navigation</span><span
@@ -36,19 +36,25 @@
 						<c:choose>
 							<c:when test="${sessionScope.username != null}">
 								<li class="nav-item" role="presentation"><a
-									class="nav-link" href="social/social"
-									style="color: #0fb800; font-size: 20px; font-family: 'Alegreya SC', serif;">Social</a></li>
+									class="nav-link nav-btn" href="social/social"
+									style="color: #005024; font-family: 'Alegreya SC', serif;">Social</a></li>
 								<li class="nav-item" role="presentation"><a
-									class="nav-link" href="#"
-									style="font-size: 20px; color: rgb(0, 7, 169); font-family: Aldrich, sans-serif;">Business</a></li>
+									class="nav-link nav-btn" href="business/bus"
+									style="color: #09136e; font-family: Aldrich, sans-serif;">Business</a></li>
+								<li class="nav-item" role="presentation"><a
+									class="nav-link nav-btn" href="dating/dat"
+									style="color: #dd00b9; font-family: fantasy;">Dating</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="nav-item" role="presentation"><a
-									class="nav-link" href="login/redirect"
-									style="color: #0fb800; font-size: 20px; font-family: 'Alegreya SC', serif;">Social</a></li>
+									class="nav-link nav-btn" href="login/redirect"
+									style="color: #005024; font-family: 'Alegreya SC', serif;">Social</a></li>
 								<li class="nav-item" role="presentation"><a
-									class="nav-link" href="login/redirect"
-									style="font-size: 20px; color: rgb(0, 7, 169); font-family: Aldrich, sans-serif;">Business</a></li>
+									class="nav-link nav-btn" href="login/redirect"
+									style="color: #09136e; font-family: Aldrich, sans-serif;">Business</a></li>
+								<li class="nav-item" role="presentation"><a
+									class="nav-link nav-btn" href="dating/dat"
+									style="color: #dd00b9; font-family: fantasy;">Dating</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
@@ -73,7 +79,7 @@
 						class="login" style="color: #ffffff; font-size: 14px;">Log In</a><a
 						class="btn btn-light action-button" role="button"
 						href="registration/reg"
-						style="background-color: #a70000; color: #ffffff; font-size: 14px;">Sign
+						style="background-color: #660000;; color: #ffffff; font-size: 14px;">Sign
 							Up</a></span>
 				</div>
 			</div>
@@ -86,8 +92,8 @@
 	<br />
 	<br /> <img src="<c:url value="/assets/img/Apoco.png" /> ">
 </div>
-<div class="footer-basic" style="background-color: #a70000;">
+<div class="footer-basic" style="background-color: #660000;">
 	<footer>
-		<p class="copyright" style="color: #ffffff;">Apoco Inc © 2018-2019</p>
+		<p class="copyright" style="color: #ffffff;">Apoco Inc © 2018-2020</p>
 	</footer>
 </div>

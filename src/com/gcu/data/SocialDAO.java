@@ -1,13 +1,9 @@
 /**
  * This class is used for all things involving our social service and the database. Currently this class
- * can create the user's social profile, create a feed post, and grab the data as well. In the future,
- * this class will allow the user to update their profile (and possibly feed posts) as well as 
- * post comments on feed posts.
+ * can create the user's social profile, create a feed post, and grab the data as well.
  * 
- * -----UPDATE MILESTONE 4-----
- * -Updated to comply with Spring jdbc.
- * 
- * @author  Kaleb Eberhart
+ *
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.1
  * @since   2018-11-25
  */

@@ -4,7 +4,7 @@
  * are being caught here, but it may be updated in the future if required.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */
@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
 	 * @param session This is used to get the id of the user and send feedback.
 	 * @return String This is returning the user to home or the login page.
 	 */
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //500 error
+	/*@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR) //500 error
 	@ExceptionHandler(NullPointerException.class)
 	public String timeout(HttpSession session) {
 		if (session.getAttribute("id") == null) {
@@ -56,5 +56,5 @@ public class GlobalExceptionHandler {
 		else {
 			return "userHome";
 		}
-	}
+	}*/
 }

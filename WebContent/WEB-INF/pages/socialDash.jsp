@@ -1,11 +1,7 @@
 <!-- 
-   - Author:		  Kaleb Eberhart
-   - Date:            10/14/18
-   - Course:          CST-341
-   - Project Name:    Apoco
-   - Project Version: 1.1
-   - Module Name:     socialDash.jsp
-   - Module Version:  1.0
+   - Authors:		  Kaleb Eberhart, Mick Torres
+   - Since:           10/14/18
+   - Version:  		  1.0
    - Summary:         This is just a placeholder for the social dashboard
  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"

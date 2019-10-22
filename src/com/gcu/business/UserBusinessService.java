@@ -1,25 +1,9 @@
 /**
  * This class handles the business side of user login and registration. It also uses the
  * BCrypt class to hash passwords and check the hash upon login.
- * 					
- * -----UPDATES MILESTONE 3-----
- * -BCrypt is now imported via jar file
- * -updateAccount method can be used to change any user property in the database minus password.
- * -changePass can now be used to change the user's password as long as they know their old
- *  password.
- * -Implemented UserBusinessInterface for Dependency Injection purposes.
- * 			
- * -----UPDATES MILESTONE 4-----
- * -Dependency injeciton added for DAO to be autowired.
- * -Class restructured for Spring JDBC.
- * 
- * -----UPDATES MILESTONE 5-----
- * -Column updates are now separated in the business service because the session can no longer
- *  be passed to my service per rubric feedback. I separated the different updates, so that I can
- * 	return relevant error messages from the controller.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.2
  * @since   2018-11-25
  */
@@ -35,9 +19,11 @@ import javax.mail.internet.InternetAddress;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gcu.data.BusinessDAO;
 import com.gcu.data.FeedDAO;
 import com.gcu.data.SocialDAO;
 import com.gcu.data.UserDAO;
+import com.gcu.model.Business;
 import com.gcu.model.Feed;
 import com.gcu.model.Social;
 import com.gcu.model.User;
@@ -51,9 +37,16 @@ public class UserBusinessService implements UserBusinessInterface {
 
 	@Autowired
 	private SocialDAO sDAO;
+	
+	@Autowired
+	private BusinessDAO bDAO;
 
 	private FeedBusinessInterface fs;
 
+	/**
+	 * Dependency Injection for the feed business service
+	 * @param fs
+	 */
 	@Autowired
 	public void setFeedService(FeedBusinessInterface fs) {
 		this.fs = fs;
@@ -88,17 +81,13 @@ public class UserBusinessService implements UserBusinessInterface {
 	 * @return int This is the id of the logged in user or 0 if failure.
 	 */
 	@Override
-	public int login(String login, String password) {
+	public User login(String login, String password) {
 		int id = dao.getId(login); // Will return ID # or 0 if no match
 		if (id == 0) { // Returns failed login message in controller
-			return id;
+			return null;
 		}
-
-		if (checkPass(password, id)) {
-			return id; // ID is returned for session capture if the login/pass combo is correct
-		} else {
-			return -1; // This allows for an error message telling the user their pass is incorrect
-		}
+		
+		return checkPass(password, id);
 	}
 
 	/**
@@ -135,13 +124,13 @@ public class UserBusinessService implements UserBusinessInterface {
 	 * @return boolean This tells the user if their password matched or did not.
 	 */
 	@Override
-	public boolean checkPass(String pass, int id) {
+	public User checkPass(String pass, int id) {
 		User user = dao.findById(id); // Grabs User object with ID
 
 		if (BCrypt.checkpw(pass, user.getPassword())) { // Checks user's pass with database password for match
-			return true;
+			return user;
 		} else
-			return false;
+			return null;
 	}
 
 	/**
@@ -280,17 +269,51 @@ public class UserBusinessService implements UserBusinessInterface {
 	 * @return User This is the User being returned from the database.
 	 */
 	@Override
-	public User findById(int id, int userId) {
+	public User findById(int id) {
 		User user = dao.findById(id);
-		if (userId != -1) {
-			Social social = sDAO.findById(id);
-			LocalDate birthDate = LocalDate.of(social.getBirthYear(), social.getBirthMonth(), social.getBirthDay());
-			social.setAge(Period.between(birthDate, LocalDate.now()).getYears());
-			user.setSocial(social);
-		}
-		if (userId != 0) {
+		return user;
+	}
+	
+	/**
+	 * Returns a user with the social object as a property of the user. This was separated
+	 * from find by ID because now there is a need to find social and business users.
+	 * @param id
+	 * @param userId
+	 * @return User
+	 */
+	@Override
+	public User findSocUser(int id, int userId) {
+		User user = dao.findById(id);
+		Social social = sDAO.findById(id);
+		
+		//Setting birth date to a date object
+		LocalDate birthDate = LocalDate.of(social.getBirthYear(), social.getBirthMonth(), social.getBirthDay());
+		
+		//Checking and setting the age of the user
+		social.setAge(Period.between(birthDate, LocalDate.now()).getYears());
+		user.setSocial(social); //Attaches the social object to the user object
+		if(userId != 0) { //Checks if the user is not self
 			user.setFeed(fs.setVoted(userId, fDAO.findUserFeed(id)));
 		}
+		return user;
+	}
+	
+	/**
+	 * Returns a user with the business object as a property of the user. See above
+	 * for separation reasons.
+	 * @param id
+	 * @return User
+	 */
+	@Override
+	public User findBusUser(int id) {
+		User user = dao.findById(id);	
+		Business bus = bDAO.findById(id);
+		//Setting birth date to a date object
+		LocalDate birthDate = LocalDate.of(bus.getBirthYear(), bus.getBirthMonth(), bus.getBirthDay());
+		
+		//Setting the age of the user
+		bus.setAge(Period.between(birthDate,  LocalDate.now()).getYears());
+		user.setBusiness(bus);
 		return user;
 	}
 }

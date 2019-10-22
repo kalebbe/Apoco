@@ -1,18 +1,10 @@
 <!-- 
-   - Author:		  Kaleb Eberhart
-   - Date:            10/14/18
-   - Course:          CST-341
-   - Project Name:    Apoco
-   - Project Version: 1.3
-   - Module Name:     socialFeed.jsp
-   - Module Version:  1.0
+   - Authors:		  Kaleb Eberhart, Mick Torres
+   - Since:           10/14/18
+   - Version:         1.0
    - Summary:         This is a view that allows the user to upload posts to their feed and view others
    -				  that they have posted. In the future, they will be able to see their friend's posts
    -				  and upload pictures.
-   -
-   -				  -----UPDATE MILESTONE 5-----
-   -				  -Added jquery/script to autosize textareas on startup and keyup.
-   -				  -Clicking (read: double clicking) textarea posts will now allow updating
  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>

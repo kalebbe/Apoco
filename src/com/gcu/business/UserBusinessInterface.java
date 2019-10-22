@@ -3,7 +3,7 @@
  * other classes that may eventually implement this interface.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */
@@ -26,7 +26,7 @@ public interface UserBusinessInterface {
 	 * @param password This is the password used for login.
 	 * @return int This is the user id returned from login.
 	 */
-	public int login(String login, String password);
+	public User login(String login, String password);
 	
 	/**
 	 * This method is for changing the user password.
@@ -41,7 +41,7 @@ public interface UserBusinessInterface {
 	 * @param id This is the id of the User.
 	 * @return boolean This is whether or not the password matches.
 	 */
-	public boolean checkPass(String pass, int id);
+	public User checkPass(String pass, int id);
 	
 	/**
 	 * This method is for changing the user first name.
@@ -90,6 +90,20 @@ public interface UserBusinessInterface {
 	 * @param id This is the ID used to get the user.
 	 * @return User This is the user returned.
 	 */
-	public User findById(int id, int userId);
+	public User findById(int id);
 	
+	/**
+	 * This method gets a user + social profile from the database.
+	 * @param id
+	 * @param userId
+	 * @return User
+	 */
+	public User findSocUser(int id, int userId);
+	
+	/**
+	 * This method gets a user + business profile from the database.
+	 * @param id
+	 * @return User
+	 */
+	public User findBusUser(int id);
 }

@@ -2,10 +2,10 @@
  * This class is used to create new friends, delete friends, and
  * retrieve all of a user's friends from the database. This does
  * not implement the DataAccessInterface because there is only one
- * method that I use verbatim from that interface.
+ * method that is use verbatim from that interface.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-09
  */

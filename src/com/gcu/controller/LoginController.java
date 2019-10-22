@@ -2,15 +2,8 @@
  * This controller handles user login and gives them an error message if their
  * login information is incorrect.
  * 
- * -----UPDATE MILESTONE 3-----
- * -Added a redirect method, so users will know why they are  sent to the login page
- * 	when they click links they cannot access.
  * 
- * -----UPDATE MILESTONE 4-----
- * -User is now sent to home with their user model.
- * 
- * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.01
  * @since   2018-11-25
  */
@@ -89,19 +82,27 @@ public class LoginController {
 	 */
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public ModelAndView login(@RequestParam String email, @RequestParam String password, HttpSession session) {
-		int id = us.login(email, password); //Checks user login and returns their id if login is correct
-		if(id > 0) {
-			if(ss.checkSocial(id)) { //Checks if the user has a social profile
-				session.setAttribute("hasSocial", true);
-			}
-			if(bs.checkBusiness(id)) {
-				session.setAttribute("hasBusiness", true);
-			}
-			session.setAttribute("id", id); //Sets user id for grabbing data
-			return new ModelAndView("userHome", "user", us.findById(id, -1));
-		}
-		else { //id==0 if the user/pass combo doesn't match. No 0 IDs in the database
+		User user = us.login(email, password); //Checks user login and returns their id if login is correct
+		if(user == null) {
 			session.setAttribute("message", "Username/password combination is incorrect!");
+			return new ModelAndView("login", "user", new User());
+		}
+		
+		if(ss.checkSocial(user.getId())) { //Checks if the user has a social profile
+			session.setAttribute("hasSocial", true);
+		}
+		if(bs.checkBusiness(user.getId())) {
+			session.setAttribute("hasBusiness", true);
+		}
+		session.setAttribute("id", user.getId()); //Sets user id for grabbing data
+		session.setAttribute("access", user.getAccess()); //Sets the access level of the account logged in
+		
+		if(user.getAccess().equals("user")) {
+			return new ModelAndView("userHome", "user", us.findById(user.getId()));
+		}
+		else {
+			//PLACEHOLDER. THIS WILL SEND COMPANY ROLES TO A NEW PAGE WHEN LOGGING IN
+			session.setAttribute("message", "Access level is: " + user.getAccess());
 			return new ModelAndView("login", "user", new User());
 		}
 	}

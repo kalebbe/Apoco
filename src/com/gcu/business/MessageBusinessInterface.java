@@ -3,7 +3,7 @@
  * other classes that may eventually implement this interface.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-16
  */
@@ -55,8 +55,9 @@ public interface MessageBusinessInterface {
 	/**
 	 * Checks to see if the user has any friend requests.
 	 * @param receiverId Id of the self-conscious user.
+	 * @param type
 	 * @return boolean Whether or not they have requests.
 	 */
-	public boolean checkRequest(int receiverId);
+	public boolean checkRequest(int receiverId, String type);
 
 }

@@ -1,17 +1,9 @@
 /**
- * This is an extra bit I decided to do with this milestone. It cost me about 8 hours of my free
- * time, so I regret it a bit, but that's besides the point. I've ported most of my minesweeper
- * to Java for this website. The visuals are still pretty crappy in chrome, but I will get that
- * figured out soon. Also right clicks aren't working yet and I intend to get that fixed with the
- * next lilestone. I would also like to get the game board ajaxed, but that isn't a priority.
- * There are many other things I would like to get ajaxed as well.
- * 
- * -----UPDATES MILESTONE 4-----
- * -Right clicking is now detected through javascript and changes the cell to a flag picture and
- * 	disables it.
+ * This class is the controller for the minesweeper game in
+ * the social portion of Apoco.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.1
  * @since   2018-11-25
  */

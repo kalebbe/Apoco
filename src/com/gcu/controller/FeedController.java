@@ -1,15 +1,8 @@
 /**
- * This controller handles all of the controlling for feed posts. This was 
- * removed from the SocialController because I felt it deserved its own controller.
- * 
- * -----UPDATE MILESTONE 5-----
- * -Users can now update their feed post. Link is not editable.
- * 
- * -----UPDATE MILESTONE 7-----
- * -Added the like/dislike system to feed posts.
+ * This controller handles all of the controlling for feed posts.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */
@@ -108,7 +101,7 @@ public class FeedController {
 		if(feed.getLink() == "") { //sets link to null if the user doesn't put anything in
 			feed.setLink(null);
 		}
-		User user = us.findById((int)session.getAttribute("id"), 0); //Gets current user's model
+		User user = us.findSocUser((int)session.getAttribute("id"), 0); //Gets current user's model
 		String name = user.getFirstName() + " " + user.getLastName(); //Sets users name to feed
 		feed.setName(name);
 		feed.setUserId((int)session.getAttribute("id")); //Sets user's id to their session id
@@ -143,7 +136,7 @@ public class FeedController {
 		}
 		int uid = (int)session.getAttribute("id");
 		if(session.getAttribute("profile").equals("user")) { //This is being checked to see if the user is coming from profile page.
-			User user = us.findById(uid, uid);
+			User user = us.findSocUser(uid, uid);
 			return new ModelAndView("viewProfile", "user", user); //Returns user to profile page.
 		}
 		List<Feed> feedList = fs.findUserFeed(uid);
@@ -179,7 +172,7 @@ public class FeedController {
 		}
 		int uid = (int)session.getAttribute("id");
 		if(session.getAttribute("profile").equals("user")) { //Added FINAL Sends user to profile if they came from there.
-			User user = us.findById(uid, uid);
+			User user = us.findSocUser(uid, uid);
 			return new ModelAndView("viewProfile", "user", user);
 		}
 		
@@ -218,11 +211,11 @@ public class FeedController {
 		
 		int uid = (int)session.getAttribute("id");
 		if(session.getAttribute("profile").equals("user")) { //Sends user back to THEIR profile view page.
-			User user = us.findById(uid, uid);
+			User user = us.findSocUser(uid, uid);
 			return new ModelAndView("viewProfile", "user", user);
 		}
 		else if(session.getAttribute("profile").equals("friend")) { //Sends user back to other person's profile page.
-			User user = us.findById(feed.getUserId(), uid);
+			User user = us.findSocUser(feed.getUserId(), uid);
 			user.setFriend(frs.checkFriend(uid, feed.getUserId()));
 			return new ModelAndView("viewProfile", "user", user);
 		}
@@ -257,11 +250,11 @@ public class FeedController {
 		}
 		int uid = (int)session.getAttribute("id");
 		if(session.getAttribute("profile").equals("user")) { //Sends the user back to their profile page.
-			User user = us.findById(uid, uid);
+			User user = us.findSocUser(uid, uid);
 			return new ModelAndView("viewProfile", "user", user);
 		}
 		else if(session.getAttribute("profile").equals("friend")) { //Sends the user back to another user's profile page.
-			User user = us.findById(feed.getUserId(), uid);
+			User user = us.findSocUser(feed.getUserId(), uid);
 			user.setFriend(frs.checkFriend(uid, feed.getUserId()));
 			return new ModelAndView("viewProfile", "user", user);
 		}

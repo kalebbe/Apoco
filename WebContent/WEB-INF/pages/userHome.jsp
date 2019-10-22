@@ -1,12 +1,8 @@
 <!-- 
-   - Author:		  Kaleb Eberhart
-   - Date:            09/23/18
-   - Course:          CST-341
-   - Project Name:    Apoco
-   - Project Version: 1.1
-   - Module Name:     userHome.jsp
-   - Module Version:  1.0
-   - Summary:         This is the user's home page for my website. In the future, there will be a little dashboard
+   - Authors:		  Kaleb Eberhart, Mick Torres
+   - Since:           09/23/18
+   - Version:         1.0
+   - Summary:         This is the user's home page for the Apoco website. In the future, there will be a little dashboard
    -				  for each service in this page if the user has created a profile for said service. These dashboards
    -				  are not currently dynamic, but they will be in the future.
  -->

@@ -1,21 +1,16 @@
 /**
  * This controller is used to handle most things that are involved with the
  * social service in this project. Will be expanded in the future for more
- * social functions. Either that or the controller will be chopped into smaller controllers.
- * 					
- * -----UPDATES MILESTONE 4-----
- * -Feed logic removed from SocialController and pushed to its own controller.
+ * social functions.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Kaleb Eberhart
  * @version 1.01
  * @since   2018-11-25
  */
 
 package com.gcu.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -31,6 +26,7 @@ import com.gcu.business.SocialBusinessInterface;
 import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.Social;
 import com.gcu.model.User;
+import com.gcu.utilities.ControllerLists;
 
 @Controller
 @RequestMapping("/social")
@@ -38,6 +34,7 @@ public class SocialController {
 
 	private SocialBusinessInterface ss;
 	private UserBusinessInterface us;
+	private ControllerLists cl;
 
 	/**
 	 * Dependency injection for the SocialBusinessService
@@ -90,7 +87,7 @@ public class SocialController {
 	@RequestMapping(path = "/profile", method = RequestMethod.GET)
 	public ModelAndView viewProfile(HttpSession session) {
 		int id = (int)session.getAttribute("id");
-		User user = us.findById(id, id);
+		User user = us.findSocUser(id, id);
 		session.setAttribute("profile", "user");
 		return new ModelAndView("viewProfile", "user", user);
 	}
@@ -145,11 +142,8 @@ public class SocialController {
 	 */
 	@ModelAttribute("dayList")
 	public List<Integer> getBirthDay() {
-		List<Integer> dayList = new ArrayList<Integer>();
-		for (int i = 1; i <= 31; i++) { //Loop to grab numbers 1->31
-			dayList.add(i);
-		}
-		return dayList;
+		cl = new ControllerLists();
+		return cl.getBirthDay();
 	}
 	
 	/**
@@ -160,11 +154,8 @@ public class SocialController {
 	 */
 	@ModelAttribute("yearList")
 	public List<Integer> getBirthYear(){
-		List<Integer> yearList = new ArrayList<Integer>();
-		for(int i = 2018; i >= 1900; i--) { //Loops 2018 -> 1900 descending
-			yearList.add(i);
-		}
-		return yearList;
+		cl = new ControllerLists();
+		return cl.getBirthYear();
 	}
 	
 	/**
@@ -174,20 +165,8 @@ public class SocialController {
 	 */
 	@ModelAttribute("monthList")
 	public Map<Integer, String> getMonthList(){
-		Map<Integer, String> monthList = new HashMap<Integer, String>();
-		monthList.put(1, "January");
-		monthList.put(2, "February");
-		monthList.put(3, "March");
-		monthList.put(4, "April");
-		monthList.put(5, "May");
-		monthList.put(6, "June");
-		monthList.put(7, "July");
-		monthList.put(8, "August");
-		monthList.put(9, "September");
-		monthList.put(10, "October");
-		monthList.put(11, "November");
-		monthList.put(12, "December");
-		return monthList;
+		cl = new ControllerLists();
+		return cl.getMonths();
 	}
 	
 	/**
@@ -196,54 +175,8 @@ public class SocialController {
 	 */
 	@ModelAttribute("jobList")
 	public List<String> getJobList(){
-		List<String> jobList = new ArrayList<String>();
-		//These job types were grabbed from a career webpage and are meant to be generic.
-		jobList.add("Accounting");
-		jobList.add("Admin");
-		jobList.add("Automotive");
-		jobList.add("Banking");
-		jobList.add("Biotech");
-		jobList.add("Business");
-		jobList.add("Construction");
-		jobList.add("Consultant");
-		jobList.add("Customer Service");
-		jobList.add("Design");
-		jobList.add("Distribution");
-		jobList.add("Education");
-		jobList.add("Engineering");
-		jobList.add("Facilities");
-		jobList.add("Finanace");
-		jobList.add("Franchise");
-		jobList.add("General Labor");
-		jobList.add("Government");
-		jobList.add("Grocery");
-		jobList.add("Health Care");
-		jobList.add("Human Resources");
-		jobList.add("Installation");
-		jobList.add("Repair");
-		jobList.add("Insurance");
-		jobList.add("Journalism");
-		jobList.add("Legal");
-		jobList.add("Management");
-		jobList.add("Manufacturing");
-		jobList.add("Marketing");
-		jobList.add("Non-profit");
-		jobList.add("Pharmaceutical");
-		jobList.add("Quality Assurance");
-		jobList.add("Real Estate");
-		jobList.add("Research");
-		jobList.add("Restaurant/Food Service");
-		jobList.add("Retail");
-		jobList.add("Sales");
-		jobList.add("Science");
-		jobList.add("Shipping");
-		jobList.add("Technology");
-		jobList.add("Telecommunications");
-		jobList.add("Training");
-		jobList.add("Transportation");
-		jobList.add("Warehouse");
-		jobList.add("Other");
-		return jobList;
+		cl = new ControllerLists();
+		return cl.getJobList();
 	}
 	
 	/**
@@ -253,19 +186,8 @@ public class SocialController {
 	 */
 	@ModelAttribute("edList")
 	public List<String> getEdList(){
-		List<String> edList = new ArrayList<String>();
-		edList.add("None");
-		edList.add("Elementary");
-		edList.add("Middle School");
-		edList.add("Some High School");
-		edList.add("GED");
-		edList.add("High School Diploma");
-		edList.add("Some College");
-		edList.add("Associates Degree");
-		edList.add("Bachelor's Degree");
-		edList.add("Master's Degree");
-		edList.add("Doctorate's Degree");
-		return edList;
+		cl = new ControllerLists();
+		return cl.getEdList();
 	}
 	
 	/**
@@ -275,15 +197,8 @@ public class SocialController {
 	 */
 	@ModelAttribute("statusList")
 	public List<String> getStatList(){
-		List<String> statList = new ArrayList<String>();
-		statList.add("Single");
-		statList.add("In a relationship");
-		statList.add("Engaged");
-		statList.add("Married");
-		statList.add("Separated");
-		statList.add("Divorced");
-		statList.add("Widowed");
-		return statList;
+		cl = new ControllerLists();
+		return cl.getStatList();
 	}
 	
 	/**
@@ -292,57 +207,7 @@ public class SocialController {
 	 */
 	@ModelAttribute("stateList")
 	public List<String> getStates(){
-		List<String> stateList = new ArrayList<String>();
-		stateList.add("AL");
-		stateList.add("AK");
-		stateList.add("AZ");
-		stateList.add("AR");
-		stateList.add("CA");
-		stateList.add("CO");
-		stateList.add("CT");
-		stateList.add("DE");
-		stateList.add("FL");
-		stateList.add("GA");
-		stateList.add("HI");
-		stateList.add("ID");
-		stateList.add("IL");
-		stateList.add("IN");
-		stateList.add("IA");
-		stateList.add("KS");
-		stateList.add("KY");
-		stateList.add("LA");
-		stateList.add("ME");
-		stateList.add("MD");
-		stateList.add("MA");
-		stateList.add("MI");
-		stateList.add("MN");
-		stateList.add("MS");
-		stateList.add("MO");
-		stateList.add("MT");
-		stateList.add("NE");
-		stateList.add("NV");
-		stateList.add("NH");
-		stateList.add("NJ");
-		stateList.add("NM");
-		stateList.add("NY");
-		stateList.add("NC");
-		stateList.add("ND");
-		stateList.add("OH");
-		stateList.add("OK");
-		stateList.add("OR");
-		stateList.add("PA");
-		stateList.add("RI");
-		stateList.add("SC");
-		stateList.add("SD");
-		stateList.add("TN");
-		stateList.add("TX");
-		stateList.add("UT");
-		stateList.add("VT");
-		stateList.add("VA");
-		stateList.add("WA");
-		stateList.add("WV");
-		stateList.add("WI");
-		stateList.add("WY");
-		return stateList;
+		cl = new ControllerLists();
+		return cl.getStates();
 	}
 }

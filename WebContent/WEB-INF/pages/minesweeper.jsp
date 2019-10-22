@@ -1,14 +1,8 @@
 <!-- 
-   - Author:		  Kaleb Eberhart
-   - Date:            10/14/18
-   - Course:          CST-341
-   - Project Name:    Apoco
-   - Project Version: 1.1
-   - Module Name:     minesweeper.jsp
-   - Module Version:  1.0
-   - Summary:         This is the view used for all of the minesweeper board. Currently has pretty sever
-   					  visual issues with google chrome, but I am working to fix it. Also would like to get right
-   					  clicks working and the buttons ajaxed.
+   - Authors:		  Kaleb Eberhart, Mick Torres
+   - Since:           10/14/18
+   - Version:  		  1.0
+   - Summary:         This is the view used for all of the minesweeper board.
  -->
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

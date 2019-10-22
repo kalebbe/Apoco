@@ -3,7 +3,7 @@
  * that needs to be validated because everything else is done through a dropdown box or a radio button.
  * There may more properties added in the future, but this is it for now.
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */
@@ -19,6 +19,7 @@ public class Business {
 	private int birthDay;
 	private int birthMonth;
 	private int birthYear;
+	private int age;
 	private String profession;
 	private String gender; //For presentation not applications
 	private String ethnicity; //For applications, can use other if not comfortable answering
@@ -261,5 +262,21 @@ public class Business {
 		this.city = "";
 		this.state = "";
 		this.education = "";
+	}
+
+	/**
+	 * Gets the age of the Business user
+	 * @return int
+	 */
+	public int getAge() {
+		return age;
+	}
+
+	/**
+	 * Sets the age of the business user
+	 * @param age
+	 */
+	public void setAge(int age) {
+		this.age = age;
 	}
 }

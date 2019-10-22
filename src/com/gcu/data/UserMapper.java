@@ -1,10 +1,9 @@
 /**
  * This class is used to map the data from the database when creating a new
- * user model using Spring JDBC. This was the recommended way to do this
- * on TutorialsPoint.
+ * user model using Spring JDBC.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */
@@ -33,6 +32,7 @@ public class UserMapper implements RowMapper {
 		user.setLastName(rs.getString("LAST_NAME"));
 		user.setPassword(rs.getString("PASSWORD"));
 		user.setPassRe(rs.getString("PASSWORD"));
+		user.setAccess(rs.getString("ROLE"));
 		return user;
 	}
 }

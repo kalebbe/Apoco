@@ -3,14 +3,8 @@
  * when they are logged in. In the future, this will be used to send
  * mods and admin to their respective home pages.
  * 
- * -----UPDATE MILESTONE 3-----
- * -Nothing huge here, just changed it to whipe theme from the session
  * 
- * -----UPDATE MILESTONE 4-----
- * -User's account info was removed from session and now returned through User model.
- * 
- * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.05
  * @since   2018-11-25
  */
@@ -56,6 +50,6 @@ private UserBusinessInterface us;
 			return new ModelAndView("redirect:../login/log", "user", new User());
 		}
 		session.setAttribute("theme", null); //Regular red header and footer with all tabs
-		return new ModelAndView("userHome", "user", us.findById((int)session.getAttribute("id"), -1));
+		return new ModelAndView("userHome", "user", us.findById((int)session.getAttribute("id")));
 	}
 }

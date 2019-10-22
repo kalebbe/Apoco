@@ -1,12 +1,9 @@
 /**
  * This model holds all of the user fields and completes data validation for
- * each field. I will try to add email validation again in the future, but
- * it was causing exceptions every time I tried to use it. The email is checked
- * in the JavaScript regardless and it doesn't seeem that important because the
- * email is easy to spoof anyways.
+ * each field. Email validation is done in javascript/html5.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */
@@ -47,9 +44,12 @@ public class User {
 	@Pattern(regexp = "^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$", message="Password must contain letters and numbers!")
 	private String passRe;
 	private int id;
+	private Business business;
 	private Social social; //Added for purpose of listing friends.
 	private List<Feed> feed;
 	private boolean friend;
+	private boolean connection;
+	private String access;
 	private int messageId;
 
 	/**
@@ -179,6 +179,15 @@ public class User {
 	public Social getSocial() {
 		return social;
 	}
+	
+	/**
+	 * Getter for the business variable. This is here so the user's business bio can be listed and
+	 * editted both on their profiel page and when others are viewing their profile.
+	 * @return Business
+	 */
+	public Business getBusiness() {
+		return business;
+	}
 
 	/**
 	 * Getter to see if a user is a friend. Added with the friend functionality.
@@ -204,6 +213,15 @@ public class User {
 	 */
 	public void setSocial(Social social) {
 		this.social = social;
+	}
+	
+	/**
+	 * Setter for the business variable.
+	 * @param business
+	 * @return nothing
+	 */
+	public void setBusiness(Business business) {
+		this.business = business;
 	}
 	
 	/**
@@ -251,5 +269,38 @@ public class User {
 		this.lastName = "";
 		this.password = "";
 		this.passRe = "";
+		this.access = "user";
+	}
+
+	/**
+	 * This holds whether or not the user is connected to the logged in user.
+	 * @return boolean
+	 */
+	public boolean isConnection() {
+		return connection;
+	}
+
+	/**
+	 * This sets the connection variable.
+	 * @param connection
+	 */
+	public void setConnection(boolean connection) {
+		this.connection = connection;
+	}
+
+	/**
+	 * This defines the access level of the user
+	 * @return String
+	 */
+	public String getAccess() {
+		return access;
+	}
+
+	/**
+	 * Sets the access level of the user;
+	 * @param access
+	 */
+	public void setAccess(String access) {
+		this.access = access;
 	}
 }

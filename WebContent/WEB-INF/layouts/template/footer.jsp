@@ -13,26 +13,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:choose>
 	<c:when test="${sessionScope.theme == null}">
-		<div class="footer-basic" style="background-color: #a70000;">
+		<div class="footer-basic" style="background-color: #660000;">
 			<footer>
 				<p class="copyright" style="color: #ffffff;">Apoco Inc ©
-					2018-2019</p>
+					2018-2020</p>
 			</footer>
 		</div>
 	</c:when>
 	<c:when test="${sessionScope.theme.equals('social')}">
-		<div class="footer-basic" style="background-color: #0fb800;">
+		<div class="footer-basic" style="background-color: #005024;">
 			<footer>
 				<p class="copyright" style="color: #ffffff;">Apoco Inc ©
-					2018-2019</p>
+					2018-2020</p>
 			</footer>
 		</div>
 	</c:when>
 	<c:when test="${sessionScope.theme.equals('business')}">
-		<div class="footer-basic" style="background-color: #0007a9;">
+		<div class="footer-basic" style="background-color: #09136e;">
 			<footer>
 				<p class="copyright" style="color: #ffffff;">Apoco Inc ©
-					2018-2019</p>
+					2018-2020</p>
+			</footer>
+		</div>
+	</c:when>
+	<c:when test="${sessionScope.theme.equals('dating')}">
+		<div class="footer-basic" style="background-color: #6c133f;">
+			<footer>
+				<p class="copyright" style="color: #ffffff;">Apoco Inc ©
+					2018-2020</p>
 			</footer>
 		</div>
 	</c:when>

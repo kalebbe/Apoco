@@ -1,16 +1,10 @@
 /**
  * This class was removed from the SocialBusinessService to separate
- * feed from social logic. Basically, this class will be used to
- * return all feed, user feed, create feed, update feed (if used),
+ * feed from social logic. Basically, this class is used to
+ * return all feed, user feed, create feed, update feed,
  * and delete feed.
  * 
- * -----UPDATE MILESTONE 5-----
- * -Feed can now be updated
- * 
- * -----UPDATE MILESTONE 7-----
- * -Added the like and dislike system to the project.
- * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */
@@ -32,8 +26,6 @@ public class FeedBusinessService implements FeedBusinessInterface {
 	 * to create a new feed post. If the user chooses to
 	 * add a link to the post, it will be trimmed here to
 	 * make it so the link will have a youtube player.
-	 * This will need logic in the future to check the
-	 * validity of the link.
 	 * @param t This is the feed object being created.
 	 * @return boolean This is whether or not the object was created successfully.
 	 */

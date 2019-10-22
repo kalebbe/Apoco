@@ -1,11 +1,8 @@
 /**
  * This interface lays forth the method guidelines for the FeedBusinessService class.
  * 
- * -----UPDATE MILESTONE 7-----
- * -Added the like and dislike system.
  * 
- * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */

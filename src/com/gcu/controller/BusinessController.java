@@ -3,14 +3,13 @@
  * in this project. This will likely be expanded in the future to include updating and
  * deleting profiles.
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */
 
 package com.gcu.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,15 +21,25 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.gcu.business.BusinessInterface;
+import com.gcu.business.ConnectionBusinessInterface;
+import com.gcu.business.JobBusinessInterface;
+import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.Business;
+import com.gcu.model.Job;
 import com.gcu.model.User;
+import com.gcu.utilities.ControllerLists;
 
 @Controller
 @RequestMapping("/business")
 public class BusinessController {
 	private BusinessInterface bs;
+	private UserBusinessInterface us;
+	private ConnectionBusinessInterface cs;
+	private JobBusinessInterface js;
+	private ControllerLists cl;
 	
 	/**
 	 * Dependency injection for the BusinessService
@@ -40,6 +49,33 @@ public class BusinessController {
 	@Autowired
 	public void setBusinessService(BusinessInterface bs) {
 		this.bs = bs;
+	}
+	
+	/**
+	 * Dependency injection for the user business service
+	 * @param us
+	 */
+	@Autowired
+	public void setUserService(UserBusinessInterface us) {
+		this.us = us;
+	}
+	
+	/**
+	 * Dependency injection for the connection business service
+	 * @param cs
+	 */
+	@Autowired
+	public void setConnectionService(ConnectionBusinessInterface cs) {
+		this.cs = cs;
+	}
+	
+	/**
+	 * Dependency injection for the job business service
+	 * @param js
+	 */
+	@Autowired
+	public void setJobService(JobBusinessInterface js) {
+		this.js = js;
 	}
 	
 	/**
@@ -91,16 +127,43 @@ public class BusinessController {
 	}
 	
 	/**
+	 * Sends the user to their business profile.
+	 * @param session
+	 * @return ModelAndView
+	 */
+	@RequestMapping(path = "/profile", method = RequestMethod.GET)
+	public ModelAndView viewProfile(HttpSession session) {
+		int id = (int)session.getAttribute("id");
+		User user = us.findBusUser(id);
+		session.setAttribute("profile",  "user");
+		return new ModelAndView("busViewProfile", "user", user);
+	}
+	
+	/**
+	 * Searches the people and jobs in the database.
+	 * @param search
+	 * @param session
+	 * @return ModelAndView
+	 */
+	@RequestMapping(path = "/search", method = RequestMethod.POST)
+	public ModelAndView searchResults(@RequestParam String search, HttpSession session) {
+		List<User> users = cs.searchPeople(search, (int)session.getAttribute("id"));
+		List<Job> jobs = js.searchJobs(search);
+		Map<String, Object> model = new HashMap<String, Object>(); //Two models will be passed to the search
+		model.put("users", users);
+		model.put("jobs", jobs);
+		session.setAttribute("search", "both");
+		return new ModelAndView("busSearch", "model", model);
+	}
+	
+	/**
 	 * Gives a list from 1 to 31 for a drop down in the view.
 	 * @return List<Integer> This is the list of days in a month being returned.
 	 */
 	@ModelAttribute("dayList")
 	public List<Integer> getBirthDay() {
-		List<Integer> dayList = new ArrayList<Integer>();
-		for (int i = 1; i <= 31; i++) { //Loop to grab numbers 1->31
-			dayList.add(i);
-		}
-		return dayList;
+		cl = new ControllerLists();
+		return cl.getBirthDay();
 	}
 	
 	/**
@@ -111,11 +174,8 @@ public class BusinessController {
 	 */
 	@ModelAttribute("yearList")
 	public List<Integer> getBirthYear(){
-		List<Integer> yearList = new ArrayList<Integer>();
-		for(int i = 2018; i >= 1900; i--) { //Loops 2018 -> 1900 descending
-			yearList.add(i);
-		}
-		return yearList;
+		cl = new ControllerLists();
+		return cl.getBirthYear();
 	}
 	
 	/**
@@ -125,20 +185,8 @@ public class BusinessController {
 	 */
 	@ModelAttribute("monthList")
 	public Map<Integer, String> getMonthList(){
-		Map<Integer, String> monthList = new HashMap<Integer, String>();
-		monthList.put(1, "January");
-		monthList.put(2, "February");
-		monthList.put(3, "March");
-		monthList.put(4, "April");
-		monthList.put(5, "May");
-		monthList.put(6, "June");
-		monthList.put(7, "July");
-		monthList.put(8, "August");
-		monthList.put(9, "September");
-		monthList.put(10, "October");
-		monthList.put(11, "November");
-		monthList.put(12, "December");
-		return monthList;
+		cl = new ControllerLists();
+		return cl.getMonths();
 	}
 	
 	/**
@@ -147,54 +195,8 @@ public class BusinessController {
 	 */
 	@ModelAttribute("jobList")
 	public List<String> getJobList(){
-		List<String> jobList = new ArrayList<String>();
-		//These job types were grabbed from a career webpage and are meant to be generic.
-		jobList.add("Accounting");
-		jobList.add("Admin");
-		jobList.add("Automotive");
-		jobList.add("Banking");
-		jobList.add("Biotech");
-		jobList.add("Business");
-		jobList.add("Construction");
-		jobList.add("Consultant");
-		jobList.add("Customer Service");
-		jobList.add("Design");
-		jobList.add("Distribution");
-		jobList.add("Education");
-		jobList.add("Engineering");
-		jobList.add("Facilities");
-		jobList.add("Finanace");
-		jobList.add("Franchise");
-		jobList.add("General Labor");
-		jobList.add("Government");
-		jobList.add("Grocery");
-		jobList.add("Health Care");
-		jobList.add("Human Resources");
-		jobList.add("Installation");
-		jobList.add("Repair");
-		jobList.add("Insurance");
-		jobList.add("Journalism");
-		jobList.add("Legal");
-		jobList.add("Management");
-		jobList.add("Manufacturing");
-		jobList.add("Marketing");
-		jobList.add("Non-profit");
-		jobList.add("Pharmaceutical");
-		jobList.add("Quality Assurance");
-		jobList.add("Real Estate");
-		jobList.add("Research");
-		jobList.add("Restaurant/Food Service");
-		jobList.add("Retail");
-		jobList.add("Sales");
-		jobList.add("Science");
-		jobList.add("Shipping");
-		jobList.add("Technology");
-		jobList.add("Telecommunications");
-		jobList.add("Training");
-		jobList.add("Transportation");
-		jobList.add("Warehouse");
-		jobList.add("Other");
-		return jobList;
+		cl = new ControllerLists();
+		return cl.getJobList();
 	}
 	
 	/**
@@ -203,15 +205,8 @@ public class BusinessController {
 	 */
 	@ModelAttribute("ethList")
 	public List<String> getEthList(){
-		List<String> ethList = new ArrayList<String>();
-		ethList.add("Native American");
-		ethList.add("Asian");
-		ethList.add("Black or African American");
-		ethList.add("Pacific Islander");
-		ethList.add("Hispanic or Latino");
-		ethList.add("White");
-		ethList.add("Other");
-		return ethList;
+		cl = new ControllerLists();
+		return cl.getEthList();
 	}
 	
 	/**
@@ -221,19 +216,8 @@ public class BusinessController {
 	 */
 	@ModelAttribute("edList")
 	public List<String> getEdList(){
-		List<String> edList = new ArrayList<String>();
-		edList.add("None");
-		edList.add("Elementary");
-		edList.add("Middle School");
-		edList.add("Some High School");
-		edList.add("GED");
-		edList.add("High School Diploma");
-		edList.add("Some College");
-		edList.add("Associates Degree");
-		edList.add("Bachelor's Degree");
-		edList.add("Master's Degree");
-		edList.add("Doctorate's Degree");
-		return edList;
+		cl = new ControllerLists();
+		return cl.getEdList();
 	}
 	
 	/**
@@ -242,57 +226,7 @@ public class BusinessController {
 	 */
 	@ModelAttribute("stateList")
 	public List<String> getStates(){
-		List<String> stateList = new ArrayList<String>();
-		stateList.add("AL");
-		stateList.add("AK");
-		stateList.add("AZ");
-		stateList.add("AR");
-		stateList.add("CA");
-		stateList.add("CO");
-		stateList.add("CT");
-		stateList.add("DE");
-		stateList.add("FL");
-		stateList.add("GA");
-		stateList.add("HI");
-		stateList.add("ID");
-		stateList.add("IL");
-		stateList.add("IN");
-		stateList.add("IA");
-		stateList.add("KS");
-		stateList.add("KY");
-		stateList.add("LA");
-		stateList.add("ME");
-		stateList.add("MD");
-		stateList.add("MA");
-		stateList.add("MI");
-		stateList.add("MN");
-		stateList.add("MS");
-		stateList.add("MO");
-		stateList.add("MT");
-		stateList.add("NE");
-		stateList.add("NV");
-		stateList.add("NH");
-		stateList.add("NJ");
-		stateList.add("NM");
-		stateList.add("NY");
-		stateList.add("NC");
-		stateList.add("ND");
-		stateList.add("OH");
-		stateList.add("OK");
-		stateList.add("OR");
-		stateList.add("PA");
-		stateList.add("RI");
-		stateList.add("SC");
-		stateList.add("SD");
-		stateList.add("TN");
-		stateList.add("TX");
-		stateList.add("UT");
-		stateList.add("VT");
-		stateList.add("VA");
-		stateList.add("WA");
-		stateList.add("WV");
-		stateList.add("WI");
-		stateList.add("WY");
-		return stateList;
+		cl = new ControllerLists();
+		return cl.getStates();
 	}
 }

@@ -1,22 +1,9 @@
 /**
  * This controller handles the revision of user's profile variables.
- * In the future, it will be expanded to include deleting user accounts
- * and vaulting user accounts. I will probably also do mod promotions here
- * as well and account suspensions.
- *
- * -----UPDATE MILESTONE 4-----
- * -Refactored for Spring jdbc changes.
- *
- * -----UPDATE MILESTONE 5-----
- * -Refactored for session error setting in the controller.
- * -As of right now, if user's input incorrect information, the model will
- *  still be updated and the incorrect info will be placed on the page, but they
- *	will receive an error message. I could change it where it resets to the 
- *	correct information, but this would require another database call. Also
- *	these checks are done in html, so it shouldn't matter much.
+ * Mod promotions will likely be done here in the future.
  *
  *
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.1
  * @since   2018-11-25
  */
@@ -62,7 +49,7 @@ public class AccountController {
 			return new ModelAndView("redirect:../login/log", "user", new User());
 		}
 		//Returns editAccount with he user's model passed in
-		return new ModelAndView("editAccount", "user", us.findById((int)session.getAttribute("id"), -1));
+		return new ModelAndView("editAccount", "user", us.findById((int)session.getAttribute("id")));
 	}
 	
 	/**
@@ -74,7 +61,7 @@ public class AccountController {
 	 */
 	@RequestMapping(path="/updateFirst", method=RequestMethod.POST)
 	public ModelAndView updateFirst(@RequestParam("firstName") String first,  HttpSession session) {
-		User user = us.findById((int)session.getAttribute("id"), -1); //Get's the user's model from their session id
+		User user = us.findById((int)session.getAttribute("id")); //Get's the user's model from their session id
 		user.setFirstName(first); //Updates model to new firstname
 		if(!us.updateFirst(user)) {
 			session.setAttribute("message", "First name must be between 2 and 30 characters!");
@@ -94,7 +81,7 @@ public class AccountController {
 	 */
 	@RequestMapping(path="/updateLast", method=RequestMethod.POST)
 	public ModelAndView updateLast(@RequestParam("lastName") String last, HttpSession session) {
-		User user = us.findById((int)session.getAttribute("id"), -1); //Grabs old user
+		User user = us.findById((int)session.getAttribute("id")); //Grabs old user
 		user.setLastName(last); //Updates user with new lastName
 		if(!us.updateLast(user)) {
 			session.setAttribute("message", "Last name must be between 2 and 30 characters!");
@@ -114,7 +101,7 @@ public class AccountController {
 	 */
 	@RequestMapping(path="/updateEmail", method=RequestMethod.POST)
 	public ModelAndView updateEmail(@RequestParam String email, HttpSession session) {
-		User user = us.findById((int)session.getAttribute("id"), -1);
+		User user = us.findById((int)session.getAttribute("id"));
 		user.setEmail(email);
 		if(us.checkEmail(user)) { //Checks to see if the email is taken
 			session.setAttribute("message", "Email is already taken!");
@@ -138,7 +125,7 @@ public class AccountController {
 	 */
 	@RequestMapping(path="/updateUser", method=RequestMethod.POST)
 	public ModelAndView updateUser(@RequestParam String username, HttpSession session) {
-		User user = us.findById((int)session.getAttribute("id"), -1);
+		User user = us.findById((int)session.getAttribute("id"));
 		user.setUsername(username);
 		if(us.checkUser(user)) { //Checks to see if username is taken
 			session.setAttribute("message", "Username is already taken!");
@@ -165,8 +152,8 @@ public class AccountController {
 	 */
 	@RequestMapping(path="/updatePass", method=RequestMethod.POST)
 	public ModelAndView updatePass(@RequestParam String oldPass, @RequestParam String pass, @RequestParam String rePass, HttpSession session) {
-		User user = us.findById((int)session.getAttribute("id"), -1); //Grabs old user from databse
-		if(!us.checkPass(oldPass, (int)session.getAttribute("id"))){ //Checks to see if the old pass matches DB pass
+		User user = us.findById((int)session.getAttribute("id")); //Grabs old user from databse
+		if(us.checkPass(oldPass, (int)session.getAttribute("id")) == null){ //Checks to see if the old pass matches DB pass
 			session.setAttribute("message", "Current password is incorrect!");
 			return new ModelAndView("editAccount", "user", user);
 		}
@@ -182,6 +169,6 @@ public class AccountController {
 		else {
 			session.setAttribute("message3", "Password updated!"); //Confirmation message
 		}
-		return new ModelAndView("editAccount", "user", us.findById((int)session.getAttribute("id"), -1));
+		return new ModelAndView("editAccount", "user", us.findById((int)session.getAttribute("id")));
 	}
 }

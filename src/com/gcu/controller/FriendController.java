@@ -1,9 +1,8 @@
 /**
- * This controller is used to handle all things relating to friends in the social platform. This
- * will be updated heavily for the final milestone.
+ * This controller is used to handle all things relating to friends in the social platform.
  * 
  *
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-10
  */
@@ -85,7 +84,7 @@ public class FriendController {
 	 */
 	@RequestMapping(path = "/view", method = RequestMethod.POST)
 	public ModelAndView viewProfile(@RequestParam int id, HttpSession session) {
-		User user = us.findById(id, (int)session.getAttribute("id"));
+		User user = us.findSocUser(id, (int)session.getAttribute("id"));
 		user.setFriend(fs.checkFriend((int)session.getAttribute("id"), id)); //Sets whether this user is FRIEND or FOE
 		session.setAttribute("profile", "friend"); //This view also serves multiple purposes. This one is for another user's profile.
 		return new ModelAndView("viewProfile", "user", user);
@@ -99,7 +98,7 @@ public class FriendController {
 	@RequestMapping(path = "/friendList", method = RequestMethod.GET)
 	public ModelAndView getFriends(HttpSession session) {
 		List<User> users = new ArrayList<User>(); //Instantiated list of users
-		if(ms.checkRequest((int)session.getAttribute("id"))){ //Checks if user has any friend requests.
+		if(ms.checkRequest((int)session.getAttribute("id"), "request")){ //Checks if user has any friend requests.
 			session.setAttribute("page", "requests"); //Again, multiple purposes. This one is for a requests page.
 			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request"); //Gets all the user's friend requests.
 			users = fs.getRequestProfiles(messages); //Gets the requestee's profiles.
@@ -130,7 +129,7 @@ public class FriendController {
 		
 		//Friend's list logic below.. Already commented this above thoroughly.
 		List<User> users = new ArrayList<User>();
-		if(ms.checkRequest((int)session.getAttribute("id"))){
+		if(ms.checkRequest((int)session.getAttribute("id"), "request")){
 			session.setAttribute("page", "requests");
 			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request");
 			users = fs.getRequestProfiles(messages);
@@ -158,7 +157,7 @@ public class FriendController {
 			session.setAttribute("message1", "Friend request deleted!");
 		}
 		List<User> users = new ArrayList<User>();
-		if(ms.checkRequest((int)session.getAttribute("id"))){
+		if(ms.checkRequest((int)session.getAttribute("id"), "request")){
 			session.setAttribute("page", "requests");
 			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request");
 			users = fs.getRequestProfiles(messages);
@@ -185,7 +184,7 @@ public class FriendController {
 		else {
 			session.setAttribute("message", "Duplicate request, you can only send one request to this person!"); //Gotta keep the DB cleannn
 		}
-		User user = us.findById(id, (int)session.getAttribute("id"));
+		User user = us.findSocUser(id, (int)session.getAttribute("id"));
 		user.setFriend(true); //If they're sending a request, they're obv not friend yet. Saving db calls here. Ignore that this is true. Shh.
 		return new ModelAndView("viewProfile", "user", user);
 	}
@@ -202,7 +201,7 @@ public class FriendController {
 		if(fs.deleteFriend(friend)) {
 			session.setAttribute("message1", "Friend has been removed!");
 		}
-		User user = us.findById(id, (int)session.getAttribute("id"));
+		User user = us.findSocUser(id, (int)session.getAttribute("id"));
 		user.setFriend(true);
 		return new ModelAndView("viewProfile", "user", user);
 	}

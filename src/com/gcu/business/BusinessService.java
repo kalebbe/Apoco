@@ -1,8 +1,7 @@
 /**
- * This class is used to handle the business logic of the Business profile. This was added
- * with milestone 6 and will be expanded upon later.
+ * This class is used to handle the business logic of the Business profile
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */

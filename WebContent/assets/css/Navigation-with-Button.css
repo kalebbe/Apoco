@@ -108,3 +108,9 @@
   background:#66d7d7;
 }
 
+.nav-btn {
+	text-shadow:1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, .5px .5px #fff, -.5px -.5px 0 #fff, .5px -.5px 0 #fff, -.5px .5px 0 #fff;
+	font-weight: bold;
+	font-size: 30px;
+}
+

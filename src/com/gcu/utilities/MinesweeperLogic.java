@@ -1,11 +1,9 @@
 /**
- * This class contains the logic for the minesweeper game in my project.
- * this class is likely to remain the way it is currently throughout
- * the remainder of my project because it does everthing I need it to.
- * This class was actually really easy to port over from c#".
+ * This class contains the logic for the minesweeper game in Apoco social.
+ * this class is likely to remain the way it is currently.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */

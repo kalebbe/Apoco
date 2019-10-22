@@ -1,9 +1,8 @@
 /**
- * This class is used for any database interactions with Feed objects. This was
- * separated from SocialDAO because object oriented programming and all that.
+ * This class is used for any database interactions with Feed objects.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-11-25
  */

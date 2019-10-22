@@ -5,7 +5,7 @@
  * possibly some new ones.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @author  Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-16
  */
@@ -131,16 +131,16 @@ public class MessageDAO implements DataAccessInterface<Message> {
 	 * @param receiverId The id of this dude.
 	 * @return boolean Whether or not they have any friend requests.
 	 */
-	public boolean checkRequest(int senderId, int receiverId) {
+	public boolean checkRequest(int senderId, int receiverId, String type) {
 		String sql;
 		int count;
 		if(senderId == 0) { //This is used to check if a user has any requests at all
-			sql = "SELECT count(*) FROM messages WHERE RECEIVER_ID=?";
-			count = jdbcTemp.queryForObject(sql, new Object[] {receiverId}, Integer.class);
+			sql = "SELECT count(*) FROM messages WHERE RECEIVER_ID=? AND TYPE=?";
+			count = jdbcTemp.queryForObject(sql, new Object[] {receiverId, type}, Integer.class);
 		}
 		else { //This is used to check if a user has sent a request to a specific user.
-			sql = "SELECT count(*) FROM messages WHERE SENDER_ID=? AND RECEIVER_ID=?";
-			count = jdbcTemp.queryForObject(sql, new Object[] {senderId, receiverId}, Integer.class);
+			sql = "SELECT count(*) FROM messages WHERE SENDER_ID=? AND RECEIVER_ID=? AND TYPE=?";
+			count = jdbcTemp.queryForObject(sql, new Object[] {senderId, receiverId, type}, Integer.class);
 		}
 		if(count > 0) {
 			return true;

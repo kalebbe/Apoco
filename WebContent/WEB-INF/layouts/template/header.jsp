@@ -14,17 +14,17 @@
 	<c:when test="${sessionScope.theme == null}">
 		<div style="background-color: #ff0000;">
 			<nav class="navbar navbar-light navbar-expand-md navigation-clean"
-				style="background-color: #a70000;">
+				style="background-color: #660000;">
 				<div class="container">
 					<!-- Sends the user either to the index or userHome depending if they're logged in -->
 					<c:choose>
 						<c:when test="${sessionScope.id != null}">
 							<a class="navbar-brand" href="../home/user"
-								style="color: #000000; font-size: 30px;">Apoco</a>
+								style="color: #ffffff; font-size: 30px;">Apoco</a>
 						</c:when>
 						<c:otherwise>
 							<a class="navbar-brand" href="../"
-								style="color: #000000; font-size: 30px;">Apoco</a>
+								style="color: #ffffff; font-size: 30px;">Apoco</a>
 						</c:otherwise>
 					</c:choose>
 					<button class="navbar-toggler" data-toggle="collapse"
@@ -37,20 +37,26 @@
 							<c:choose>
 								<c:when test="${sessionScope.id != null}">
 									<li class="nav-item" role="presentation"><a
-										class="nav-link" href="../social/social"
-										style="color: #0fb800; font-size: 20px; font-family: 'Alegreya SC', serif;">Social</a></li>
+										class="nav-link nav-btn" href="../social/social"
+										style="color: #005024; font-family: 'Alegreya SC', serif;">Social</a></li>
 
 									<li class="nav-item" role="presentation"><a
-										class="nav-link" href="../business/bus"
-										style="font-size: 20px; color: rgb(0, 7, 169); font-family: Aldrich, sans-serif;">Business</a></li>
+										class="nav-link nav-btn" href="../business/bus"
+										style="color: #09136e; font-family: Aldrich, sans-serif;">Business</a></li>
+									<li class="nav-item" role="presentation"><a
+										class="nav-link nav-btn" href="../dating/dat"
+										style="color: #dd00b9; font-family: fantasy;">Dating</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="nav-item" role="presentation"><a
-										class="nav-link" href="../login/redirect"
-										style="color: #0fb800; font-size: 20px; font-family: 'Alegreya SC', serif;">Social</a></li>
+										class="nav-link nav-btn" href="../login/redirect"
+										style="color: #005024; font-family: 'Alegreya SC', serif;">Social</a></li>
 									<li class="nav-item" role="presentation"><a
-										class="nav-link" href="../login/redirect"
-										style="font-size: 20px; color: rgb(0, 7, 169); font-family: Aldrich, sans-serif;">Business</a></li>
+										class="nav-link nav-btn" href="../login/redirect"
+										style="color: #09136e; font-family: Aldrich, sans-serif;">Business</a></li>
+									<li class="nav-item" role="presentation"><a
+										class="nav-link nav-btn" href="../login/redirect"
+										style="color: #dd00b9; font-family: fantasy;">Dating</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ul>
@@ -78,7 +84,7 @@
 										style="color: #ffffff; font-size: 14px;">Edit Account</a>
 									<a class="btn btn-light action-button" role="button"
 										href="../logout/log"
-										style="background-color: #a70000; color: #ffffff; font-size: 14px;">Log
+										style="background-color: #660000; color: #ffffff; font-size: 14px;">Log
 										Out</a>
 								</c:when>
 								<c:otherwise>
@@ -86,7 +92,7 @@
 										style="color: #ffffff; font-size: 14px;">Log In</a>
 									<a class="btn btn-light action-button" role="button"
 										href="../registration/reg"
-										style="background-color: #a70000; color: #ffffff; font-size: 14px;">Sign
+										style="background-color: #660000; color: #ffffff; font-size: 14px;">Sign
 										Up</a>
 								</c:otherwise>
 							</c:choose>
@@ -99,10 +105,10 @@
 	<c:when test="${sessionScope.theme.equals('social')}">
 		<div style="background-color: #ff0000;">
 			<nav class="navbar navbar-light navbar-expand-md navigation-clean"
-				style="background-color: #0fb800;">
+				style="background-color: #005024;">
 				<div class="container">
 					<a class="navbar-brand" href="../home/user"
-						style="color: #000000; font-size: 30px;">Apoco</a>
+						style="color: #ffffff; font-size: 30px;">Apoco</a>
 					<button class="navbar-toggler" data-toggle="collapse"
 						data-target="#navcol-1">
 						<span class="sr-only">Toggle navigation</span><span
@@ -110,9 +116,12 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navcol-1">
 						<ul class="nav navbar-nav ml-auto">
-							<li class="nav-item" role="presentation"><a class="nav-link"
+							<li class="nav-item" role="presentation"><a class="nav-link nav-btn"
 								href="../business/bus"
-								style="font-size: 20px; color: rgb(0, 7, 169); font-family: Aldrich, sans-serif;">Business</a></li>
+								style="color: #09136e; font-family: Aldrich, sans-serif;">Business</a></li>
+							<li class="nav-item" role="presentation"><a
+									class="nav-link nav-btn" href="../dating/dat"
+									style="color: #dd00b9; font-family: fantasy;">Dating</a></li>
 						</ul>
 					</div>
 				</div>
@@ -164,7 +173,7 @@
 							class="login" style="color: #ffffff; font-size: 14px;">My
 								Profile</a><a class="btn btn-light action-button" role="button"
 							href="../logout/log"
-							style="background-color: #0fb800;; color: #ffffff; font-size: 14px;">Log
+							style="background-color: #005024; color: #ffffff; font-size: 14px;">Log
 								Out</a></span>
 					</div>
 				</div>
@@ -174,10 +183,10 @@
 	<c:when test="${sessionScope.theme.equals('business')}">
 		<div style="background-color: #ff0000;">
 			<nav class="navbar navbar-light navbar-expand-md navigation-clean"
-				style="background-color: #0007a9;">
+				style="background-color: #09136e;">
 				<div class="container">
 					<a class="navbar-brand" href="../home/user"
-						style="color: #000000; font-size: 30px;">Apoco</a>
+						style="color: #ffffff; font-size: 30px;">Apoco</a>
 					<button class="navbar-toggler" data-toggle="collapse"
 						data-target="#navcol-1">
 						<span class="sr-only">Toggle navigation</span><span
@@ -185,9 +194,12 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navcol-1">
 						<ul class="nav navbar-nav ml-auto">
-							<li class="nav-item" role="presentation"><a class="nav-link"
+							<li class="nav-item" role="presentation"><a class="nav-link nav-btn"
 								href="../social/social"
-								style="color: #0fb800; font-size: 20px; font-family: 'Alegreya SC', serif;">Social</a></li>
+								style="color: #005024; font-family: 'Alegreya SC', serif;">Social</a></li>
+							<li class="nav-item" role="presentation"><a
+									class="nav-link nav-btn" href="../dating/dat"
+									style="color: #dd00b9; font-family: fantasy;">Dating</a></li>
 						</ul>
 					</div>
 				</div>
@@ -210,13 +222,87 @@
 									<li class="nav-item" role="presentation"><a
 										style="color: #ffffff;" class="nav-link"
 										href="../business/bus">Dashboard</a></li>
+									<li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link"
+										href="../jobs/jobList">View Jobs</a></li>
+									<!-- <li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link"
+										href="../messages/msgList">Messages</a>-->
+									<li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link"
+										href="../connections/connList">Connections</a></li>
+									<form class="navbar-form navbar-left" method="POST" action="../business/search">
+										<div class="input-group">
+											<input type="text" name="search" class="form-control" size="10"
+												style="font-size: 12px; background: none; border: none; color: #ffffff;" placeholder="Search" required>
+											<span class="input-group-btn">
+												<button type="submit" style="background: none; border: none;">
+													<i class="material-icons" style="color: #ffffff;">search</i>
+												</button>
+											</span>
+										</div>
+									</form>
 								</c:when>
 							</c:choose>
 						</ul>
-						<span class="navbar-text actions"><a
-							class="btn btn-light action-button" role="button"
+						<span class="navbar-text actions"><a href="../business/profile"
+							class="login" style="color: #ffffff; font-size: 14px;">My 
+								Profile</a><a class="btn btn-light action-button" role="button"
 							href="../logout/log"
-							style="background-color: #0007a9; color: #ffffff; font-size: 14px;">Log
+							style="background-color: #09136e; color: #ffffff; font-size: 14px;">Log
+								Out</a></span>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</c:when>
+	<c:when  test="${sessionScope.theme.equals('dating')}">
+		<div style="background-color: #ff0000;">
+			<nav class="navbar navbar-light navbar-expand-md navigation-clean"
+				style="background-color: #dd00b9;">
+				<div class="container">
+					<a class="navbar-brand" href="../home/user"
+						style="color: #ffffff; font-size: 30px;">Apoco</a>
+					<button class="navbar-toggler" data-toggle="collapse"
+						data-target="#navcol-1">
+						<span class="sr-only">Toggle navigation</span><span
+							class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navcol-1">
+						<ul class="nav navbar-nav ml-auto">
+							<li class="nav-item" role="presentation"><a class="nav-link nav-btn"
+								href="../social/social"
+								style="color: #005024; font-family: 'Alegreya SC', serif;">Social</a></li>
+							<li class="nav-item" role="presentation"><a
+									class="nav-link nav-btn" href="../business/bus"
+									style="color: #09136e; font-family: Aldrich, sans-serif;">Business</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div>
+			<nav
+				class="navbar navbar-light navbar-expand-md navigation-clean-button"
+				style="background-color: #000000; height: 50px;">
+				<div class="container">
+					<button class="navbar-toggler" data-toggle="collapse"
+						data-target="#navcol-2">
+						<span class="sr-only">Toggle navigation</span><span
+							class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navcol-2">
+						<ul class="nav navbar-nav mr-auto">
+							
+									<li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link"
+										href="../dating/dat">Dashboard</a></li>
+								
+						</ul>
+						<span class="navbar-text actions">
+						<a class="btn btn-light action-button" role="button"
+							href="../logout/log"
+							style="background-color: #dd00b9; color: #ffffff; font-size: 14px;">Log
 								Out</a></span>
 					</div>
 				</div>

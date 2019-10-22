@@ -1,12 +1,8 @@
 <!-- 
-   - Author:		  Kaleb Eberhart
-   - Date:            09/23/18
-   - Course:          CST-341
-   - Project Name:    Apoco
-   - Project Version: 1.1
-   - Module Name:     registration.jsp
-   - Module Version:  1.0
-   - Summary:         This is the registration page for my project. Data validation for this is done through both
+   - Authors:		  Kaleb Eberhart, Mick Torres
+   - Since:           09/23/18
+   - Version:  		  1.0
+   - Summary:         This is the registration page for Apoco. Data validation for this is done through both
    -				  JavaScript and Java in the model.
  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -15,7 +11,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="register-photo">
 	<div class="form-container" style="max-width: 411px; color: #000000;">
-		<form:form method="POST" modelAttribute="user" action="register" style="background-color: #a70000;">
+		<form:form method="POST" modelAttribute="user" action="register" style="background-color: #660000;">
 			<h2 class="text-center" style="color: #000000;">
 				<strong>Registration</strong>
 			</h2>

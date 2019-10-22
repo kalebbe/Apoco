@@ -3,7 +3,7 @@
  * logic for the messaging service. There are still some things in use here, but not much.
  * 
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.0
  * @since   2018-12-16
  */
@@ -76,7 +76,7 @@ public class MessageBusinessService implements MessageBusinessInterface {
 	 * @return boolean Whether or not they have requests.
 	 */
 	@Override
-	public boolean checkRequest(int receiverId) {
-		return dao.checkRequest(0, receiverId);
+	public boolean checkRequest(int receiverId, String type) {
+		return dao.checkRequest(0, receiverId, type);
 	}
 }

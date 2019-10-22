@@ -2,10 +2,8 @@
  * This controller handles the user's registration to my website and
  * also brings them to the registration page.
  * 					
- * -----UPDATE MILESTONE 3-----
- * -Added Dependency injection
  * 
- * @author  Kaleb Eberhart
+ * @authors Kaleb Eberhart, Mick Torres
  * @version 1.01
  * @since   2018-11-25
  */
