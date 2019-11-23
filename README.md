@@ -1,4 +1,7 @@
+[logo]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/Apoco.png
+
 # Apoco
+![Apoco][logo]
 ---
 ### Table of Contents
 - [Directory](https://github.com/kalebbe/Apoco#directory)
