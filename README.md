@@ -1,4 +1,4 @@
-[logo]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/
+[logo]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/Apoco.png
 
 # Apoco
 ![Apoco][logo]
