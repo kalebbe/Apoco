@@ -15,7 +15,7 @@
 				<c:choose>
 					<c:when
 						test="${sessionScope.message != null || sessionScope.message2 != null}">
-						<p style="color: #a70000;">
+						<p class="error">
 							<c:out value="${sessionScope.message}" />
 							<c:out value="${sessionScope.message2}" />
 						</p>
@@ -23,7 +23,7 @@
 						<c:remove var="message2" />
 					</c:when>
 					<c:when test="${sessionScope.message3 != null}">
-						<p style="color: #000000;">
+						<p>
 							<c:out value="${sessionScope.message3}" />
 						</p>
 						<c:remove var="message3" />

@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.gcu.business.MessageBusinessInterface;
 import com.gcu.business.SocialBusinessInterface;
 import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.Social;
@@ -34,7 +36,25 @@ public class SocialController {
 
 	private SocialBusinessInterface ss;
 	private UserBusinessInterface us;
+<<<<<<< Updated upstream
 	private ControllerLists cl;
+=======
+<<<<<<< HEAD
+	private MessageBusinessInterface ms;
+	private ControllerLists cl;
+	
+	/**
+	 * Dependency injection for the ControllerLists
+	 * @param cl
+	 */
+	@Autowired
+	public void setControllerList(ControllerLists cl) {
+		this.cl = cl;
+	}
+=======
+	private ControllerLists cl;
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 
 	/**
 	 * Dependency injection for the SocialBusinessService
@@ -57,6 +77,15 @@ public class SocialController {
 	}
 	
 	/**
+	 * Dependency injection for the message business service.
+	 * @param ms
+	 */
+	@Autowired
+	public void messageBusinessService(MessageBusinessInterface ms) {
+		this.ms = ms;
+	}
+	
+	/**
 	 * Sets the user's theme to social which changes their navbar and footer to green. It then checks if the
 	 * user has a profile and then either sends them to the creator or the dashboard.
 	 * @param social This is the social model retrieved from the view.
@@ -69,6 +98,10 @@ public class SocialController {
 			return new ModelAndView("redirect:../login/log", "user", new User());
 		}
 		session.setAttribute("theme", "social"); //Makes header and footer of page green and removes social link
+		
+		//Being set here instead of controller advice because controller advice happens before this
+		session.setAttribute("requests", ms.getNotifications((int)session.getAttribute("id"), "request"));
+		session.setAttribute("messages", ms.getNotifications((int)session.getAttribute("id"), "socUnread"));
 		if(session.getAttribute("hasSocial") != null) {
 			//Returns the dashboard if the user has a social profile
 			return new ModelAndView("socialDash", "social", new Social()); 
@@ -142,7 +175,14 @@ public class SocialController {
 	 */
 	@ModelAttribute("dayList")
 	public List<Integer> getBirthDay() {
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getBirthDay();
 	}
 	
@@ -154,7 +194,14 @@ public class SocialController {
 	 */
 	@ModelAttribute("yearList")
 	public List<Integer> getBirthYear(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getBirthYear();
 	}
 	
@@ -165,7 +212,14 @@ public class SocialController {
 	 */
 	@ModelAttribute("monthList")
 	public Map<Integer, String> getMonthList(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getMonths();
 	}
 	
@@ -175,7 +229,14 @@ public class SocialController {
 	 */
 	@ModelAttribute("jobList")
 	public List<String> getJobList(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getJobList();
 	}
 	
@@ -186,7 +247,14 @@ public class SocialController {
 	 */
 	@ModelAttribute("edList")
 	public List<String> getEdList(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getEdList();
 	}
 	
@@ -197,7 +265,14 @@ public class SocialController {
 	 */
 	@ModelAttribute("statusList")
 	public List<String> getStatList(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getStatList();
 	}
 	
@@ -207,7 +282,14 @@ public class SocialController {
 	 */
 	@ModelAttribute("stateList")
 	public List<String> getStates(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getStates();
 	}
 }

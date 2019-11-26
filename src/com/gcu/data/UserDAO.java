@@ -11,7 +11,7 @@ package com.gcu.data;
 
 import java.sql.SQLException;
 import java.util.List;
-import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -20,20 +20,16 @@ import com.gcu.model.User;
 
 public class UserDAO implements DataAccessInterface<User> {
 
+<<<<<<< HEAD
+	@Autowired
+=======
 	@SuppressWarnings("unused")
 	private DataSource dataSource;
+<<<<<<< Updated upstream
+=======
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 	private JdbcTemplate jdbcTemp;
-
-	/**
-	 * Sets the data source for the spring jdbc template.
-	 * 
-	 * @param dataSource.
-	 * @return Nothing.
-	 */
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		this.jdbcTemp = new JdbcTemplate(dataSource);
-	}
 
 	/**
 	 * This method creates a new user in the database using a User object.

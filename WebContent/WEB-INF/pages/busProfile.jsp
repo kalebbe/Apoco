@@ -20,16 +20,16 @@
 						<form:options items="${jobList}" />
 					</form:select>
 					<br> <br> Education:
-					<form:select path="education" style="margin-left:15px;">
+					<form:select path="education">
 						<form:options items="${edList}" />
 					</form:select>
 					<br> <br> Ethnicity:
-					<form:select path="ethnicity" style="margin-left:26px;">
+					<form:select path="ethnicity">
 						<form:options items="${ethList}" />
 					</form:select>
 				</h5>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6" align="right">
 				<h5>
 					Date of Birth:
 					<form:select path="birthDay">
@@ -43,7 +43,7 @@
 					</form:select>
 					<br> <br>
 				</h5>
-				<form:errors style="color: #a70000;" path="city" />
+				<form:errors class="error" path="city" />
 				<h5>
 					City:
 					<form:input type="text" path="city" minlength="2" maxlength="40" />

@@ -8,13 +8,29 @@
 	<br><hr>
 	<c:choose>
 		<c:when test="${sessionScope.message != null}">
+<<<<<<< Updated upstream
 			<p style="color: #a70000;">
+=======
+<<<<<<< HEAD
+			<p class="error">
+=======
+			<p style="color: #a70000;">
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 				<c:out value="${sessionScope.message}" />
 			</p>
 			<c:remove var="message" />
 		</c:when>
 		<c:when test="${sessionScope.message1 != null}">
+<<<<<<< Updated upstream
 			<p style="color: #000000;">
+=======
+<<<<<<< HEAD
+			<p>
+=======
+			<p style="color: #000000;">
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 				<c:out value="${sessionScope.message1}" />
 			</p>
 			<c:remove var="message1" />

@@ -26,6 +26,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gcu.business.BusinessInterface;
 import com.gcu.business.ConnectionBusinessInterface;
 import com.gcu.business.JobBusinessInterface;
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+import com.gcu.business.MessageBusinessInterface;
+=======
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.Business;
 import com.gcu.model.Job;
@@ -39,7 +46,25 @@ public class BusinessController {
 	private UserBusinessInterface us;
 	private ConnectionBusinessInterface cs;
 	private JobBusinessInterface js;
+<<<<<<< Updated upstream
 	private ControllerLists cl;
+=======
+<<<<<<< HEAD
+	private MessageBusinessInterface ms;
+	private ControllerLists cl;
+	
+	/**
+	 * Dependency injection for the ControllerLists
+	 * @param cl
+	 */
+	@Autowired
+	public void setControllerLists(ControllerLists cl) {
+		this.cl = cl;
+	}
+=======
+	private ControllerLists cl;
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 	
 	/**
 	 * Dependency injection for the BusinessService
@@ -79,6 +104,21 @@ public class BusinessController {
 	}
 	
 	/**
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+	 * Dependency injection for the message business service
+	 * @param ms
+	 */
+	@Autowired
+	public void setMessageService(MessageBusinessInterface ms) {
+		this.ms = ms;
+	}
+	
+	/**
+=======
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 	 * Sets the user's theme to business which will change the appearance of their navbar and footer.
 	 * It will then check to see if the user has a business profile and either sends them to the profile
 	 * creator or the business dashboard.
@@ -92,6 +132,8 @@ public class BusinessController {
 			return new ModelAndView("redirect:../login/log", "user", new User());
 		}
 		session.setAttribute("theme", "business");
+		session.setAttribute("requests", ms.getNotifications((int)session.getAttribute("id"), "connection"));
+		session.setAttribute("messages", ms.getNotifications((int)session.getAttribute("id"), "busUnread"));
 		if(session.getAttribute("hasBusiness") != null) {
 			//Dashboard is returned if the user has a business profile
 			return new ModelAndView("busDash", "business", new Business());
@@ -103,7 +145,7 @@ public class BusinessController {
 	
 	/**
 	 * Submits the user's business profile for insertion into the database after pushing through the business
-	 * service. Pictures will be in an upcoming milestone.
+	 * service.
 	 * @param bus This is the business model grabbed from the view.
 	 * @param result This is the result used to check for errors.
 	 * @param session This is the session used to set the hasBusiness variable.
@@ -162,7 +204,14 @@ public class BusinessController {
 	 */
 	@ModelAttribute("dayList")
 	public List<Integer> getBirthDay() {
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getBirthDay();
 	}
 	
@@ -174,7 +223,14 @@ public class BusinessController {
 	 */
 	@ModelAttribute("yearList")
 	public List<Integer> getBirthYear(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getBirthYear();
 	}
 	
@@ -185,7 +241,14 @@ public class BusinessController {
 	 */
 	@ModelAttribute("monthList")
 	public Map<Integer, String> getMonthList(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getMonths();
 	}
 	
@@ -195,7 +258,14 @@ public class BusinessController {
 	 */
 	@ModelAttribute("jobList")
 	public List<String> getJobList(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getJobList();
 	}
 	
@@ -205,7 +275,14 @@ public class BusinessController {
 	 */
 	@ModelAttribute("ethList")
 	public List<String> getEthList(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getEthList();
 	}
 	
@@ -216,7 +293,14 @@ public class BusinessController {
 	 */
 	@ModelAttribute("edList")
 	public List<String> getEdList(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getEdList();
 	}
 	
@@ -226,7 +310,14 @@ public class BusinessController {
 	 */
 	@ModelAttribute("stateList")
 	public List<String> getStates(){
+<<<<<<< Updated upstream
 		cl = new ControllerLists();
+=======
+<<<<<<< HEAD
+=======
+		cl = new ControllerLists();
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		return cl.getStates();
 	}
 }

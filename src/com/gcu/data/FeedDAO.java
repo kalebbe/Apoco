@@ -12,7 +12,7 @@ package com.gcu.data;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -20,16 +20,8 @@ import com.gcu.model.Feed;
 
 public class FeedDAO implements DataAccessInterface<Feed> {
 
+	@Autowired
 	private JdbcTemplate jdbcTemp;
-
-	/**
-	 * Sets the data source for this class and instantiates the spring jdbc template.
-	 * @param dataSource.
-	 * @return Nothing.
-	 */
-	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemp = new JdbcTemplate(dataSource);
-	}
 
 	/**
 	 * This method is used to return a socialfeed object by its ID. This is

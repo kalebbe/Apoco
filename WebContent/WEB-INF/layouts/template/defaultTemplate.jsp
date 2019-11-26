@@ -50,7 +50,7 @@
 </head>
 
 <body>
-	<div id="content">
+	<div id="content" style="background-color:#484848">
 		<!-- Header -->
 		<tiles:insertAttribute name="header" />
 

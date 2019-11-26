@@ -11,6 +11,7 @@
 
 package com.gcu.model;
 
+import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -18,10 +19,14 @@ public class Message {
 	private int id;
 	private int senderId;
 	private int receiverId;
+	private int parentId;
 	@NotNull(message = "You must fill the message body!")
 	@Size(min=20, max = 10000, message="Your message must be atleast 20 characters!")
 	private String body;
 	private String type;
+	private boolean read; //Sets parent to read/unread for logged in user (based on follow messages)
+	private User user; //Added to attach a name to messages (Used for sender)
+	private LocalDateTime date; //Added to show date/time sent in message center
 	
 	/**
 	 * This is the getter for this message's id.
@@ -109,15 +114,80 @@ public class Message {
 	}
 	
 	/**
+	 * Getter for parent id
+	 * @return
+	 */
+	public int getParentId() {
+		return parentId;
+	}
+
+	/**
+	 * Setter for the parent Id.
+	 * @param parentId
+	 */
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
+	
+	/**
+	 * Getter for the user
+	 * @return User
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * Setter for the user
+	 * @param user
+	 */
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	/**
+	 * Getter for the date of the message
+	 * @return Date
+	 */ 
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	/**
+	 * Setter for the date
+	 * @param date
+	 */
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
+
+	/**
+	 * Checks if message is read
+	 * @return boolean
+	 */
+	public boolean isRead() {
+		return read;
+	}
+
+	/**
+	 * Sets read boolean
+	 * @param read
+	 */
+	public void setRead(boolean read) {
+		this.read = read;
+	}
+
+	/**
 	 * This is the non-default constructor for a message.
 	 * @param senderId The dude who sent the message.
 	 * @param receiverId The dude gettin the message.
 	 * @param body The message he gettin.
 	 * @param type The type of message.
 	 */
-	public Message(int senderId, int receiverId, String body, String type) {
+	public Message(int senderId, int receiverId, int parentId, String body, String type) {
 		this.senderId = senderId;
 		this.receiverId = receiverId;
+		this.parentId = parentId;
 		this.body = body;
 		this.type = type;
 	}
@@ -126,8 +196,9 @@ public class Message {
 	 * This is the default constructor. Will be used for new message creation in the future.
 	 */
 	public Message() {
-		this.senderId = 0;
-		this.receiverId = 0;
+		this.senderId = -1;
+		this.receiverId = -1;
+		this.parentId = -1;
 		this.body = "";
 		this.type = "";
 	}

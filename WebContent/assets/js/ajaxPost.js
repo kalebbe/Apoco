@@ -41,3 +41,8 @@ function ajaxFeed(url, name, value, name2, value2){
 		$('#content').html(ajax_control.responseText);
 	});
 }
+
+function clickDiv(count){
+	$('#feedTarget' + count).attr('disabled', false);
+	$('#target' + count).css('display', 'inline-block');
+}

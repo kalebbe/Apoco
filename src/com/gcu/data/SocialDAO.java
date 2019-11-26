@@ -11,28 +11,15 @@
 package com.gcu.data;
 
 import java.util.List;
-import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.gcu.model.Social;
 
 public class SocialDAO implements DataAccessInterface<Social> {
 
-	@SuppressWarnings("unused")
-	private DataSource dataSource; // Datasource grabbed from appconfig
+	@Autowired
 	private JdbcTemplate jdbcTemp; // Used for spring jdbc database calls
-
-	/**
-	 * This method sets the data source for my database calls and instantiates the
-	 * template.
-	 * 
-	 * @param dataSource.
-	 * @return Nothing.
-	 */
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		this.jdbcTemp = new JdbcTemplate(dataSource);
-	}
 
 	/**
 	 * This method takes the user's id and returns the user model for them. If there

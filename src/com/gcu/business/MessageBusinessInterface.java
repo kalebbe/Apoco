@@ -50,7 +50,7 @@ public interface MessageBusinessInterface {
 	 * @param type Type of messages to look for. (used for requests as well).
 	 * @return List<Message> This is the list of inbox messages returned.
 	 */
-	public List<Message> getMessages(int id, String type);
+	public List<Message> getMessages(int id, String theme, String type);
 
 	/**
 	 * Checks to see if the user has any friend requests.
@@ -59,5 +59,53 @@ public interface MessageBusinessInterface {
 	 * @return boolean Whether or not they have requests.
 	 */
 	public boolean checkRequest(int receiverId, String type);
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+	
+	/**
+	 * Gets the count of the specified notification type.
+	 * @param id
+	 * @param type
+	 * @return int
+	 */
+	public int getNotifications(int id, String type);
+=======
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 
+	
+	/**
+	 * Sends a message to the selected user
+	 * @param senderId
+	 * @param receiverId
+	 * @param parentId
+	 * @param body
+	 * @param theme
+	 * @return boolean
+	 */
+	public boolean sendMessage(int senderId, int receiverId, int parentId, String body, String theme);
+
+	/**
+	 * Retrieves a thread of messages
+	 * @param id
+	 * @return List<Message>
+	 */
+	public List<Message> getThread(int id);
+
+	/**
+	 * Marks thread as read
+	 * @param t
+	 * @param theme
+	 * @return boolean
+	 */
+	public boolean markRead(Message t, String theme);
+
+	/**
+	 * Gets the other person's ID
+	 * @param id
+	 * @param msg
+	 * @return int
+	 */
+	public int getCorrespondentId(int id, Message msg);
 }

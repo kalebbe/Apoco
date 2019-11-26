@@ -78,11 +78,12 @@ public class FriendController {
 	
 	/**
 	 * This method loads a user's profile for the current user to view.
+	 * Removed RequestMethod because this can now use POST and GET.
 	 * @param id The id of the user being viewed.
-	 * @param session Well duh.
+	 * @param session
 	 * @return ModelAndView ... the viewProfile view and user model.
 	 */
-	@RequestMapping(path = "/view", method = RequestMethod.POST)
+	@RequestMapping(path = "/view")
 	public ModelAndView viewProfile(@RequestParam int id, HttpSession session) {
 		User user = us.findSocUser(id, (int)session.getAttribute("id"));
 		user.setFriend(fs.checkFriend((int)session.getAttribute("id"), id)); //Sets whether this user is FRIEND or FOE
@@ -100,7 +101,7 @@ public class FriendController {
 		List<User> users = new ArrayList<User>(); //Instantiated list of users
 		if(ms.checkRequest((int)session.getAttribute("id"), "request")){ //Checks if user has any friend requests.
 			session.setAttribute("page", "requests"); //Again, multiple purposes. This one is for a requests page.
-			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request"); //Gets all the user's friend requests.
+			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request", "RECEIVER_ID"); //Gets all the user's friend requests.
 			users = fs.getRequestProfiles(messages); //Gets the requestee's profiles.
 		}
 		else {
@@ -112,10 +113,10 @@ public class FriendController {
 	
 	/**
 	 * This method is used to actually add a friend. Must be the confirmation of a request to get here.
-	 * @param id The id of the message(read: friend request).
-	 * @param friendId The id of the friend being added.
-	 * @param session The damn session.
-	 * @return ModelAndView Welp.
+	 * @param id
+	 * @param friendId
+	 * @param session
+	 * @return ModelAndView
 	 */
 	@RequestMapping(path = "/addFriend", method = RequestMethod.POST)
 	public ModelAndView addFriend(@RequestParam int id, @RequestParam int friendId, HttpSession session) {
@@ -131,7 +132,7 @@ public class FriendController {
 		List<User> users = new ArrayList<User>();
 		if(ms.checkRequest((int)session.getAttribute("id"), "request")){
 			session.setAttribute("page", "requests");
-			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request");
+			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request", "RECEIVER_ID");
 			users = fs.getRequestProfiles(messages);
 		}
 		else {
@@ -159,13 +160,15 @@ public class FriendController {
 		List<User> users = new ArrayList<User>();
 		if(ms.checkRequest((int)session.getAttribute("id"), "request")){
 			session.setAttribute("page", "requests");
-			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request");
+			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request", "RECEIVER_ID");
 			users = fs.getRequestProfiles(messages);
 		}
 		else {
 			session.setAttribute("page", "friends");
 			users = fs.getFriends((int)session.getAttribute("id"));
 		}
+		
+		session.setAttribute("requests", ms.getNotifications((int)session.getAttribute("id"), "request"));
 		return new ModelAndView("friendList", "users", users);
 	}
 	
@@ -177,7 +180,7 @@ public class FriendController {
 	 */
 	@RequestMapping(path = "/sendRequest", method = RequestMethod.POST)
 	public ModelAndView sendRequest(@RequestParam int id, HttpSession session) {
-		Message msg = new Message((int)session.getAttribute("id"), id, null, "request");
+		Message msg = new Message((int)session.getAttribute("id"), id, -1, null, "request");
 		if(fs.sendRequest(msg)) {
 			session.setAttribute("message1", "Friend request sent!"); //Congrats you got through. They'll deny it.
 		}

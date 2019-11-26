@@ -15,22 +15,15 @@ package com.gcu.data;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import com.gcu.model.Friend;
 
 public class FriendDAO{
 
+	@Autowired
 	private JdbcTemplate jdbcTemp;
-	
-	/**
-	 * This is just setting the datasource for this dao
-	 * @param dataSource Self Explanatory.
-	 */
-	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemp = new JdbcTemplate(dataSource);
-	}
 	
 	/**
 	 * This method grabs all of the friends for a specific user.

@@ -31,6 +31,7 @@ public class MessageMapper implements RowMapper {
 		message.setSenderId(rs.getInt("SENDER_ID"));
 		message.setBody(rs.getString("BODY"));
 		message.setType(rs.getString("TYPE"));
+		message.setDate((rs.getTimestamp("DATE_SENT")).toLocalDateTime());
 		return message;
 	}
 	

@@ -23,13 +23,13 @@
 	</c:choose>
 	<c:choose>
 		<c:when test="${sessionScope.message != null}">
-			<p style="color: #a70000;">
+			<p class="error">
 				<c:out value="${sessionScope.message}" />
 			</p>
 			<c:remove var="message" />
 		</c:when>
 		<c:when test="${sessionScope.message1 != null}">
-			<p style="color: #000000;">
+			<p>
 				<c:out value="${sessionScope.message1}" />
 			</p>
 			<c:remove var="message1" />
@@ -78,6 +78,17 @@
 				</c:when>
 				<c:otherwise>
 					<div align="center">
+						<form method="POST" action="../messages/send">
+							<input type="hidden" name="userId" value="${user.id}" />
+							<input type="hidden" name="parentId" value="-1" />
+							<textarea name="body"
+								style="white-space: pre-wrap: overflow:hidden;" cols="50" rows = "5"
+								minlength="10" maxlength="50000" 
+								oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+							<br><br>
+							<button class="btn" type="submit" style="background-color: #000000; color: #ffffff;">Send Message</button>	
+						</form>
+						
 						<button class="btn" id="remFriend" onclick="ajaxFeed('friends/removeFriend', 'id', '#remFriend')"
 							style="background-color: #a70000; color: #ffffff;"
 							value="${user.id}">Remove Friend</button>
@@ -92,13 +103,13 @@
 		<table>
 			<c:choose>
 			<c:when test="${sessionScope.message2 != null}">
-				<p style="color: #a70000;">
+				<p class="error">
 					<c:out value="${sessionScope.message2}" />
 				</p>
 				<c:remove var="message2" />
 			</c:when>
 			<c:when test="${sessionScope.message3 != null}">
-				<p style="color: #000000;">
+				<p>
 					<c:out value="${sessionScope.message3}" />
 				</p>
 				<c:remove var="message3" />
@@ -129,7 +140,7 @@
 
 									<textarea id="feedTarget${count}" cols="40" disabled="disabled"
 										name="feed" minlength="20" maxlength="5000"
-										style="white-space: pre-wrap; border: none; outline: none; background-color: white; resize: none; overflow: hidden;"
+										style="white-space: pre-wrap; border: none; outline: none; background-color: #484848; color: #ffffff; overflow: hidden; resize: none"
 										oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'><c:out
 											value="${feed.feed}" /></textarea>
 								</div>

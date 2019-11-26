@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gcu.business.BusinessInterface;
+import com.gcu.business.DatingInterface;
 import com.gcu.business.SocialBusinessInterface;
 import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.User;
@@ -30,6 +31,7 @@ public class LoginController {
 	private UserBusinessInterface us; //Changed to private per rubric feedback
 	private SocialBusinessInterface ss;
 	private BusinessInterface bs;
+	private DatingInterface ds;
 	
 	/**
 	 * Dependency injection for the UserBusinessService.
@@ -59,6 +61,11 @@ public class LoginController {
 	@Autowired
 	public void setBusinessService(BusinessInterface bs) {
 		this.bs = bs;
+	}
+	
+	@Autowired
+	public void setDatingService(DatingInterface ds) {
+		this.ds = ds;
 	}
 	
 	/**
@@ -91,9 +98,24 @@ public class LoginController {
 		if(ss.checkSocial(user.getId())) { //Checks if the user has a social profile
 			session.setAttribute("hasSocial", true);
 		}
+<<<<<<< Updated upstream
 		if(bs.checkBusiness(user.getId())) {
 			session.setAttribute("hasBusiness", true);
 		}
+=======
+<<<<<<< HEAD
+		if(bs.checkBusiness(user.getId())) { //Checks if the user has a business profile
+			session.setAttribute("hasBusiness", true);
+		}
+		if(ds.checkDating(user.getId())) { //Checks if the user has a dating profile
+			session.setAttribute("hasDating", true);
+		}
+=======
+		if(bs.checkBusiness(user.getId())) {
+			session.setAttribute("hasBusiness", true);
+		}
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 		session.setAttribute("id", user.getId()); //Sets user id for grabbing data
 		session.setAttribute("access", user.getAccess()); //Sets the access level of the account logged in
 		

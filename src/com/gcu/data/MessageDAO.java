@@ -15,22 +15,16 @@ package com.gcu.data;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import com.gcu.model.Message;
 
 public class MessageDAO implements DataAccessInterface<Message> {
 
-	private JdbcTemplate jdbcTemp;
 	
-	/**
-	 * This is setting the dataSource for this dao
-	 * @param dataSource The datasource.
-	 */
-	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemp = new JdbcTemplate(dataSource);
-	}
+	@Autowired
+	private JdbcTemplate jdbcTemp;
 	
 	/**
 	 * This method gets a message by its id.
@@ -41,6 +35,20 @@ public class MessageDAO implements DataAccessInterface<Message> {
 	@Override
 	public Message findById(int id) {
 		String sql = "SELECT * FROM messages WHERE ID=?";
+		Message message = (Message) jdbcTemp.queryForObject(sql, new Object[] { id }, new MessageMapper());
+		return message;
+	}
+	
+	/**
+	 * This gets the last message in a thread of messages to check if it's read or unread
+	 * for the logge din user.
+	 * @param id
+	 * @return Message
+	 */
+	@SuppressWarnings("unchecked")
+	public Message getLastThread(int id) {
+		String sql;
+		sql = "SELECT * FROM messages where PARENT_ID=? ORDER BY DATE_SENT desc LIMIT 1";
 		Message message = (Message) jdbcTemp.queryForObject(sql, new Object[] { id }, new MessageMapper());
 		return message;
 	}
@@ -59,25 +67,47 @@ public class MessageDAO implements DataAccessInterface<Message> {
 	}
 	
 	/**
-	 * This method gets the inbox of a certain user. Refined by type.
+	 * This method gets the inbox or outbox of a certain user. Refined by type.
 	 * @param id The id of the user logged in.
-	 * @param type The type of messages being grabbed.
+	 * @param type receiver or sender depending on inbox/outbox
+	 * @param type1 socUnread, busUnread
+	 * @param type2 socRead, busRead
 	 * @return List<Message> The returned messages.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Message> getMessages(int id, String type){
-		String sql = "SELECT * FROM messages WHERE RECEIVER_ID = ? AND TYPE = ?";
+	public List<Message> getMessages(int id, String type, String type1, String type2){
+		String sql = "SELECT * FROM messages WHERE " + type + " = ? AND (TYPE = ? OR TYPE = ?) AND PARENT_ID = '-1'";
 		//PreparedStatementSetter for multiple parameters.
 		List<Message> message = jdbcTemp.query(sql, new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException{
 				ps.setInt(1, id);
-				ps.setString(2, type);
+				ps.setString(2, type1);
+				ps.setString(3, type2);
 			}
 		}, new MessageMapper()); //Maps messages to their values.
 		return message;
 	}
-
+	
+	/**
+	 * This method gets all messages within a thread. Threads are created when a user sends
+	 * a message to another from their profile.
+	 * @param id
+	 * @return List<message>
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Message> getThread(int id){
+		String sql= "SELECT * FROM messages WHERE PARENT_ID = ? ORDER BY DATE_SENT asc";
+		
+		List<Message> message = jdbcTemp.query(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException{
+				ps.setInt(1, id);
+			}
+		}, new MessageMapper());
+		return message;
+	}
+	
 	/**
 	 * This method is used to create a new message in the database. Currently
 	 * used only for requests.
@@ -86,26 +116,27 @@ public class MessageDAO implements DataAccessInterface<Message> {
 	 */
 	@Override
 	public boolean create(Message t) {
-		String sql = "INSERT INTO messages (SENDER_ID, RECEIVER_ID, BODY, TYPE) VALUES(?,?,?,?)";
-		if(jdbcTemp.update(sql, t.getSenderId(), t.getReceiverId(), t.getBody(), t.getType()) == 1) {
+		String sql = "INSERT INTO messages (SENDER_ID, RECEIVER_ID, PARENT_ID, BODY, TYPE) VALUES(?,?,?,?,?)";
+		if(jdbcTemp.update(sql, t.getSenderId(), t.getReceiverId(), t.getParentId(), t.getBody(), t.getType()) == 1) {
 			return true;
 		}
 		return false;
 	}
 
 	/**
-	 * This method is used to update a message in the database. Currently not in
-	 * use.
+	 * This method is used to update a message in the database.
 	 * @param t The message being updated.
 	 * @return boolean Whether or not the object update was successful.
 	 */
 	@Override
 	public boolean update(Message t) {
-		String sql = "UPDATE messages SET SENDER_ID = ?, RECEIVER_ID = ?, BODY = ?, TYPE = ? WHERE ID = ?";
-		if(jdbcTemp.update(sql, t.getSenderId(), t.getReceiverId(), t.getBody(), t.getType(), t.getId()) == 1) {
-			return true;
+		String sql = "UPDATE messages SET TYPE = ? WHERE ID = ?";
+	
+		boolean result = false;
+		if(jdbcTemp.update(sql, t.getType(), t.getId()) == 1) {
+			result = true;
 		}
-		return false;
+		return result;
 	}
 
 	/**
@@ -146,5 +177,21 @@ public class MessageDAO implements DataAccessInterface<Message> {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * The purpose of this method is to retrieve the number of unread messages, friend requests, connection
+	 * requests, or matches. 
+	 * @param id
+	 * @param type
+	 * @return int
+	 */
+	public int getNotifications(int id, String type) {
+		String sql;
+		int count; //Holds the result
+		sql = "SELECT count(*) FROM messages WHERE RECEIVER_ID=? AND TYPE=?";
+		count = jdbcTemp.queryForObject(sql,  new Object[] {id, type}, Integer.class); 
+		
+		return count;
 	}
 }

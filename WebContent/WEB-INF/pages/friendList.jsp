@@ -16,13 +16,13 @@
 	</c:choose>
 	<c:choose>
 		<c:when test="${sessionScope.message != null}">
-			<p style="color: #a70000;">
+			<p class="error">
 				<c:out value="${sessionScope.message}" />
 			</p>
 			<c:remove var="message" />
 		</c:when>
 		<c:when test="${sessionScope.message2 != null}">
-			<p style="color: #000000;">
+			<p>
 				<c:out value="${sessionScope.message2}" />
 			</p>
 			<c:remove var="message2" />

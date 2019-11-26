@@ -13,13 +13,28 @@ package com.gcu.data;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+<<<<<<< Updated upstream
 import javax.sql.DataSource;
+=======
+<<<<<<< HEAD
+import org.springframework.beans.factory.annotation.Autowired;
+=======
+import javax.sql.DataSource;
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import com.gcu.model.Connection;
 
 public class ConnectionDAO {
 	
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+	@Autowired
+	private JdbcTemplate jdbcTemp;
+=======
+>>>>>>> Stashed changes
 	private JdbcTemplate jdbcTemp;
 	
 	/**
@@ -29,6 +44,10 @@ public class ConnectionDAO {
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemp = new JdbcTemplate(dataSource);
 	}
+<<<<<<< Updated upstream
+=======
+>>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
+>>>>>>> Stashed changes
 
 	/**
 	 * This method retrieves all of the connections that the logged in user has.

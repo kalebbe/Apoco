@@ -21,23 +21,23 @@
 					</form:select>
 					<br> <br>
 				</h5>
-				<form:errors style="color: #a70000;" path="job" />
+				<form:errors class="error" path="job" />
 				<h5>
 					Job:
-					<form:input type="text" path="job" style="margin-left:72px;" minlength="2" maxlength="100" />
+					<form:input type="text" path="job" minlength="2" maxlength="100" />
 					<br> <br> Education:
-					<form:select path="education" style="margin-left:15px;">
+					<form:select path="education">
 						<form:options items="${edList}" />
 					</form:select>
 					<br> <br>
 				</h5>
-				<form:errors style="color: #a70000;" path="school" />
+				<form:errors class="error" path="school" />
 				<h5>
 					School:
-					<form:input type="text" path="school" style="margin-left: 45px;" minlength="2" maxlength="100" />
+					<form:input type="text" path="school" minlength="2" maxlength="100" />
 				</h5>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-6" align="right">
 				<h5>
 					<!--
 					<errors style="color: #a70000;" path="picture"/>
@@ -56,7 +56,7 @@
 					</form:select>
 					<br> <br>
 				</h5>
-				<form:errors style="color: #a70000;" path="city" />
+				<form:errors class="error" path="city" />
 				<h5>
 					City:
 					<form:input type="text" path="city" minlength="2" maxlength="40" />
@@ -77,14 +77,14 @@
 		</div>
 		<div align="center">
 			<br> <br>
-			<form:errors style="color: #a70000;" path="bio" />
+			<form:errors class="error" path="bio" />
 			<h5>Biography:</h5>
-			<br>
+			<form:textarea style="white-space: pre-wrap;" id="word_count"
+				path="bio" rows="10" cols="40" minlength="50" maxlength="5000" 
+				oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' />
 			<p style="font-size: xx-small;">
 				Word count: <span id="display_count">0</span> of 200 (Max)<br>
 			</p>
-			<form:textarea style="white-space: pre-wrap;" id="word_count"
-				path="bio" rows="10" cols="40" minlength="50" maxlength="5000" />
 			<h5>
 				<br> Privacy Mode:
 				<form:radiobutton path="privacy" name="privacy" value="true"

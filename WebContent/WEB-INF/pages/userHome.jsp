@@ -18,7 +18,7 @@
 			</h2>
 		</div>
 		<div class="row people">
-			<div class="col-md-6 col-lg-6 item" style="color: #0fb800;">
+			<div class="col-md-4 col-lg-4 item" style="color: #005024;">
 				<div class="box">
 					<c:choose>
 						<c:when test="${sessionScope.hasSocial != true}">
@@ -26,7 +26,7 @@
 							<p class="description">You have not set up a social account!</p>
 							<a class="btn btn-light action-button" role="button"
 								href="../social/social"
-								style="background-color: #0fb800; color: #ffffff; font-size: 14px;">Create
+								style="background-color: #005024; color: #ffffff; font-size: 14px;">Create
 								Profile</a>
 						</c:when>
 						<c:otherwise>
@@ -36,19 +36,36 @@
 					</c:choose>
 				</div>
 			</div>
-			<div class="col-md-6 col-lg-6 item" style="color: rgb(0, 7, 169);">
+			<div class="col-md-4 col-lg-4 item" style="color: #09136e;">
 				<div class="box">
 					<c:choose>
 						<c:when test="${sessionScope.hasBusiness != true}">
 							<h3 class="name">Apoco Business</h3>
 							<p class="description">You have not set up a business account!</p>
 							<a class="btn btn-light action-button" role="button" href="../business/bus"
-								style="background-color: rgb(0, 7, 169); color: #ffffff; font-size: 14px;">Create
+								style="background-color: #09136e; color: #ffffff; font-size: 14px;">Create
 								Profile</a>
 						</c:when>
 						<c:otherwise>
 							<h3 class="name">Apoco Business</h3>
 							<p class="description">Business mini dashboard coming soon!</p>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-4 item" style="color: #dd00b9;">
+				<div class="box">
+					<c:choose>
+						<c:when test="${sessionScope.hasDating != true}">
+							<h3 class="name">Apoco Dating</h3>
+							<p class="description">You have not set up a dating account!</p>
+							<a class="btn btn-light action-button" role="button" href="../dating/dat"
+								style="background-color: #dd00b9; color: #ffffff; font-size: 14px;">Create 
+								Profile</a>
+						</c:when>
+						<c:otherwise>
+							<h3 class="name">Apoco Dating</h3>
+							<p class="description">Dating mini dashboard coming soon!</p>
 						</c:otherwise>
 					</c:choose>
 				</div>

@@ -42,7 +42,7 @@
 		<p style="font-size: xx-small;">
 			Word count: <span id="display_count">0</span> of 200 (Max)
 		</p>
-		<form:errors style="color: #a70000;" path="feed" />
+		<form:errors class="error" path="feed" />
 		<h5>
 			<form:radiobutton path="privacy" value="public" label=" Public"
 				checked="checked" />
@@ -54,7 +54,7 @@
 	</form:form>
 	<c:choose>
 		<c:when test="${sessionScope.message != null}">
-			<p style="color: #000000; font-size: small;">
+			<p style="font-size: small;">
 				<c:out value="${sessionScope.message}" />
 			</p>
 			<c:remove var="message" />
@@ -64,13 +64,13 @@
 	<table>
 		<c:choose>
 			<c:when test="${sessionScope.message2 != null}">
-				<p style="color: #a70000;">
+				<p class="error">
 					<c:out value="${sessionScope.message2}" />
 				</p>
 				<c:remove var="message2" />
 			</c:when>
 			<c:when test="${sessionScope.message3 != null}">
-				<p style="color: #000000;">
+				<p>
 					<c:out value="${sessionScope.message3}" />
 				</p>
 				<c:remove var="message3" />
@@ -96,12 +96,10 @@
 			<tr>
 				<td><c:choose>
 						<c:when test="${feed.userId == sessionScope.id}">
-							<div
-								onclick="$('#feedTarget${count}').attr('disabled', false); $('#target${count}').css('display', 'inline-block');">
-
+							<div onclick="clickDiv(${count})">
 								<textarea id="feedTarget${count}" cols="40" disabled="disabled"
 									name="feed" minlength="20" maxlength="5000"
-									style="white-space: pre-wrap; border: none; outline: none; background-color: white; resize: none; overflow: hidden;"
+									style="white-space: pre-wrap; border: none; outline: none; background-color: #484848; color: #ffffff; resize: none; overflow: hidden;"
 									oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'><c:out
 										value="${feed.feed}" /></textarea>
 							</div>
@@ -113,8 +111,9 @@
 									Update</button>
 								<br>
 							</div>
+							<!-- Commenting out for now because this does not work in Firefox. Working on a fix.
 							<p style="font-size: xx-small;" align="center">Double click
-								your post to edit it!</p>
+								your post to edit it!</p>-->
 						</c:when>
 						<c:otherwise>
 							<p style="white-space: pre-wrap">

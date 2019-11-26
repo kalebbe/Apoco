@@ -11,26 +11,15 @@
 package com.gcu.data;
 
 import java.util.List;
-import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.gcu.model.Business;
 
 public class BusinessDAO implements DataAccessInterface<Business> {
 
-	@SuppressWarnings("unused")
-	private DataSource dataSource;
+	@Autowired
 	private JdbcTemplate jdbcTemp;
-
-	/**
-	 * Sets the data source for this class and instantiates the spring jdbc template.
-	 * @param dataSource.
-	 * @return Nothing.
-	 */
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		this.jdbcTemp = new JdbcTemplate(dataSource);
-	}
 
 	/**
 	 * This method is used to return a Business profile using its id. Realistically, this is probably
