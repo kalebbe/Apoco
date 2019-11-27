@@ -6,6 +6,7 @@
 [minesweeper]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Minesweeper.png
 
 # Apoco
+Come visit us at https://apoco-app.herokuapp.com/
 ![Apoco][logo]
 ---
 ### Table of Contents
@@ -34,8 +35,11 @@
 ### Global (Login/Registration/Landing page)
 ![Global][global]
 ##### Overview
+This section will give a brief explanation of the global module of the Apoco web application. This module includes the login, registration, index, user home, and account editor pages.
 ##### Purpose
+The global module is the first interaction all users will have with the Apoco website. We tried our best to make a design and logo that would be visual appealing to all users and attract new users. All users that want to use any of the services Apoco offers are required to create a global account before they can make any other account. This gives our users the freedom to create profiles for the services they want to use rather than forcing them to use all of our services.
 ##### Functionality
+The core functionality included in the Global module of Apoco include account registration, login, and account editting. Users must follow validation rules regarding usernames, emails, and passwords when creating or updating their account. Passwords are hashed using an up-to-date formula prior to being stored in the database.
 
 ---
 ### Social Platform
