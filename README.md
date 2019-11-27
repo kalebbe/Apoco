@@ -1,4 +1,9 @@
-[logo]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/Apoco.png
+[logo]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Apoco.png
+[global]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Global.png
+[dating]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Dating.png
+[business]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Business.png
+[social]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Social.png
+[minesweeper]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Minesweeper.png
 
 # Apoco
 ![Apoco][logo]
@@ -27,25 +32,31 @@
 - [Views](https://github.com/kalebbe/Apoco/tree/master/WebContent/WEB-INF/pages)- Contains the visual pages of the website.
 ---
 ### Global (Login/Registration/Landing page)
+![Global][global]
 ##### Overview
 ##### Purpose
 ##### Functionality
 
 ---
 ### Social Platform
+![Social][social]
 ##### Overview
 This section will give a brief explanation of the purpose of our social platform and a list of files used in the creation of the social platform.
 ##### Purpose
 ##### Functionality
+## Minesweeper
+![Minesweeper][minesweeper]
 
 ---
 ### Business Platform
+![Business][business]
 ##### Overview
 ##### Purpose
 ##### Functionality
 
 ---
 ### Dating Platform
+![Dating][dating]
 ##### Overview
 ##### Purpose
 ##### Functionality
