@@ -89,6 +89,7 @@ This section will give a brief explanation of the purpose of our social platform
 The social platform is the biggest part of Apoco and has been the focus of most of the project and testing. Our social media allows our users to connect with each other and communicate with their closest friends. Users can also enable privacy mode so that other users can only search for them by their email if they choose to do so. This is just a shell of what our social media platform is going to become over time. More browser games can be developed and added to the website as requested and we can give users a way to compete with their friends.
 ### Functionality
 Current functionaly includes profile creation, minesweeper, post creation/deletion, voting on posts, adding friends, and messaging friends. Our social platform is still in the early stages like the rest of our website and can only grow from here.
+
 **Creating a social profile (Controller code)**
 ```java
 @RequestMapping(path = "/submitSocial", method = RequestMethod.POST)
@@ -108,7 +109,8 @@ Current functionaly includes profile creation, minesweeper, post creation/deleti
 ```
 **Minesweeper**
 ![Minesweeper][minesweeper]
-**Minesweeper board generation**
+
+**Minesweeper board Generation**
 ```java
 public void generateBoard(int size) {
   btnHolder = new Button[size][size];
@@ -131,16 +133,90 @@ public void generateBoard(int size) {
 	}
 }
 ```
+
+**Minesweeper Recursive Cell Processing**
+Cells around the clicked cell are checked recursively using this method. This allows the effect where all the cells that would equal 0 in minesweeper around the clicked cell automatically get cleared.
+```java
+public static void processCell(int x, int y, int size) {
+		if(inBounds(x, y, size)) { //This makes sure we don't get an outofbounds exception
+			if(btnHolder[x][y].isLive()) { //Kaboom
+				setLose(size);
+			}
+			else if(btnHolder[x][y].getLiveNeighbors() != 0) {
+				btnHolder[x][y].setVisited(true); //Button has now been visited
+			}
+			else {
+				for(int i = -1; i < 1; i++) { //There's that loop around the neighbors again
+					for(int j = -1; j < 1; j++) {
+						if(inBounds(x + i, y + j, size) && !btnHolder[x][y].isVisited()) {
+							btnHolder[x][y].setVisited(true);
+							processCell(x-1, y, size); //This is recursively calling
+							processCell(x+1, y, size); //this same method 8 times to check
+							processCell(x, y-1, size); //every cell around the clicked cell.
+							processCell(x, y+1, size); //recursion is a bit confusing though.
+							processCell(x+1, y+1, size);
+							processCell(x-1, y-1, size);
+							processCell(x+1, y-1, size);
+							processCell(x-1, y+1, size);
+						}
+					}
+				}
+			}
+		}
+	}
+```
 ---
 ## Business Platform
 ![Business][business]
 ### Overview
+This section will talk about the purpose of the business platform and some of the functionality included in the business portion as well as some planned future functionality. This is a section of the website that could see some huge growth with the addition of useful functionality.
 ### Purpose
+The purpose of the business platform on Apoco is to give our users a place to connect with some of their colleagues and view job openings in their area. Most of the functionality is still in beta; however, we're looking to expand this section to provide a unique experience to our users.
 ### Functionality
+The current functionality in the business platform includes profile creation, searching jobs, searching users, adding connections, viewing jobs, and messaging connections. We would like to expand this platform to include dynamic job creation by company accounts, free resume creation for our users, application creation for our company accounts, job recommendations for your connections and more! Stay tuned.
 
+**Message Threads**
+This functionality is used across all platforms, but we'll talk about it a little more here and provide a code snippet showing some of the backend logic. Message correspondence between 2 users is placed into a message thread to help them keep their conversation going.
+```java
+@Override
+public List<Message> getThread(int id){
+   List<Message> msgs = dao.getThread(id);
+   msgs.add(0, dao.findById(id)); //Puts the parent message at the start of the list
+		
+   //Attach sender User to each message
+   for(Message msg : msgs) {
+      msg.setUser(uDao.findById(msg.getSenderId()));
+   }
+		
+   return msgs;
+}
+```
 ---
 ## Dating Platform
 ![Dating][dating]
 ### Overview
+This section will go into more detail about the purpose of the dating platform at Apoco and discuss some of the current and planned functionality in this section. Our dating platform is the newest addition to our website and is still in the very early stages of development. This platform will have more functionality very soon for the senior capstone showcase on December 5th.
 ### Purpose
+Our goal with the dating platform of Apoco is to give users a place to meet with other people with similar interests. We understand that our users don't want their business colleagues or their friends to know about their dating life (at least not always), so we've taken steps to separate dating from the other platforms. Account first names and last names are not used in the dating portion of our website, but instead users are required to select a nickname when they create their dating profile.
 ### Functionality
+The current functionality in the dating platform is unfortunately limited to profile creation. Once users create their dating profile, they will be sent to a dashboard and they will not be able to perform any other actions on the dating platform. Our intent is to drop a few more bits of functionality to the dating platform before the capstone showcase on December 5th. The current plan is to implement a matching system where users will be matched based upon their answers to 10 questions. These users will then be able to browse matches and message other users. Over time we intend to refine the matchmaking algorithm and provide additional feautures to the dating platform as they are requested.
+
+**Dating Profile Age Verification (18+)**
+We don't want minors using our dating platform, so we implemented age verification logic to ensure that our users are over the age of 18.
+```java
+@Override
+public boolean checkAge(Dating t) {
+   //Creates a date object with the data to check difference
+   LocalDate birthDate = LocalDate.of(t.getBirthYear(), t.getBirthMonth(), t.getBirthDay());
+		
+   //Returns the year between birthDate and current
+   int age = Period.between(birthDate, LocalDate.now()).getYears();
+		
+   if(age < 18) {
+      return false;
+   }
+   else {
+      return true;
+   }
+}
+```
