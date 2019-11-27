@@ -56,6 +56,7 @@ https://youtu.be/YYS6Z7Q2Dq4
 
 ## Relational Diagram
 ![Relational Diagram][relational]
+
 This diagram is a general representation of the relationships used throughout our application design. Our controllers use different models and call methods from the business services. The business services each have an interface that they implement, and they also utilize the data services. Finally, most of the data services implement the DataAccessInterface.
 
 ## Design Tools
