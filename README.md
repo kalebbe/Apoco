@@ -5,6 +5,11 @@
 [social]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Social.png
 [minesweeper]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Minesweeper.png
 [sysdesign]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/SystemDesign-Apoco.png
+[ajax]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Ajax.jpg
+[bootstrap]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Bootstrap.png
+[eclipse]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Eclipse.png
+[java]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Java.jpeg
+[spring]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Spring.png
 
 # Apoco
 Come visit us at https://apoco-app.herokuapp.com/
@@ -48,6 +53,35 @@ https://youtu.be/YYS6Z7Q2Dq4
 ![System Design][sysdesign]
 
 ## Design Tools
+![Spring MVC][spring]
+
+**Spring MVC**
+
+Apoco was built using the Model, View, Controller design pattern and heavily leveraged the Spring MVC framework. During the early stages of Apoco, we wanted to build our website using the MEAN stack; however, after many hours of frustration, we determined that Spring MVC and Java would better match our needs and expertise. 
+
+![Java][java]
+
+**Java**
+
+Java is one of the first programming languages we learn at Grand Canyon University and because of that, it's also one of our most concrete languages. Apoco was built using Java and further development will be continued in Java.
+
+![Eclipse][eclipse]
+
+**Eclipse**
+
+I think we will always have a love-hate relationship with Eclipse as developers. Despite its many frustrations, Eclipse makes so many things easier than using a normal Notepad editor.
+
+![Bootstrap][bootstrap]
+
+**Bootstrap**
+
+Pretty much our entire project is lined with bootstrap methods or leverages bootstrap in some way. Mick and I started using Bootstrap studios early in our college years and it has helped us immensely in easing the development of our front end web pages. That being said, as we've gotten better at development, most web pages are created manually, but still leverage bootstrap libraries.
+
+![jQuery][ajax]
+
+**jQuery and Ajax**
+
+jQuery is utilized all throughout Apoco and some social areas of Apoco also utilize Ajax for form posting to prevent page refreshing. This is important in the Minesweeper module because it simulates a console-style gaming experience.
 
 ## Global (Login/Registration/Landing page)
 ![Global][global]
@@ -96,19 +130,21 @@ Current functionaly includes profile creation, minesweeper, post creation/deleti
 **Creating a social profile (Controller code)**
 ```java
 @RequestMapping(path = "/submitSocial", method = RequestMethod.POST)
-  public ModelAndView submitSocial(@Valid @ModelAttribute("social") Social social, BindingResult result,
-			HttpSession session) {
-		if (result.hasErrors()) { //Binding result holds data validation errors from the model
-			return new ModelAndView("socialProfile", "social", social); //Returns socialProfile with errors
-		}
-		social.setUserId((int)session.getAttribute("id"));
-		if(ss.createSocial(social)) { //Successfully creates a social profile in the database
+public ModelAndView submitSocial(@Valid @ModelAttribute("social") Social social, BindingResult result,
+   HttpSession session) {
+   if (result.hasErrors()) { //Binding result holds data validation errors from the model
+      return new ModelAndView("socialProfile", "social", social); //Returns socialProfile with errors
+   }
+   social.setUserId((int)session.getAttribute("id"));
+   if(ss.createSocial(social)) { //Successfully creates a social profile in the database
       //Session attribute that lets the user skip the profile creation in the future
-			session.setAttribute("hasSocial", true); 
-			return new ModelAndView("socialDash", "social", social);
-		}
-		else { //Social profile failed insertion into database.
-			return new ModelAndView("socialProfile", "social", new Social());
+      session.setAttribute("hasSocial", true); 
+      return new ModelAndView("socialDash", "social", social);
+   }
+   else { //Social profile failed insertion into database.
+      return new ModelAndView("socialProfile", "social", new Social());
+   }
+}
 ```
 **Minesweeper**
 ![Minesweeper][minesweeper]
