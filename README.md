@@ -18,6 +18,7 @@ https://youtu.be/YYS6Z7Q2Dq4
 ### Table of Contents
 - [Directory](https://github.com/kalebbe/Apoco#directory)
 - [System Design](https://github.com/kalebbe/Apoco#top-down-system-design-model)
+- [Design Tools](https://github.com/kalebbe/Apoco#design-tools)
 - [Global](https://github.com/kalebbe/Apoco#global-loginregistrationlanding-page)
    * [Overview](https://github.com/kalebbe/Apoco#overview)
    * [Purpose](https://github.com/kalebbe/Apoco#purpose)
@@ -45,6 +46,8 @@ https://youtu.be/YYS6Z7Q2Dq4
 
 ## Top-down System Design Model
 ![System Design][sysdesign]
+
+## Design Tools
 
 ## Global (Login/Registration/Landing page)
 ![Global][global]
@@ -113,24 +116,24 @@ Current functionaly includes profile creation, minesweeper, post creation/deleti
 **Minesweeper board Generation**
 ```java
 public void generateBoard(int size) {
-  btnHolder = new Button[size][size];
+   btnHolder = new Button[size][size];
 		
-	//first loops to check if each button will be a bomb and then set it
-	for(int i = 0; i < size; i++) {
-		for(int j = 0; j < size; j++) {
-			btnHolder[i][j] = new Button(i, j);
-			if(isActive()) {
-				btnHolder[i][j].setLive(true);
-			}
-		}
-	}
+   //first loops to check if each button will be a bomb and then set it
+   for(int i = 0; i < size; i++) {
+      for(int j = 0; j < size; j++) {
+         btnHolder[i][j] = new Button(i, j);
+	 if(isActive()) {
+	    btnHolder[i][j].setLive(true);
+	 }
+      }
+   }
 		
-	//Second loops to set live neighbors for each button
-	for(int i = 0; i < size; i++) {
-		for(int j = 0; j < size; j++) {
-			countNeighbors(i, j, size);
-		}
-	}
+   //Second loops to set live neighbors for each button
+   for(int i = 0; i < size; i++) {
+      for(int j = 0; j < size; j++) {
+         countNeighbors(i, j, size);
+      }
+   }
 }
 ```
 
@@ -138,32 +141,32 @@ public void generateBoard(int size) {
 Cells around the clicked cell are checked recursively using this method. This allows the effect where all the cells that would equal 0 in minesweeper around the clicked cell automatically get cleared.
 ```java
 public static void processCell(int x, int y, int size) {
-		if(inBounds(x, y, size)) { //This makes sure we don't get an outofbounds exception
-			if(btnHolder[x][y].isLive()) { //Kaboom
-				setLose(size);
-			}
-			else if(btnHolder[x][y].getLiveNeighbors() != 0) {
-				btnHolder[x][y].setVisited(true); //Button has now been visited
-			}
-			else {
-				for(int i = -1; i < 1; i++) { //There's that loop around the neighbors again
-					for(int j = -1; j < 1; j++) {
-						if(inBounds(x + i, y + j, size) && !btnHolder[x][y].isVisited()) {
-							btnHolder[x][y].setVisited(true);
-							processCell(x-1, y, size); //This is recursively calling
-							processCell(x+1, y, size); //this same method 8 times to check
-							processCell(x, y-1, size); //every cell around the clicked cell.
-							processCell(x, y+1, size); //recursion is a bit confusing though.
-							processCell(x+1, y+1, size);
-							processCell(x-1, y-1, size);
-							processCell(x+1, y-1, size);
-							processCell(x-1, y+1, size);
-						}
-					}
-				}
-			}
+   if(inBounds(x, y, size)) { //This makes sure we don't get an outofbounds exception
+      if(btnHolder[x][y].isLive()) { //Kaboom
+         setLose(size);
+      }
+      else if(btnHolder[x][y].getLiveNeighbors() != 0) {
+         btnHolder[x][y].setVisited(true); //Button has now been visited
+      }
+      else {
+         for(int i = -1; i < 1; i++) { //There's that loop around the neighbors again
+	    for(int j = -1; j < 1; j++) {
+		if(inBounds(x + i, y + j, size) && !btnHolder[x][y].isVisited()) {
+		   btnHolder[x][y].setVisited(true);
+		   processCell(x-1, y, size); //This is recursively calling
+		   processCell(x+1, y, size); //this same method 8 times to check
+		   processCell(x, y-1, size); //every cell around the clicked cell.
+		   processCell(x, y+1, size); //recursion is a bit confusing though.
+		   processCell(x+1, y+1, size);
+		   processCell(x-1, y-1, size);
+		   processCell(x+1, y-1, size);
+		   processCell(x-1, y+1, size);
 		}
-	}
+	     }
+          }
+       }
+    }
+}
 ```
 ---
 ## Business Platform
