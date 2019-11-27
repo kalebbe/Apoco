@@ -11,6 +11,7 @@ Come visit us at https://apoco-app.herokuapp.com/
 
 # Video Demonstration
 [![Demo](http://img.youtube.com/vi/YYS6Z7Q2Dq4/0.jpg)](http://www.youtube.com/watch?v=YYS6Z7Q2Dq4)
+https://youtu.be/YYS6Z7Q2Dq4
 ---
 ### Table of Contents
 - [Directory](https://github.com/kalebbe/Apoco#directory)
