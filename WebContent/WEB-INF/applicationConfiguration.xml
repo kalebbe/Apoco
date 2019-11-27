@@ -32,9 +32,9 @@
 	
 	<bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/apoco" />
-        <property name="username" value="root" />
-        <property name="password" value="" />
+        <property name="url" value="jdbc:mysql://localhost:3306/npt93jx9l21fcjr2" />
+        <property name="username" value="yf8udu3av46716id" />
+        <property name="password" value="hy9z8j25b1r5w190" />
         <property name="validationQuery" value="select 1"/>
     </bean>
     
