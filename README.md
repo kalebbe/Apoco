@@ -34,23 +34,36 @@ Come visit us at https://apoco-app.herokuapp.com/
 ---
 ### Global (Login/Registration/Landing page)
 ![Global][global]
-##### Overview
+#### Overview
 This section will give a brief explanation of the global module of the Apoco web application. This module includes the login, registration, index, user home, and account editor pages.
-##### Purpose
+#### Purpose
 The global module is the first interaction all users will have with the Apoco website. We tried our best to make a design and logo that would be visual appealing to all users and attract new users. All users that want to use any of the services Apoco offers are required to create a global account before they can make any other account. This gives our users the freedom to create profiles for the services they want to use rather than forcing them to use all of our services.
-##### Functionality
+#### Functionality
 The core functionality included in the Global module of Apoco include account registration, login, and account editting. Users must follow validation rules regarding usernames, emails, and passwords when creating or updating their account. Passwords are hashed using the BCrypt Maven dependency.
 
 **Registration with BCrypt password hash**
 ```java
 @Override
 public int register(User t) {
-	String hashPass = BCrypt.hashpw(t.getPassword(), BCrypt.gensalt()); // Takes the plain text pass and encrypts it
-	t.setPassword(hashPass); // Updating the model object for database insertion
-	if (dao.create(t)) { // creates a new
-		return dao.getId(t.getEmail()); // Returns the ID of the newly created user for session capture
-	} else
-		return 0; // 0 tells me that the user creation has failed
+   String hashPass = BCrypt.hashpw(t.getPassword(), BCrypt.gensalt()); // Takes the plain text pass and encrypts it
+   t.setPassword(hashPass); // Updating the model object for database insertion
+   if (dao.create(t)) { // creates a new
+      return dao.getId(t.getEmail()); // Returns the ID of the newly created user for session capture
+   } else
+      return 0; // 0 tells me that the user creation has failed
+}
+```
+
+**Hashed password check for login**
+```java
+@Override
+public User checkPass(String pass, int id) {
+   User user = dao.findById(id); // Grabs User object with ID
+
+   if (BCrypt.checkpw(pass, user.getPassword())) { // Checks user's pass with database password for match
+      return user;
+   } else
+      return null;
 }
 ```
 ---
