@@ -5,7 +5,7 @@
 [social]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Social.png
 [minesweeper]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Minesweeper.png
 [sysdesign]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/SystemDesign-Apoco.png
-[ajax]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/Ajax.jpg
+[ajax]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Ajax.jpg
 [bootstrap]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Bootstrap.png
 [eclipse]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Eclipse.png
 [java]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Java.jpeg
