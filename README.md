@@ -4,6 +4,7 @@
 [business]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Business.png
 [social]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Social.png
 [minesweeper]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Minesweeper.png
+[sysdesign]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/SystemDesign-Apoco.png
 
 # Apoco
 Come visit us at https://apoco-app.herokuapp.com/
@@ -37,6 +38,10 @@ https://youtu.be/YYS6Z7Q2Dq4
 - [Utilities](https://github.com/kalebbe/Apoco/tree/master/src/com/gcu/utilities)- Classes containing functions used throughout the application.
 - [Views](https://github.com/kalebbe/Apoco/tree/master/WebContent/WEB-INF/pages)- Contains the visual pages of the website.
 ---
+
+### Top-down System Design Model
+![System Design][sysdesign]
+
 ### Global (Login/Registration/Landing page)
 ![Global][global]
 #### Overview
