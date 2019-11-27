@@ -10,6 +10,7 @@
 [eclipse]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Eclipse.png
 [java]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Java.jpeg
 [spring]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/Spring.png
+[relational]: https://github.com/kalebbe/Apoco/blob/master/WebContent/assets/img/presentation/RelationalDiagram.png
 
 # Apoco
 Come visit us at https://apoco-app.herokuapp.com/
@@ -23,6 +24,7 @@ https://youtu.be/YYS6Z7Q2Dq4
 ### Table of Contents
 - [Directory](https://github.com/kalebbe/Apoco#directory)
 - [System Design](https://github.com/kalebbe/Apoco#top-down-system-design-model)
+- [Relational Diagram](https://github.com/kalebbe/Apoco#relational-diagram)
 - [Design Tools](https://github.com/kalebbe/Apoco#design-tools)
 - [Global](https://github.com/kalebbe/Apoco#global-loginregistrationlanding-page)
    * [Overview](https://github.com/kalebbe/Apoco#overview)
@@ -51,6 +53,10 @@ https://youtu.be/YYS6Z7Q2Dq4
 
 ## Top-down System Design Model
 ![System Design][sysdesign]
+
+## Relational Diagram
+![Relational Diagram][relational]
+This diagram is a general representation of the relationships used throughout our application design. Our controllers use different models and call methods from the business services. The business services each have an interface that they implement, and they also utilize the data services. Finally, most of the data services implement the DataAccessInterface.
 
 ## Design Tools
 ![Spring MVC][spring]
