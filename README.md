@@ -54,23 +54,33 @@ https://youtu.be/YYS6Z7Q2Dq4
 
 ## Design Tools
 ![Spring MVC][spring]
+
 **Spring MVC**
+
 Apoco was built using the Model, View, Controller design pattern and heavily leveraged the Spring MVC framework. During the early stages of Apoco, we wanted to build our website using the MEAN stack; however, after many hours of frustration, we determined that Spring MVC and Java would better match our needs and expertise. 
 
 ![Java][java]
+
 **Java**
+
 Java is one of the first programming languages we learn at Grand Canyon University and because of that, it's also one of our most concrete languages. Apoco was built using Java and further development will be continued in Java.
 
 ![Eclipse][eclipse]
+
 **Eclipse**
+
 I think we will always have a love-hate relationship with Eclipse as developers. Despite its many frustrations, Eclipse makes so many things easier than using a normal Notepad editor.
 
 ![Bootstrap][bootstrap]
+
 **Bootstrap**
+
 Pretty much our entire project is lined with bootstrap methods or leverages bootstrap in some way. Mick and I started using Bootstrap studios early in our college years and it has helped us immensely in easing the development of our front end web pages. That being said, as we've gotten better at development, most web pages are created manually, but still leverage bootstrap libraries.
 
-![Ajax/jQuery][ajax]
+![jQuery][ajax]
+
 **jQuery and Ajax**
+
 jQuery is utilized all throughout Apoco and some social areas of Apoco also utilize Ajax for form posting to prevent page refreshing. This is important in the Minesweeper module because it simulates a console-style gaming experience.
 
 ## Global (Login/Registration/Landing page)
