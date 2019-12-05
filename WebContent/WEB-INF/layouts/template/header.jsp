@@ -176,7 +176,6 @@
 								</c:when>
 							</c:choose>
 						</ul>
-<<<<<<< HEAD
 						<span class="navbar-text actions"> 
 						
 						<c:if test="${sessionScope.hasSocial != null}">
@@ -187,15 +186,6 @@
 								
 							<a class="btn btn-light action-button" role="button"
 								href="../logout/log"
-=======
-						<span class="navbar-text actions"> <a href="../social/profile"
-							class="login" style="color: #ffffff; font-size: 14px;">My
-								Profile</a><a class="btn btn-light action-button" role="button"
-							href="../logout/log"
-<<<<<<< Updated upstream
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 							style="background-color: #005024; color: #ffffff; font-size: 14px;">Log
 								Out</a></span>
 					</div>
@@ -248,9 +238,6 @@
 									<li class="nav-item" role="presentation"><a
 										style="color: #ffffff;" class="nav-link"
 										href="../jobs/jobList">View Jobs</a></li>
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 									<li class="nav-item" role="presentation"><a
 										style="color: #ffffff;" class="nav-link"
 										href="../messages/inbox">Messages
@@ -265,18 +252,6 @@
 											<c:out value="(${sessionScope.requests})" />
 										</c:if>
 										</a></li>
-=======
->>>>>>> Stashed changes
-									<!-- <li class="nav-item" role="presentation"><a
-										style="color: #ffffff;" class="nav-link"
-										href="../messages/msgList">Messages</a>-->
-									<li class="nav-item" role="presentation"><a
-										style="color: #ffffff;" class="nav-link"
-										href="../connections/connList">Connections</a></li>
-<<<<<<< Updated upstream
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 									<form class="navbar-form navbar-left" method="POST" action="../business/search">
 										<div class="input-group">
 											<input type="text" name="search" class="form-control" size="10"
@@ -291,24 +266,12 @@
 								</c:when>
 							</c:choose>
 						</ul>
-<<<<<<< Updated upstream
-						<span class="navbar-text actions"><a href="../business/profile"
-							class="login" style="color: #ffffff; font-size: 14px;">My 
-								Profile</a><a class="btn btn-light action-button" role="button"
-=======
-<<<<<<< HEAD
 						<span class="navbar-text actions">
 						<c:if test="${sessionScope.hasBusiness != null}">
 							<a href="../business/profile" class="login" 
 								style="color: #ffffff; font-size: 14px;">My Profile</a>
 						</c:if>
 								<a class="btn btn-light action-button" role="button"
-=======
-						<span class="navbar-text actions"><a href="../business/profile"
-							class="login" style="color: #ffffff; font-size: 14px;">My 
-								Profile</a><a class="btn btn-light action-button" role="button"
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 							href="../logout/log"
 							style="background-color: #09136e; color: #ffffff; font-size: 14px;">Log
 								Out</a></span>
@@ -354,27 +317,29 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navcol-2">
 						<ul class="nav navbar-nav mr-auto">
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-							<c:if test="${sessionScope.hasDating != null}">
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
+							<c:if test="${sessionScope.hasDating != null && sessionScope.question != null}">
 							
 									<li class="nav-item" role="presentation"><a
 										style="color: #ffffff;" class="nav-link"
 										href="../dating/dat">Dashboard</a></li>
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
+									<li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link"
+										href="../dating/matches">View Matches</a></li>
+									<li class="nav-item" role="presentation"><a
+										style="color: #ffffff;" class="nav-link"
+										href="../messages/inbox">Messages
+										<c:if test="${sessionScope.messages > 0}">
+											<c:out value="(${sessionScope.messages})" />
+										</c:if>
+										</a>
 							</c:if>
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 								
 						</ul>
 						<span class="navbar-text actions">
+						<c:if test="${sessionScope.hasDating != null && sessionScope.question != null}">
+							<a href="../dating/profile" class="login" 
+								style="color: #ffffff; font-size: 14px;">My Profile</a>
+						</c:if>
 						<a class="btn btn-light action-button" role="button"
 							href="../logout/log"
 							style="background-color: #dd00b9; color: #ffffff; font-size: 14px;">Log

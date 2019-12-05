@@ -53,16 +53,10 @@ public class ConnectionBusinessService implements ConnectionBusinessInterface {
 	 */
 	@Override
 	public boolean addConnection(Connection t) {
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 		Connection conn = new Connection(t.getConnId(), t.getUserId()); //Create a connection for other user too
 		if(!dao.create(conn)) {
 			return false;
 		}
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 		return dao.create(t);
 	}
 

@@ -26,13 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.gcu.business.BusinessInterface;
 import com.gcu.business.ConnectionBusinessInterface;
 import com.gcu.business.JobBusinessInterface;
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 import com.gcu.business.MessageBusinessInterface;
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 import com.gcu.business.UserBusinessInterface;
 import com.gcu.model.Business;
 import com.gcu.model.Job;
@@ -46,10 +40,6 @@ public class BusinessController {
 	private UserBusinessInterface us;
 	private ConnectionBusinessInterface cs;
 	private JobBusinessInterface js;
-<<<<<<< Updated upstream
-	private ControllerLists cl;
-=======
-<<<<<<< HEAD
 	private MessageBusinessInterface ms;
 	private ControllerLists cl;
 	
@@ -61,10 +51,6 @@ public class BusinessController {
 	public void setControllerLists(ControllerLists cl) {
 		this.cl = cl;
 	}
-=======
-	private ControllerLists cl;
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 	
 	/**
 	 * Dependency injection for the BusinessService
@@ -104,9 +90,6 @@ public class BusinessController {
 	}
 	
 	/**
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 	 * Dependency injection for the message business service
 	 * @param ms
 	 */
@@ -116,9 +99,6 @@ public class BusinessController {
 	}
 	
 	/**
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 	 * Sets the user's theme to business which will change the appearance of their navbar and footer.
 	 * It will then check to see if the user has a business profile and either sends them to the profile
 	 * creator or the business dashboard.
@@ -204,14 +184,6 @@ public class BusinessController {
 	 */
 	@ModelAttribute("dayList")
 	public List<Integer> getBirthDay() {
-<<<<<<< Updated upstream
-		cl = new ControllerLists();
-=======
-<<<<<<< HEAD
-=======
-		cl = new ControllerLists();
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 		return cl.getBirthDay();
 	}
 	
@@ -223,14 +195,6 @@ public class BusinessController {
 	 */
 	@ModelAttribute("yearList")
 	public List<Integer> getBirthYear(){
-<<<<<<< Updated upstream
-		cl = new ControllerLists();
-=======
-<<<<<<< HEAD
-=======
-		cl = new ControllerLists();
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 		return cl.getBirthYear();
 	}
 	
@@ -241,14 +205,6 @@ public class BusinessController {
 	 */
 	@ModelAttribute("monthList")
 	public Map<Integer, String> getMonthList(){
-<<<<<<< Updated upstream
-		cl = new ControllerLists();
-=======
-<<<<<<< HEAD
-=======
-		cl = new ControllerLists();
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 		return cl.getMonths();
 	}
 	
@@ -258,14 +214,6 @@ public class BusinessController {
 	 */
 	@ModelAttribute("jobList")
 	public List<String> getJobList(){
-<<<<<<< Updated upstream
-		cl = new ControllerLists();
-=======
-<<<<<<< HEAD
-=======
-		cl = new ControllerLists();
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 		return cl.getJobList();
 	}
 	
@@ -275,14 +223,6 @@ public class BusinessController {
 	 */
 	@ModelAttribute("ethList")
 	public List<String> getEthList(){
-<<<<<<< Updated upstream
-		cl = new ControllerLists();
-=======
-<<<<<<< HEAD
-=======
-		cl = new ControllerLists();
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 		return cl.getEthList();
 	}
 	
@@ -293,14 +233,6 @@ public class BusinessController {
 	 */
 	@ModelAttribute("edList")
 	public List<String> getEdList(){
-<<<<<<< Updated upstream
-		cl = new ControllerLists();
-=======
-<<<<<<< HEAD
-=======
-		cl = new ControllerLists();
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 		return cl.getEdList();
 	}
 	
@@ -310,14 +242,6 @@ public class BusinessController {
 	 */
 	@ModelAttribute("stateList")
 	public List<String> getStates(){
-<<<<<<< Updated upstream
-		cl = new ControllerLists();
-=======
-<<<<<<< HEAD
-=======
-		cl = new ControllerLists();
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 		return cl.getStates();
 	}
 }

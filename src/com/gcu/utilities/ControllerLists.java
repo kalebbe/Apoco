@@ -104,15 +104,7 @@ public class ControllerLists {
 	 */
 	public List<Integer> getBirthYear(){
 		List<Integer> yearList = new ArrayList<Integer>();
-<<<<<<< Updated upstream
-		for(int i = 2018; i >= 1900; i--) { //Loops 2018 -> 1900 descending
-=======
-<<<<<<< HEAD
 		for(int i = 2019; i >= 1900; i--) { //Loops 2018 -> 1900 descending
-=======
-		for(int i = 2018; i >= 1900; i--) { //Loops 2018 -> 1900 descending
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 			yearList.add(i);
 		}
 		return yearList;
@@ -236,9 +228,6 @@ public class ControllerLists {
 		ethList.add("Other");
 		return ethList;
 	}
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 	
 	/**
 	 * This method returns a list of salary ranges.
@@ -254,7 +243,4 @@ public class ControllerLists {
 		salaryList.add("I don't want to answer");
 		return salaryList;
 	}
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 }

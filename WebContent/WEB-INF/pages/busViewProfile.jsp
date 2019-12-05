@@ -15,29 +15,13 @@
 	</c:choose>
 	<c:choose>
 		<c:when test="${sessionScope.message != null}">
-<<<<<<< Updated upstream
-			<p style="color: #a70000;">
-=======
-<<<<<<< HEAD
 			<p class="error">
-=======
-			<p style="color: #a70000;">
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 				<c:out value="${sessionScope.message}" />
 			</p>
 			<c:remove var="message" />
 		</c:when>
 		<c:when test="${sessionScope.message1 != null}">
-<<<<<<< Updated upstream
-			<p style="color: #000000;">
-=======
-<<<<<<< HEAD
 			<p>
-=======
-			<p style="color: #000000;">
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 				<c:out value="${sessionScope.message1}" />
 			</p>
 			<c:remove var="message1" />
@@ -84,9 +68,6 @@
 				</c:when>
 				<c:otherwise>
 					<div align="center">
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 						<form method="POST" action="../messages/send">
 							<input type="hidden" name="userId" value="${user.id}" />
 							<input type="hidden" name="parentId" value="-1" />
@@ -98,9 +79,6 @@
 							<button class="btn" type="submit" style="background-color: #000000; color: #ffffff;">Send Message</button>	
 						</form>
 						
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 						<button class="btn" id="remConn" onclick="ajaxFeed('connections/removeConn', 'id', '#remConn')"
 							style="background-color: #a70000; color: #ffffff;"
 							value="${user.id}">Remove Connection</button>

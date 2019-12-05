@@ -53,15 +53,7 @@
 									class="nav-link nav-btn" href="login/redirect"
 									style="color: #09136e; font-family: Aldrich, sans-serif;">Business</a></li>
 								<li class="nav-item" role="presentation"><a
-<<<<<<< Updated upstream
-									class="nav-link nav-btn" href="dating/dat"
-=======
-<<<<<<< HEAD
 									class="nav-link nav-btn" href="login/redirect"
-=======
-									class="nav-link nav-btn" href="dating/dat"
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 									style="color: #dd00b9; font-family: fantasy;">Dating</a></li>
 							</c:otherwise>
 						</c:choose>

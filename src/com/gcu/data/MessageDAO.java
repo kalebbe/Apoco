@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import com.gcu.model.Message;
@@ -47,10 +48,15 @@ public class MessageDAO implements DataAccessInterface<Message> {
 	 */
 	@SuppressWarnings("unchecked")
 	public Message getLastThread(int id) {
-		String sql;
-		sql = "SELECT * FROM messages where PARENT_ID=? ORDER BY DATE_SENT desc LIMIT 1";
-		Message message = (Message) jdbcTemp.queryForObject(sql, new Object[] { id }, new MessageMapper());
-		return message;
+		try {
+			String sql;
+			sql = "SELECT * FROM messages where PARENT_ID=? ORDER BY DATE_SENT desc LIMIT 1";
+			Message message = (Message) jdbcTemp.queryForObject(sql, new Object[] { id }, new MessageMapper());
+			return message;
+		}
+		catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 	/**
@@ -76,7 +82,8 @@ public class MessageDAO implements DataAccessInterface<Message> {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Message> getMessages(int id, String type, String type1, String type2){
-		String sql = "SELECT * FROM messages WHERE " + type + " = ? AND (TYPE = ? OR TYPE = ?) AND PARENT_ID = '-1'";
+		String sql = "SELECT * FROM messages WHERE " + type + " = ? AND (TYPE = ? OR TYPE = ?) AND PARENT_ID = '-1'"
+				+ " ORDER BY DATE_SENT desc";
 		//PreparedStatementSetter for multiple parameters.
 		List<Message> message = jdbcTemp.query(sql, new PreparedStatementSetter() {
 			@Override

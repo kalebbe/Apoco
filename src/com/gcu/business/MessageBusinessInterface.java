@@ -59,9 +59,6 @@ public interface MessageBusinessInterface {
 	 * @return boolean Whether or not they have requests.
 	 */
 	public boolean checkRequest(int receiverId, String type);
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 	
 	/**
 	 * Gets the count of the specified notification type.
@@ -70,9 +67,6 @@ public interface MessageBusinessInterface {
 	 * @return int
 	 */
 	public int getNotifications(int id, String type);
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 
 	
 	/**
@@ -91,7 +85,7 @@ public interface MessageBusinessInterface {
 	 * @param id
 	 * @return List<Message>
 	 */
-	public List<Message> getThread(int id);
+	public List<Message> getThread(int id, String theme);
 
 	/**
 	 * Marks thread as read
@@ -108,4 +102,5 @@ public interface MessageBusinessInterface {
 	 * @return int
 	 */
 	public int getCorrespondentId(int id, Message msg);
+
 }

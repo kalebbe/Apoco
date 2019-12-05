@@ -60,26 +60,12 @@ public class ConnectionController {
 	
 	/**
 	 * Sends the user to a view of their own profile.
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 	 * Removed RequestMethod because this can now be a GET or POST
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 	 * @param id
 	 * @param session
 	 * @return ModelAndView
 	 */
-<<<<<<< Updated upstream
-	@RequestMapping(path = "/view", method = RequestMethod.POST)
-=======
-<<<<<<< HEAD
 	@RequestMapping(path = "/view")
-=======
-	@RequestMapping(path = "/view", method = RequestMethod.POST)
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 	public ModelAndView viewProfile(@RequestParam int id, HttpSession session) {
 		User user = us.findBusUser(id);
 		user.setConnection(cs.checkConn((int)session.getAttribute("id"), id));
@@ -97,15 +83,7 @@ public class ConnectionController {
 		List<User> users = new ArrayList<User>();
 		if(ms.checkRequest((int)session.getAttribute("id"), "connection")){ //Checks if user has any connection requests.
 			session.setAttribute("page", "requests"); //The connection list page will serve as a connection list + connection request hub.
-<<<<<<< Updated upstream
-			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "connection"); //Gets all the user's connection requests.
-=======
-<<<<<<< HEAD
 			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "connection", "RECEIVER_ID"); //Gets all the user's connection requests.
-=======
-			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "connection"); //Gets all the user's connection requests.
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 			users = cs.getRequestProfiles(messages); //Gets the requestee's profiles.
 		}
 		else {
@@ -136,15 +114,7 @@ public class ConnectionController {
 		List<User> users = new ArrayList<User>();
 		if(ms.checkRequest((int)session.getAttribute("id"), "connection")){
 			session.setAttribute("page", "requests");
-<<<<<<< Updated upstream
-			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request");
-=======
-<<<<<<< HEAD
 			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "connection", "RECEIVER_ID");
-=======
-			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request");
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 			users = cs.getRequestProfiles(messages);
 		}
 		else {
@@ -171,29 +141,15 @@ public class ConnectionController {
 		List<User> users = new ArrayList<User>();
 		if(ms.checkRequest((int)session.getAttribute("id"), "connection")){
 			session.setAttribute("page", "requests");
-<<<<<<< Updated upstream
-			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request");
-=======
-<<<<<<< HEAD
 			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "connection", "RECEIVER_ID");
-=======
-			List<Message> messages = ms.getMessages((int)session.getAttribute("id"), "request");
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 			users = cs.getRequestProfiles(messages);
 		}
 		else {
 			session.setAttribute("page", "connections");
 			users = cs.getConnections((int)session.getAttribute("id"));
 		}
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 		
 		session.setAttribute("requests", ms.getNotifications((int)session.getAttribute("id"), "connection"));
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 		return new ModelAndView("connectionList", "users", users);
 	}
 	
@@ -205,15 +161,7 @@ public class ConnectionController {
 	 */
 	@RequestMapping(path = "/sendRequest", method = RequestMethod.POST)
 	public ModelAndView sendRequest(@RequestParam int id, HttpSession session) {
-<<<<<<< Updated upstream
-		Message msg = new Message((int)session.getAttribute("id"), id, null, "connection");
-=======
-<<<<<<< HEAD
 		Message msg = new Message((int)session.getAttribute("id"), id, -1, null, "connection");
-=======
-		Message msg = new Message((int)session.getAttribute("id"), id, null, "connection");
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 		if(cs.sendRequest(msg)) {
 			session.setAttribute("message1", "Connection request sent!");
 		}

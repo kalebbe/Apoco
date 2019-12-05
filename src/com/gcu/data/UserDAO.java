@@ -20,15 +20,7 @@ import com.gcu.model.User;
 
 public class UserDAO implements DataAccessInterface<User> {
 
-<<<<<<< HEAD
 	@Autowired
-=======
-	@SuppressWarnings("unused")
-	private DataSource dataSource;
-<<<<<<< Updated upstream
-=======
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 	private JdbcTemplate jdbcTemp;
 
 	/**

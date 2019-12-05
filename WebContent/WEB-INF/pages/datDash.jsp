@@ -9,12 +9,4 @@
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div align="center">
 	<h1>Dating dashboard coming soon!</h1>
-<<<<<<< Updated upstream
-	<p>We also plan to make it so you can edit, delete or profile soon. Just hold tight</p>
-=======
-<<<<<<< HEAD
-=======
-	<p>We also plan to make it so you can edit, delete or profile soon. Just hold tight</p>
->>>>>>> 5f384a09925701c157caf999ba50900c1a9432af
->>>>>>> Stashed changes
 </div>
